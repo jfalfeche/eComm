@@ -35,7 +35,7 @@ CREATE TABLE `LGU`(
 
 DROP TABLE IF EXISTS `sellers`;
 
-CREATE TABLE `seller`(
+CREATE TABLE `sellers`(
 	`sellerID` int(15) AUTO_INCREMENT,
 	`storeStatus` boolean NOT NULL,
 	`storeName` varchar(100) NOT NULL,
