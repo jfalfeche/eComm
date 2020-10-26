@@ -16,7 +16,7 @@ CREATE TABLE `customers`(
 	`gender` varchar(10) NOT NULL,
 	`birthday` date NOT NULL,
 	PRIMARY KEY (`userID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -28,7 +28,7 @@ CREATE TABLE `LGU`(
 	`LGUEmail` varchar(50) NOT NULL,
 	`LGUpassword` varchar(150) NOT NULL,
 	PRIMARY KEY (`LGUID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -43,7 +43,7 @@ CREATE TABLE `seller`(
 	`storeDescription` text NOT NULL,
 	`profilePhoto` longblob NOT NULL,
 	PRIMARY KEY (`sellerID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -53,7 +53,7 @@ CREATE TABLE `productUnit`(
 	`productUnitID` int(15) AUTO_INCREMENT,
 	`name` varchar(50) NOT NULL,
 	PRIMARY KEY (`productUnitID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -64,7 +64,7 @@ CREATE TABLE `productCategory`(
 	`productCategoryID` int(15) AUTO_INCREMENT,
 	`name` varchar(50) NOT NULL,
 	PRIMARY KEY (`productCategoryID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -86,8 +86,8 @@ CREATE TABLE `product`(
 	KEY `seller` (`seller`),
 	CONSTRAINT `product_ibfk_1` FOREIGN KEY (`productUnitID`) REFERENCES `productUnit` (`productUnitID`) ON DELETE SET NULL ON UPDATE CASCADE,
 	CONSTRAINT `product_ibfk_2` FOREIGN KEY (`productCategory`) REFERENCES `productCategory` (`productCategoryID`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `product_ibfk_3` FOREIGN KEY (`seller`) REFERENCES `seller` (`sellerID`) ON DELETE SET NULL ON UPDATE CASCADE,
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+	CONSTRAINT `product_ibfk_3` FOREIGN KEY (`seller`) REFERENCES `seller` (`sellerID`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -98,7 +98,7 @@ CREATE TABLE `orderStatus`(
 	`orderStatusID` int(15) AUTO_INCREMENT,
 	`name` varchar(50) NOT NULL,
 	PRIMARY KEY (`orderStatusID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -111,7 +111,7 @@ CREATE TABLE `productDetail`(
 	`productID` int(15),
 	`quantity` int(10),
 	PRIMARY KEY (`productDetailID`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -140,7 +140,7 @@ CREATE TABLE `order`(
 	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`) ON DELETE SET NULL ON UPDATE CASCADE,
 	CONSTRAINT `order_ibfk_4` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`) ON DELETE SET NULL ON UPDATE CASCADE,
 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -158,6 +158,6 @@ CREATE TABLE `cart`(
 	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customer` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE,
 	CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`) ON DELETE SET NULL ON UPDATE CASCADE,
 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
