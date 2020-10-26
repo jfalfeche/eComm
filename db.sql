@@ -33,7 +33,7 @@ CREATE TABLE `LGU`(
 
 
 
-DROP TABLE IF EXISTS `seller`;
+DROP TABLE IF EXISTS `sellers`;
 
 CREATE TABLE `seller`(
 	`sellerID` int(15) AUTO_INCREMENT,
@@ -78,15 +78,15 @@ CREATE TABLE `product`(
 	`stock` int(15) NOT NULL,
 	`price` int(15) NOT NULL,
 	`productUnitID` int(15) NOT NULL,
-	`productCategory` int(15) NOT NULL,
+	`productCategory` int(15),
 	`seller` int(15) NOT NULL,
 	PRIMARY KEY	(`productID`),
 	KEY `productUnitID` (`productUnitID`),
 	KEY `productCategory` (`productCategory`),
 	KEY `seller` (`seller`),
-	CONSTRAINT `product_ibfk_1` FOREIGN KEY (`productUnitID`) REFERENCES `productUnit` (`productUnitID`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `product_ibfk_2` FOREIGN KEY (`productCategory`) REFERENCES `productCategory` (`productCategoryID`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `product_ibfk_3` FOREIGN KEY (`seller`) REFERENCES `seller` (`sellerID`) ON DELETE SET NULL ON UPDATE CASCADE
+	CONSTRAINT `product_ibfk_1` FOREIGN KEY (`productUnitID`) REFERENCES `productUnit` (`productUnitID`),
+	CONSTRAINT `product_ibfk_2` FOREIGN KEY (`productCategory`) REFERENCES `productCategory` (`productCategoryID`),
+	CONSTRAINT `product_ibfk_3` FOREIGN KEY (`seller`) REFERENCES `sellers` (`sellerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
@@ -135,10 +135,10 @@ CREATE TABLE `order`(
 	KEY `shippingAddress` (`shippingAddress`),
 	KEY `status` (`status`),
 	KEY `productDetailID` (`productDetailID`),
-	CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `customer` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shippingAddress`) REFERENCES `customer` (`permanentAddress`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `order_ibfk_4` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`) ON DELETE SET NULL ON UPDATE CASCADE,
+	CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
+	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shippingAddress`) REFERENCES `customers` (`permanentAddress`),
+	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`) ,
+	CONSTRAINT `order_ibfk_4` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
@@ -155,8 +155,8 @@ CREATE TABLE `cart`(
 	PRIMARY KEY (`cartID`),
 	KEY `userID` (`userID`),
 	KEY `productDetailID` (`productDetailID`),
-	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customer` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`) ON DELETE SET NULL ON UPDATE CASCADE,
+	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customer` (`userID`),
+	CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`),
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
