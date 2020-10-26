@@ -15,6 +15,7 @@ CREATE TABLE `customers`(
 	`permanentAddress` varchar(200) NOT NULL,
 	`gender` varchar(10) NOT NULL,
 	`birthday` date NOT NULL,
+	KEY `permanentAddress` (`permanentAddress`),
 	PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
@@ -122,7 +123,7 @@ CREATE TABLE `order`(
 	`orderNo` int(15) AUTO_INCREMENT,
 	`buyerID` int(15) NOT NULL,
 	`shippingAddress` varchar(200) NOT NULL,
-	`status` varchar(10) NOT NULL,
+	`status` int(15) NOT NULL,
 	`paymentMethod` varchar(10) NOT NULL,
 	`dateOrdered` date NOT NULL,
 	`dateCompleted` date NOT NULL,
@@ -137,7 +138,7 @@ CREATE TABLE `order`(
 	KEY `productDetailID` (`productDetailID`),
 	CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
 	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shippingAddress`) REFERENCES `customers` (`permanentAddress`),
-	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`) ,
+	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`),
 	CONSTRAINT `order_ibfk_4` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
@@ -155,8 +156,8 @@ CREATE TABLE `cart`(
 	PRIMARY KEY (`cartID`),
 	KEY `userID` (`userID`),
 	KEY `productDetailID` (`productDetailID`),
-	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customer` (`userID`),
-	CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`),
+	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customers` (`userID`),
+	CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
