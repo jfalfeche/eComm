@@ -128,6 +128,11 @@ body {
   .card {
     padding: 2%;
     margin: 0 2%;
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    box-shadow: -5px 5px #F26709;
   }
 
   .imgwrap {
@@ -163,13 +168,29 @@ body {
     box-shadow: 0 3px 3px rgb(165, 165, 165);
   }
 
+  .btn-primary:hover {
+    background: #a84706;
+  }
+
+  .last {
+    max-width: 20.2%;
+    transition: 0.3s;
+  }
+
+  .last:hover {
+    background: #048b2d;
+  }
+
+  .last:hover .viewmore {
+    color: #dfdfdf;
+  }
+
   .viewmore {
     color: #949494;
   }
 
   .viewmore:hover {
     text-decoration: none;
-    color: #949494;
   }
 
 footer {

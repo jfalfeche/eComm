@@ -34,7 +34,7 @@
                 <div class="logo"><h1>LOGO</h1></div>
             </div>
             <div class="col-md-4"></div>
-            <a class="col-md-1 nav-active" href="">Home</a>
+            <a class="col-md-1 nav-active" href="/homePage/sample.php">Home</a>
             <a class="col-md-1" href="">About</a>
             <a class="col-md-1" href="">Products</a>
             <a class="col-md-1" href="">Contact</a>
@@ -104,19 +104,20 @@
                     <?php
                                 if($i == 7) {
                                     ?>
-                                    <div class="col card">
-                                        <div class="my-auto">
+                                    <div class="col card last">
+                                        <div class=" my-auto">
                                             <a class="viewmore h-100" href="">
                                                 <img src="media/viewmore.png" alt="">
                                                 <p>View More</p>
                                             </a>
                                         </div>
                                     </div>
+                                </div>
                                     <?php
                                     break;
                                 }
 
-                                if ($i % 4 == 0 && $i != 0)
+                                if ($i % 4 == 0 && $i != 0) 
                                     echo '</div>';
                                 $i++;
                             }
