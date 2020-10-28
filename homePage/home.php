@@ -122,7 +122,7 @@
                                 $i++;
                             }
                         } else {
-                            echo "0 results";
+                            echo "No products found.";
                         }
                 ?>
                 <!-- PHP END HERE -->
