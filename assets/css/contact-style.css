@@ -1,0 +1,121 @@
+body
+{
+	font-family: Roboto;
+	background: #F7F6F4;  
+}
+
+#container
+{
+	display: grid;
+	grid-template-columns: repeat(4, [col] 280px );
+	margin-top: 3%;
+}
+
+#left-contact
+{
+	grid-column: col / span 3;
+    grid-row: row ;
+    width: 75%;
+    margin: 2%;
+    margin-left: 5%;
+    color: #787575;
+
+}
+
+#left-contact h1
+{
+	color: #379863;
+	margin-block-start: 0.25em;
+	margin-block-end: 0em;
+}
+
+#left-contact h3
+{
+	margin-block-end: 0.25em;
+}
+
+.rounded-border-green
+{
+	width: 100%;
+	border: 0;
+	border-top: 5px solid rgba(55, 152, 99, 0.8);
+	border-radius: 2px;
+	margin: 3px 3px;
+}
+
+#right-contact
+{
+	margin-left: 20%;
+	margin: 2%;
+	grid-column: col 4;
+    grid-row: row ;
+}
+
+.socmed-bar
+{
+	width: 500px;
+	height: 50px;
+	padding: 2px;
+}
+
+.socmed-bar i
+{
+	padding: 5px 20px;
+	display: inline-block;
+	display: -moz-inline-box;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 25%;
+    text-align: center;
+	color: rgba(55, 152, 99, 0.8);
+}
+
+.socmed-bar i:hover
+{
+	color: rgba(0, 0, 0, 1);
+}
+
+.rounded-border
+{
+	margin: 10px 3px;
+	width: 320px;
+	border: 0px;
+	border-top: 2px solid #bbb;
+	border-radius: 2px;
+}
+
+form
+{
+	width: 400px;
+	padding: 2% 10%;
+	font-family: Roboto;
+}
+
+#message-form input, #message-form textarea
+{
+	width: 300px;
+	font-size: 14px;
+}
+
+#message-form strong
+{
+	font-size: 20px;
+}
+
+form p
+{
+	font-size: 14px;
+}
+
+.btn-success
+{
+	background-color: rgba(55, 152, 99);
+	margin-top: 5px;
+	margin-left: 200px;
+	width: 100px;
+}
+
+#message-form, .socmed-bar
+{
+	padding-left: 35%;
+}
