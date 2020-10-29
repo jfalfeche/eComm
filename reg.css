@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background: #F7F6F4;
+}
+
+h2 {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    color: #000000;
+    padding: 3% 5% 0% 5%;
+    width: 100%;
+}
+
+h5 {
+    font-weight: 200;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+/*NAV*/
+nav {
+    position: relative;
+    background: #246F75;
+    text-align: center;
+    line-height: 80px;
+}
+
+  .logo {
+    position: absolute;
+    left: 2em;
+    top: 1em;
+    background: #246F75;
+    z-index: 3;
+    border-radius: 20px;
+    color: #F6E05E;
+  }
+
+  nav a {
+    color: #FFFFFF;
+    transition: 0.3s;
+  }
+
+  nav a:hover {
+    background: #072110;
+    text-decoration: none;
+    color: #FFFFFF;
+  }
+  /*END NAV*/
+
+  /*REGISTRATION FORM*/
+.form-control {
+	height: 54px;
+	box-shadow: 0px 1.5px rgba(0, 0, 0, 0.25);
+	color: #969fa4;
+}
+
+.form-control, .btn {        
+	border-radius: 5px;
+}
+
+.back{
+    margin-left: 15px;
+}
+.signup-form {
+	width: 1074px;
+	margin: 0 auto;
+	padding: 10px 0;
+  	font-size: 15px;
+}
+
+.signup-form .form-check {
+  	top: 10px;
+    margin-left:90px;
+    font-size: 20px;
+}
+  
+.signup-form form {
+	border-radius: 3px;
+	background: #ffffff;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	padding: 50px;
+}
+
+.signup-form .form-group {
+	margin-bottom: 40px;
+}
+
+.signup-form .row div:first-child {
+	padding-right: 20px;
+}
+
+.signup-form .row div:last-child {
+	padding-left: 30px;
+}
+
+.signup-form p {
+      font-weight: bold;
+      font-size: 24px;
+  }
+
+  .btn-success {
+	background-color: #F2BC1F;
+    margin-top: 20px;
+    margin-bottom: 40px;
+	margin-left: 790px;
+    width: 287px;
+    height: 55px;
+    border-style: none;
+}
+  /*END OF REGFORM*/
+
+  /*FOOTER*/
+  footer {
+  background: #246F75;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+  .container-2 {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 4em 10%;
+  }
+
+  .container-2 a {
+    color: #F6E05E;
+    line-height: 200%;
+    font-weight: bold;
+  }
+
+  .container-2 .left a {
+    line-height: 400%;
+    padding-left: 20px;
+  }
+
+  .flogo img {
+    max-width: 30px;
+    width: 30px;
+  }
+
+  .fcontact img {
+    max-width: 30px;
+    width: 30px;
+  }
+
+  .fcontacttext {
+    padding: 5px 0 0 0;
+  }
+
+  hr.footer {
+    border-top: 2px solid #F6E05E;
+    width: 100%;
+  }
+  /*END FOOTER*/
