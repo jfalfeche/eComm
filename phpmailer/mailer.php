@@ -43,13 +43,13 @@
 		    //Server settings
 		    $mail->SMTPDebug = 0;                      // Enable verbose debug output --- change to 2 if debugging code
 		    $mail->isSMTP();                                            // Send using SMTP
-		    $mail->Host       = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
+		    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
 		    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-		    $mail->Username   = '3349ff37ccddb9';                     // SMTP username
-		    $mail->Password   = '883081d02cf890';                               // SMTP password
+		    $mail->Username   = 'samplemail.ecomm@gmail.com';                     // SMTP username
+		    $mail->Password   = 'H&$3A3i&@4gStAc';                               // SMTP password
 		    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 		    $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-
+/*
 		    $mail->SMTPSecure = false;
 		    $mail->SMTPAutoTLS = false;
 			$mail->SMTPOptions = array(
@@ -58,13 +58,13 @@
 	        'verify_peer_name' => false,
 	        'allow_self_signed' => true
 	    		)
-			);
+			);*/
 
 		    //Sender
 		    $mail->setFrom($email, $name);
 
 		    //Recipient
-		    $mail->addAddress('deusvultdegurechaff+sample@gmail.com', 'Deus Vult');     
+		    $mail->addAddress('samplemail.ecomm+smtp@gmail.com', 'Sample Email');     
 
 		    //Content
 		    $mail->isHTML(true);                                  // Set email format to HTML
@@ -91,10 +91,12 @@
 		catch (Exception $e) 
 		{
 		    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+		    		header("Location: contact.php?error");
 		}
 
 	}
 
-	//header("Location: contact.php");
+	else
+			header("Location: contact.php?redirect");
 
 ?>
