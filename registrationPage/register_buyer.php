@@ -8,27 +8,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="reg.css">
+    <link rel="stylesheet" href="../navbar/nav.css">
+    <link rel="stylesheet" href="../footer/footer.css">
 </head>
 
 <body>
     <!--NAV-->
     <nav class="nav guest">
         <div class="col-md-1">
-            <div class="logo">
-                <h1>LOGO</h1>
-            </div>
+            <div class="logo"><h1>LOGO</h1></div>
         </div>
-        <div class="col-md-7"></div>
-        <a class="col-md-1" href="homePage/sample.php">Home</a>
-        <a class="col-md-1" href="">About</a>
-        <a class="col-md-1" href="">Products</a>
-        <a class="col-md-1" href="">Contact</a>
+        <div class="col-md-6"></div>
+            <?php include '../navbar/guest.php' ?>
     </nav>
     <!--END NAV-->
 
     <div class="header">
         <div class="row">
-            <a class="back" href=""><img src=" homePage/media/back1.svg" alt=""></a>
+            <a class="back" href=""><img src="../media/back1.svg" alt=""></a>
             <h5>Back to Login</h5>
         </div>
         <h2 class="text-center">Register as PhilCafe Customer</h2>
@@ -106,45 +103,7 @@
     <!--END OF REGFORM-->
 
     <!--FOOTER-->
-    <footer class="container-2">
-        <div class="row">
-            <div class="col-md-6 left">
-                <a href="">About Us</a><br>
-                <a href="">Products</a><br>
-                <a href="">Login</a><br>
-                <a href="">Register</a>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <a class="col-md-6" href="">Contact Us</a>
-                    <a class="col-md-2 flogo" href=""><img src="homePage/media/twitterlogo.png" alt=""></a>
-                    <a class="col-md-2 flogo" href=""><img src="homePage/media/fblogo.png" alt=""></a>
-                    <a class="col-md-2 flogo" href=""><img src="homePage/media/messengerlogo.png" alt=""></a>
-                </div>
-                <br>
-                <div class="row fcontact">
-                    <div class="col-md-2 text-right"><img src="homePage/media/officeicon.png" alt=""></div>
-                    <div class="col-md-10 fcontacttext">
-                        <h6><i>Philippine Agriculture Office</i></h6>
-                        <p>1st Floor, Provincial Capitol Building, Cagayan De Oro City,
-                            Misamis Oriental 9000 Philippines</p>
-                    </div>
-                </div>
-                <div class="row fcontact">
-                    <div class="col-md-2 text-right"><img src="homePage/media/phoneicon.png" alt=""></div>
-                    <div class="col-md-10 fcontacttext">
-                        <h6><i>09363961890</i></h6>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <a class="col-md-6" href="">Leave a Message</a>
-                </div>
-            </div>
-        </div>
-        <hr class="footer">
-        <p class="text-center">Copyright 2020 PhilCafe. All rights reserved.</p>
-    </footer>
+    <?php include '../footer/shortfooter.php'; ?>
     <!--END FOOTER-->
 </body>
 

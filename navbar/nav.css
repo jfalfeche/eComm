@@ -1,0 +1,30 @@
+nav {
+    position: relative;
+    background: #246F75;
+    text-align: center;
+    line-height: 80px;
+    z-index: 5;
+}
+
+  nav a {
+    color: #FFFFFF;
+    transition: 0.3s;
+    border-bottom: solid thick #246F75;
+    font-size: 16px;
+  }
+
+  nav a:hover {
+    background: #072110;
+    text-decoration: none;
+    color: #FFFFFF;
+    border-bottom: solid thick #072110;
+  }
+
+  .nav-active {
+    background: #072110;
+    border-bottom: solid thick #F6E05E;
+  }
+
+  .logo {
+    color: #F6E05E;
+  }
