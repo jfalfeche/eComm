@@ -5,8 +5,19 @@
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet"	 type="text/css" href="../assets/css/contact-style.css">
+	<link rel="stylesheet" href="../navbar/nav.css">
 </head>
 <body>
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-1">
+            <div class="logo"><h1>LOGO</h1></div>
+        </div>
+        <div class="col-md-6"></div>
+            <?php include '../navbar/guest.php' ?>
+    </nav>
+    <!--END NAV-->
+
 	<div id="container">
 		<div id="left-contact">
 			<h1>CONTACT US</h1>
