@@ -16,9 +16,7 @@
     <!--NAV-->
     <nav class="nav guest">
         <div class="col-md-1">
-            <div class="logo">
-                <h1>LOGO</h1>
-            </div>
+            <div class="logo"><h1>LOGO</h1></div>
         </div>
         <div class="col-md-6"></div>
         <?php include '../navbar/guest.php' ?>
@@ -31,6 +29,7 @@
             <h5>Back to Login</h5>
         </div>
         <h2 class="text-center">Register as PhilCafe Seller</h2>
+        <hr class="solid">
     </div>
 
     <!--REG FORM-->

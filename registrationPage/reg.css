@@ -6,7 +6,6 @@
 
 body{
     background: #F7F6F4;
-    overflow-x: hidden;
 }
 
 h2 {
@@ -52,7 +51,7 @@ h5 {
 .signup-form {
 	width: 1074px;
 	margin: 0 auto;
-	padding: 10px 0;
+	padding: 0px 0;
   	font-size: 15px;
 }
 
@@ -96,3 +95,9 @@ h5 {
   border-style: none;
 }
   /*END OF REGFORM*/
+
+  hr.solid {
+  border: 1px solid #CBCBCB;
+  margin-bottom: 0%;
+  width: 1074px;
+}
