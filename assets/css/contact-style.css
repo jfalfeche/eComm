@@ -12,13 +12,13 @@ body
 #container
 {
 	display: grid;
-	grid-template-columns: repeat(4, [col] 280px );
+	grid-template-columns: repeat(3, [col] 33% );
 	margin-top: 3%;
 }
 
 #left-contact
 {
-	grid-column: col / span 3;
+	grid-column: col / span 2;
     grid-row: row ;
     width: 75%;
     margin: 2%;
@@ -50,27 +50,25 @@ body
 
 #right-contact
 {
-	margin-left: 20%;
-	margin: 2%;
-	grid-column: col 4;
+	grid-column: col 3;
     grid-row: row ;
 }
 
 .socmed-bar
 {
-	width: 500px;
+	width: 85%;
 	height: 50px;
 	padding: 2px;
 }
 
 .socmed-bar i
 {
-	padding: 5px 20px;
+	padding: 0% 15%;
 	display: inline-block;
 	display: -moz-inline-box;
     *display: inline; /* For IE7 */
     zoom: 1; /* Trigger hasLayout */
-    width: 25%;
+    width: 30%;
     text-align: center;
 	color: rgba(55, 152, 99, 0.8);
 }
@@ -82,8 +80,8 @@ body
 
 .rounded-border
 {
-	margin: 10px 3px;
-	width: 320px;
+	margin: 10px 5px;
+	width: 100%;
 	border: 0px;
 	border-top: 2px solid #bbb;
 	border-radius: 2px;
@@ -91,14 +89,13 @@ body
 
 form
 {
-	width: 400px;
 	padding: 2% 10%;
 	font-family: Roboto;
 }
 
 #message-form input, #message-form textarea
 {
-	width: 300px;
+	width: 80%;
 	font-size: 14px;
 }
 
@@ -116,11 +113,7 @@ form p
 {
 	background-color: rgba(55, 152, 99);
 	margin-top: 5px;
-	margin-left: 200px;
+	margin-left: 52%;
 	width: 100px;
 }
-
-#message-form, .socmed-bar
-{
-	padding-left: 35%;
-}
+s
