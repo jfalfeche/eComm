@@ -6,6 +6,7 @@
 
 body{
     background: #F7F6F4;
+    overflow-x: hidden;
 }
 
 h2 {
@@ -81,17 +82,17 @@ h5 {
 }
 
 .signup-form p {
-      font-weight: bold;
-      font-size: 24px;
-  }
+  font-weight: bold;
+  font-size: 24px;
+}
 
-  .btn-success {
-	background-color: #F2BC1F;
-    margin-top: 20px;
-    margin-bottom: 40px;
-	margin-left: 790px;
-    width: 287px;
-    height: 55px;
-    border-style: none;
+.btn-success {
+  background-color: #F2BC1F;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  margin-left: 790px;
+  width: 287px;
+  height: 55px;
+  border-style: none;
 }
   /*END OF REGFORM*/
