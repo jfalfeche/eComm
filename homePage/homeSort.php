@@ -26,6 +26,7 @@
                     echo '<div class="row products">';
                 }
 ?>  
+<a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
     <div class="col<?php if(sizeof($result) < 4) echo '-md-2';?> card">
         <div class="imgwrap">
             <?php
@@ -42,17 +43,20 @@
             </a>
         </div>
     </div>
+</a>
     <?php
                 if($i == 7) {
                     ?>
+                <a href="../product/product.php?action=<?php echo $cat ?>">
                     <div class="col card last">
                         <div class=" my-auto">
-                            <a class="viewmore h-100" href="">
+                            <a class="viewmore h-100" href="../products/product.php?action=<?php echo $cat ?>">
                                 <img src="../media/viewmore.png" alt="">
                                 <p>View More</p>
                             </a>
                         </div>
                     </div>
+                </a>
                 </div>
                     <?php
                     break;
