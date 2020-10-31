@@ -13,8 +13,11 @@
         <link rel="stylesheet" href="home.css">
         <link rel="stylesheet" href="../navbar/nav.css">
         <link rel="stylesheet" href="../footer/footer.css">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     </head>
     <body>
+        <script>AOS.init();</script>
         <header>
             <div class="overlay"></div>
             <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
@@ -44,12 +47,12 @@
             <div class="container text-center align-items-center">
                 <div class="row">
                     <div class="col-md-12 mx-auto">
-                        <h2 id="products">PRODUCTS</h2>
+                        <h2 id="products"><a href="#products">PRODUCTS</a></h2>
                         <hr>
                     </div>
                 </div>
 
-                <div class="row">
+                <div data-aos="fade-up" class="row">
                     <a class="col category category-active" href="#products" id="0">ALL CATEGORIES</a>
                     <a class="col category" href="#products" id="1">FRUITS</a>
                     <a class="col category" href="#products" id="2">VEGETABLES</a>
@@ -74,7 +77,7 @@
                 </script>
                 <!-- jQuery END -->
                 
-                <div id="display">
+                <div data-aos="fade-up" id="display">
                     <?php include 'homeSort.php' ?>
                 </div>
                 

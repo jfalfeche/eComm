@@ -32,3 +32,8 @@ nav {
   .logo {
     color: #F6E05E;
   }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+  }
