@@ -3,7 +3,7 @@
         <div class="col-md-6 left">
             <a href="">About Us</a><br>
             <a href="">Products</a><br>
-            <a href="">Login</a><br>
+            <a href="../loginPage/login.php">Login</a><br>
             <a href="../registrationPage/register_buyer.php">Register</a>
         </div>
         <div class="col-md-6">

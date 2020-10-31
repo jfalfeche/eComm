@@ -14,4 +14,4 @@
 <a class="col-md-1" href="">About</a>
 <a class="col-md-1" href="">Products</a>
 <a class="col-md-1 <?php if(strpos($url,'http://localhost/eComm/phpmailer/contact.php') == 'true') echo 'nav-active'?>" href="../phpmailer/contact.php">Contact</a>
-<a class="col-md-1" href="">Login</a>
+<a class="col-md-1" href="../loginPage/login.php">Login</a>

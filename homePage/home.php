@@ -1,7 +1,5 @@
 <?php
-    include_once 'database.php';
-    $active = 0;
-    $result = mysqli_query($conn,"SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID ORDER BY product.productID DESC");
+    $cat = 0;
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +9,7 @@
         <meta charset = "UTF-8" />
         <link rel="icon" href="">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="home.css">
         <link rel="stylesheet" href="../navbar/nav.css">
         <link rel="stylesheet" href="../footer/footer.css">
@@ -50,85 +49,35 @@
                     </div>
                 </div>
 
-                <!-- PHP SORT BY CATEGORY -->
-
-                <?php
-                    if (isset($_GET['action'])){
-                        if(intval($_GET['action']) == 0) {
-                            $result = mysqli_query($conn,"SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID ORDER BY product.productID DESC");
-                            $active = 0;
-                        }
-                        for($x = 1; $x <= intval($_GET['action']); $x++){
-                            if($_GET['action'] == strval($x)) {
-                                $result = mysqli_query($conn,"SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND productCategory = ".strval($x)."");
-                                $active = $x;
-                            }
-                        }
-                    }
-                ?>
-                
                 <div class="row">
-                    <a class="col category <?php if($active == 0) echo 'category-active';?>" href="home.php?action=0#products">ALL CATEGORIES</a>
-                    <a class="col category <?php if($active == 1) echo 'category-active';?>" href="home.php?action=1#products">FRUITS</a>
-                    <a class="col category <?php if($active == 2) echo 'category-active';?>" href="home.php?action=2#products">VEGETABLES</a>
-                    <a class="col category <?php if($active == 3) echo 'category-active';?>" href="">ROOT CROPS</a>
-                    <a class="col category <?php if($active == 4) echo 'category-active';?>" href="">OTHERS</a>
+                    <a class="col category category-active" href="#products" id="0">ALL CATEGORIES</a>
+                    <a class="col category" href="#products" id="1">FRUITS</a>
+                    <a class="col category" href="#products" id="2">VEGETABLES</a>
+                    <a class="col category" href="#products" id="3">ROOT CROPS</a>
+                    <a class="col category" href="#products" id="4">OTHERS</a>
+                </div>
+
+                <!-- jQuery for sorting and category highlighting -->
+                <script>
+                    for(var i = 0; i < 5; i++){
+                        $("a#"+i).on('click', function(){
+                            for(j = 0; j < 5; j++){
+                                $("a#"+j).removeClass('category-active');
+                            }
+                            $(this).addClass('category-active');
+                            $.get('homeSort.php', {id:this.id}, function(d){
+                                $('#display').html(d);
+                            });
+                        }); 
+                    }
+                    
+                </script>
+                <!-- jQuery END -->
+                
+                <div id="display">
+                    <?php include 'homeSort.php' ?>
                 </div>
                 
-                <!-- Ideally, every 4 products, a new row of products will be created. 
-                    Only up to 7 products are displayed.
-                -->    
-                <?php
-                    $i = 1;
-                        if (mysqli_num_rows($result) > 0) {
-                            // output data of each row
-                            while($row = mysqli_fetch_assoc($result)) {
-                                if ($i == 1 || $i % 5 == 0){
-                                    echo '<div class="row products">';
-                                }
-                ?>  
-                    <div class="col<?php if(sizeof($result) < 4) echo '-md-2';?> card">
-                        <div class="imgwrap">
-                            <?php
-                                echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.base64_encode( $row['image'] ).'" alt="Card image cap">';
-                            ?>
-                        </div>
-                        <div class="card-body text-left">
-                            <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
-                            <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
-                            <p class="card-text"><?php echo $row["name"]; ?></p><br><br>
-                            <a href="#!" class="btn btn-primary">
-                                <img src="../media/cart.png" alt="cart">
-                                <h5 class="card-text">Add to Cart</h5>
-                            </a>
-                        </div>
-                    </div>
-                    <?php
-                                if($i == 7) {
-                                    ?>
-                                    <div class="col card last">
-                                        <div class=" my-auto">
-                                            <a class="viewmore h-100" href="">
-                                                <img src="../media/viewmore.png" alt="">
-                                                <p>View More</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <?php
-                                    break;
-                                }
-
-                                if ($i % 4 == 0 && $i != 0) 
-                                    echo '</div>';
-                                $i++;
-                            }
-                        } else {
-                            echo "No products found.";
-                        }
-                ?>
-                <!-- PHP END HERE -->
-
             </div>
         </section>
         
