@@ -49,16 +49,38 @@
         <div class="mainContent">
             <div class="row">
                 <div class="col-md-4" id="categories">
-                    <a class="text-decoration-none" href="#products" id="0"><div class="category category-active">ALL CATEGORIES</div></a>
-                    <a class="text-decoration-none" href="#products" id="1"><div class="category">FRUITS</div></a>
-                    <a class="text-decoration-none" href="#products" id="2"><div class="category">VEGETABLES</div></a>
-                    <a class="text-decoration-none" href="#products" id="3"><div class="category">ROOT CROPS</div></a>
-                    <a class="text-decoration-none" href="#products" id="4"><div class="category">OTHERS</div></a>
+                    <a class="text-decoration-none category-active" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
+                    <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
+                    <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
+                    <a class="text-decoration-none" href="#" id="3"><div class="category">ROOT CROPS</div></a>
+                    <a class="text-decoration-none" href="#" id="4"><div class="category">OTHERS</div></a>
                 </div>
+
+                <!-- jQuery for sorting and category highlighting -->
+                <script>
+                    for(var i = 0; i < 5; i++){
+                        $("a#"+i).on('click', function(){
+                            for(j = 0; j < 5; j++){
+                                $("a#"+j).removeClass('category-active');
+                            }
+                            $(this).addClass('category-active');
+                            $.get('productSort.php', {id:this.id}, function(d){
+                                $('#display').html(d);
+                            });
+                        }); 
+                    }
+                    
+                </script>
+                <!-- jQuery END -->
+
                 <div class="col-md-8" id="products">
                     <div class="col-md-12">
                         <h2 id="products">PRODUCTS</h2>
                         <hr>
+                    </div>
+                    <div class="pageNumbers">
+                        <button type="button" class="btn btn-outline-dark">1</button>
+                        <button type="button" class="btn btn-outline-dark">2</button>
                     </div>
                     <div id="display">
                         <?php include './productSort.php' ?>

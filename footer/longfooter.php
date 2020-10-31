@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6 left">
             <a href="">About Us</a><br>
-            <a href="">Products</a><br>
+            <a href="../products/product.php">Products</a><br>
             <a href="../loginPage/login.php">Login</a><br>
             <a href="../registrationPage/register_buyer.php">Register</a>
         </div>
