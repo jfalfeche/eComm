@@ -1,3 +1,7 @@
+<?php
+    $cat = 0;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,13 +9,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Products</title>
         <link rel="icon" href="">
-        <link rel="stylesheet" href="product.css">
-        <link rel="stylesheet" href="../navbar/nav.css">
-        <link rel="stylesheet" href="../footer/footer.css">
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="product.css">
+        <link rel="stylesheet" href="../assets/css/productCard.css">
+        <link rel="stylesheet" href="../navbar/nav.css">
+        <link rel="stylesheet" href="../footer/footer.css">
+
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     </head>
@@ -39,19 +46,27 @@
             </div>
         </header>
 
-        <div class="container align-items-center w-100 my-5">
+        <div class="mainContent">
             <div class="row">
-                <div class="col-md-4 categories text-center">
-                    <div class="category"><a class="category-active" href="#products" id="0">ALL CATEGORIES</a></div>
-                    <div class="category"><a class="" href="#products" id="1">FRUITS</a></div>
-                    <div class="category"><a class="" href="#products" id="2">VEGETABLES</a></div>
-                    <div class="category"><a class="" href="#products" id="3">ROOT CROPS</a></div>
-                    <div class="category"><a class="" href="#products" id="4">OTHERS</a></div>
+                <div class="col-md-4" id="categories">
+                    <a class="text-decoration-none" href="#products" id="0"><div class="category category-active">ALL CATEGORIES</div></a>
+                    <a class="text-decoration-none" href="#products" id="1"><div class="category">FRUITS</div></a>
+                    <a class="text-decoration-none" href="#products" id="2"><div class="category">VEGETABLES</div></a>
+                    <a class="text-decoration-none" href="#products" id="3"><div class="category">ROOT CROPS</div></a>
+                    <a class="text-decoration-none" href="#products" id="4"><div class="category">OTHERS</div></a>
                 </div>
-                <div class="col-md-8 products text-center">Test</div>
+                <div class="col-md-8" id="products">
+                    <div class="col-md-12">
+                        <h2 id="products">PRODUCTS</h2>
+                        <hr>
+                    </div>
+                    <div id="display">
+                        <?php include './productSort.php' ?>
+                    </div>
+                </div>
             </div>
         </div>
-        
+        <br><br><br>
         <?php include '../footer/longfooter.php';?>
     </body>
 </html>

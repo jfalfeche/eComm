@@ -1,0 +1,50 @@
+.products {
+    padding: 5% 5% 1% 5%;
+    width: 100%;
+  }
+    .card {
+      padding: 2%;
+      margin: 0 2%;
+      transition: 0.3s;
+    }
+  
+    .card:hover {
+      box-shadow: -5px 5px #F26709;
+    }
+  
+    .imgwrap {
+      width: 100%;
+      padding-bottom: 100%;
+      overflow: hidden;
+      position: relative;
+      border-radius: 5px;
+      box-shadow: 0 3px 3px rgb(165, 165, 165);
+    }
+  
+    .card-img-top {
+      position: absolute;
+      min-width: 100%;
+      min-height: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  
+    .card-body {
+      padding: 2vh 0;
+    }
+  
+    .card-text {
+      display: inline-block;
+    }
+  
+    .btn-primary {
+      width: 100%;
+      background: #F26709;
+      border: none;
+      box-shadow: 0 3px 3px rgb(165, 165, 165);
+    }
+  
+    .btn-primary:hover {
+      background: #a84706;
+    }

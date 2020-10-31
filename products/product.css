@@ -30,21 +30,40 @@ header {
     background-size: cover;
 }
 
+.mainContent {
+    padding-top: 5vh;
+}
+
 .input-group {
     position: relative;
     max-width: 60%;
 }
 
-.categories {
+hr {
+    width: 85%;
+    margin-right: 15%;
+}
+
+#categories {
+    left: 10%;
 }
 
 .category {
-    text-decoration: none;
+    background: #FFFFFF;
     color: black;
-    max-width: 60%;
-    border: 1px solid black;
+    max-width: 50%;
+    border: 1px solid #5CDB95;
+    text-decoration: none;
+    padding: 10px;
+    text-align: left;
+    z-index: 5;
 }
 
-.category:hover {
-    text-decoration: none;
+a div.category:hover {
+    color: green;
+    border: 1px solid green;
 }
+
+a div.category-active {
+    background: rgb(181, 252, 181);
+  }
