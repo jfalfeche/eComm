@@ -36,7 +36,7 @@
         <div class="card-body text-left">
             <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
             <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
-            <p class="card-text"><?php echo $row["name"]; ?></p><br><br>
+            <p class="card-text"><?php echo "Per ".ucwords($row["name"]); ?></p><br><br>
             <a href="#!" class="btn btn-primary">
                 <img src="../media/cart.png" alt="cart">
                 <h5 class="card-text">Add to Cart</h5>

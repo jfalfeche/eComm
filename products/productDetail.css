@@ -1,0 +1,156 @@
+body {
+    height: 125vh;
+    min-height: 125vh;
+    max-height: 125vh;
+}
+
+/*NAV*/
+.logo {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    background: #246F75;
+    z-index: 3;
+    border-radius: 20px;
+}
+/*END NAV*/
+
+.bottom {
+    max-height: 5vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.whiteSquare {
+    position: absolute;
+    height: 60vh;
+    min-height: 350px;
+    background: white;
+    width: 50%;
+    min-width: 400px;
+    box-shadow: 0 0 3px rgb(170, 170, 170);
+    left: 40%;
+    top: 25vh;
+    z-index: 0;
+}
+
+.imgwrap {
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px rgb(165, 165, 165);
+}
+
+.productImg {
+    position: absolute;
+    min-width: 50vh;
+    min-height: 50vh;
+    width: 25%;
+    height: 25%;
+    top: 42vh;
+    left: 30%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 10;
+}
+
+.productDetails {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+p {
+    margin: 0;
+}
+
+.productInfo {
+    width: 35%;
+    min-width: 350px;
+    max-width: 35%;
+    color: black;
+    position: absolute;
+    left: 50%;
+    top: 30vh;
+    z-index: 11;
+}
+
+.description {
+    margin: 20px 50px;
+    width: 100% - 50px;
+    max-width: 100% - 50px;
+    height: 10vh;
+    max-height: 10vh;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+}
+
+.btn-primary {
+    width: 180px;
+    background: #F26709;
+    border: none;
+    box-shadow: 0 3px 3px rgb(165, 165, 165);
+}
+
+.btn-primary:hover {
+    background: #a84706;
+}
+
+.cartIcon, .cartText {
+    display: inline-block;
+}
+
+.cartIcon {
+    height: 30px;
+    width: 30px;
+}
+
+.adjust, .quantity {
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    border-radius: 0;
+}
+
+.adjust {
+    width: 30px;
+}
+
+.quantity {
+    width: 70px;
+}
+
+.back a{
+    color: black;
+    
+}
+
+i, .title {
+    display: inline-block;
+}
+
+.back {
+    width: 15%;
+    min-width: 250px;
+    z-index: 13;
+    position: absolute;
+    left: 30px;
+    margin-top: 20px;
+}
+
+.title h1 {
+    position: absolute;
+    top: 5px;
+    font-size: x-large;
+}
+
+.title hr {
+    position: absolute;
+    top: 1.5em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgba(0, 0, 0);
+    width: 40%;
+}
