@@ -24,14 +24,14 @@ body {
 
 .whiteSquare {
     position: absolute;
-    height: 60vh;
+    height: 65vh;
     min-height: 350px;
     background: white;
     width: 50%;
     min-width: 400px;
     box-shadow: 0 0 3px rgb(170, 170, 170);
     left: 40%;
-    top: 25vh;
+    top: 20vh;
     z-index: 0;
 }
 
@@ -48,9 +48,9 @@ body {
     position: absolute;
     min-width: 50vh;
     min-height: 50vh;
-    width: 25%;
-    height: 25%;
-    top: 42vh;
+    width: 30%;
+    height: 30%;
+    top: 40vh;
     left: 30%;
     transform: translateX(-50%) translateY(-50%);
     z-index: 10;
@@ -72,7 +72,7 @@ p {
     color: black;
     position: absolute;
     left: 50%;
-    top: 30vh;
+    top: 25vh;
     z-index: 11;
 }
 
