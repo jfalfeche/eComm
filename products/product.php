@@ -49,11 +49,17 @@
         <div class="mainContent">
             <div class="row">
                 <div class="col-md-4" id="categories">
-                    <a class="text-decoration-none category-active" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
-                    <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
-                    <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
-                    <a class="text-decoration-none" href="#" id="3"><div class="category">ROOT CROPS</div></a>
-                    <a class="text-decoration-none" href="#" id="4"><div class="category">OTHERS</div></a>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <a class="text-decoration-none category-active" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
+                            <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
+                            <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
+                            <a class="text-decoration-none" href="#" id="3"><div class="category">ROOT CROPS</div></a>
+                            <a class="text-decoration-none" href="#" id="4"><div class="category">OTHERS</div></a>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
                 </div>
 
                 <!-- jQuery for sorting and category highlighting -->
@@ -64,7 +70,7 @@
                                 $("a#"+j).removeClass('category-active');
                             }
                             $(this).addClass('category-active');
-                            $.get('productSort.php', {id:this.id}, function(d){
+                            $.get('sortByPages.php', {id:this.id}, function(d){
                                 $('#display').html(d);
                             });
                         }); 
@@ -78,12 +84,8 @@
                         <h2 id="products">PRODUCTS</h2>
                         <hr>
                     </div>
-                    <div class="pageNumbers">
-                        <button type="button" class="btn btn-outline-dark">1</button>
-                        <button type="button" class="btn btn-outline-dark">2</button>
-                    </div>
                     <div id="display">
-                        <?php include './productSort.php' ?>
+                        <?php include './sortByPages.php' ?>
                     </div>
                 </div>
             </div>
