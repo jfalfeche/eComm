@@ -61,25 +61,31 @@
 		{
 			
 
-			$query = "SELECT * FROM LGU WHERE LGUemail = '$email' AND LGUpassword = '$password' LIMIT 1";
+			$query = "SELECT LGUID, password FROM LGU WHERE LGUemail = '$email' LIMIT 1";
 			$results = mysqli_query($db, $query);
 
+			$row = $results->fetch_assoc();
+			
 			// user is admin
-			if(mysqli_num_rows($results) == 1)
+			if(mysqli_num_rows($results) == 1 && password_verify($row['password'], $password))
 			{
-				//$_SESSION['user_type'] = 'admin';
+				$_SESSION['user_type'] = 'admin';
+				$_SESSION['LGUID'] = $row['LGUID'];
 				header('Location: ../admin.php');
 			}
 
 			//search in customers table
 			else
 			{
-				$query = "SELECT * FROM customers WHERE customerEmail = '$email' AND password = '$password' LIMIT 1";
+				$query = "SELECT userID, password FROM customers WHERE customerEmail = '$email' LIMIT 1";
 				$results = mysqli_query($db, $query);
 
-				if(mysqli_num_rows($results) == 1)
+				$row = $results->fetch_assoc();
+
+				if(mysqli_num_rows($results) == 1 && password_verify($row['password'], $password))
 				{
-					//$_SESSION['user_type'] = 'customer';	
+					$_SESSION['user_type'] = 'customer';
+					$_SESSION['userID'] = $row['userID'];	
 					header('Location: ../customer.php');
 				}
 
