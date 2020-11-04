@@ -72,3 +72,8 @@ a div.category:hover {
 #products {
     z-index: 10;
 }
+
+.btn-active {
+    background: #343A40;
+    color: white;
+}

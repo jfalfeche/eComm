@@ -60,15 +60,14 @@
 ?>
 
 <!-- PAGE NUMBERS START -->
-    <?php 
-        echo "<button id=\"1\" type=\"button\" class=\"btn btn-outline-dark\">First</button>";
-        echo "<button id=\"";?><?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?><?php echo "\" type=\"button\" class=\"btn btn-outline-dark\"><</button>";
-        for($p = 1; $p <= $total_pages; $p++){
-            echo "<button id=\"".$p."\" type=\"button\" class=\"btn btn-outline-dark\">".$p."</button>";
-        }
-        echo "<button id=\"";?><?php if($pageno >= $total_pages){ echo '#'; } else { echo ($pageno + 1); } ?><?php echo "\" type=\"button\" class=\"btn btn-outline-dark\">></button>";
-        echo "<button id=\"".$total_pages."\" type=\"button\" class=\"btn btn-outline-dark\">Last</button>";
-    ?>
+<button id="1" type="button" class="btn btn-outline-dark">First</button>
+<button id="<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>" type="button" class="btn btn-outline-dark"><</button>
+<?php
+    for($p = 1; $p <= $total_pages; $p++){ ?>
+        <button id="<?php echo $p; ?>" type="button" class="<?php if($p == $pageno) echo 'btn-active'; ?> btn btn-outline-dark"><?php echo $p ?></button>
+<?php        } ?>
+<button id="<?php if($pageno >= $total_pages){ echo '#'; } else { echo ($pageno + 1); } ?>" type="button" class="btn btn-outline-dark">></button>
+<button id="<?php echo $total_pages; ?>" type="button" class="btn btn-outline-dark">Last</button>
 <!-- PAGE NUMBERS END -->
 
 <!-- PRODUCT DISPLAY START -->
