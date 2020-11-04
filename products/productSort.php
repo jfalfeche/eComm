@@ -17,6 +17,11 @@
                 $cat = 0;
             }
         } 
+// on search
+        if(isset($_GET['search']))
+            $search = $_GET['search'];
+        else
+            $search = NULL;
 
         $no_of_records_per_page = 9;
         $offset = ($pageno-1) * $no_of_records_per_page;
@@ -24,20 +29,32 @@
         include_once '../homePage/database.php';
 
         if($cat == 0) {
-            $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID";
+            if(isset($search)) {
+                $total_pages_sql = "SELECT COUNT(*) FROM product WHERE product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%'";
+            } else
+                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID";
         }
         if($cat > 0) {
-            $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND productCategory = ".strval($cat)."";
+            if(isset($search)) {
+                $total_pages_sql = "SELECT COUNT(*) FROM product WHERE (product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%') AND productCategory = ".strval($cat)."";
+            } else
+                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND productCategory = ".strval($cat)."";
         }
         $result = mysqli_query($conn,$total_pages_sql);
         $total_rows = mysqli_fetch_array($result)[0];
         $total_pages = ceil(($total_rows / $no_of_records_per_page));
 
         if($cat == 0) {
-            $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+            if(isset($search)) {
+                $sql = "SELECT * FROM product, productunit WHERE (productunit.productUnitID = product.productUnitID) AND (product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%') ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+            } else
+                $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
         }
         if($cat > 0) {
-            $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND (productCategory = ".strval($cat).") ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+            if(isset($search)) {
+                $sql = "SELECT * FROM product, productunit WHERE (productunit.productUnitID = product.productUnitID) AND (productCategory = ".strval($cat).") AND (product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%') ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+            } else
+                $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND (productCategory = ".strval($cat).") ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
         }
         $res_data = mysqli_query($conn,$sql);
 ?>
