@@ -48,20 +48,14 @@ hr {
     margin-right: 15%;
 }
 
-#categories {
-    left: 10%;
-    z-index: 10;
-}
-
 .category {
+    width: 100%;
     background: #FFFFFF;
     color: black;
-    max-width: 50%;
     border: 1px solid #5CDB95;
     text-decoration: none;
     padding: 10px;
     text-align: left;
-    z-index: 5;
     transition: 0.3s;
 }
 
@@ -75,8 +69,11 @@ a div.category:hover {
     background: rgb(181, 252, 181);
   }
 
-.pageNumbers {
-    position: relative;
-    text-align: right;
-    padding-right: 20%;
+#products {
+    z-index: 10;
+}
+
+.btn-active {
+    background: #343A40;
+    color: white;
 }

@@ -47,10 +47,10 @@
     <?php
                 if($i == 7) {
                     ?>
-                <a href="../product/product.php?action=<?php echo $cat ?>">
+                <a href="../product/product.php">
                     <div class="col card last">
                         <div class=" my-auto">
-                            <a class="viewmore h-100" href="../products/product.php?action=<?php echo $cat ?>">
+                            <a class="viewmore h-100" href="../products/product.php">
                                 <img src="../media/viewmore.png" alt="">
                                 <p>View More</p>
                             </a>

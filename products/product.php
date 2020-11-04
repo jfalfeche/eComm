@@ -1,7 +1,6 @@
-<?php
-    $cat = 0;
+<?php 
+    session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,54 +37,115 @@
         <header class="row">
             <div class="col d-flex justify-content-center my-auto">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search products here..." aria-label="" aria-describedby="basic-addon1">
+                    <input id="searchFor" type="text" class="form-control" placeholder="Search products here..." aria-label="" aria-describedby="basic-addon1">
                     <div class="input-group-append">
-                        <button class="btn btn-success" type="button">Search <i class="fas fa-search"></i> </button>
+                        <button id="search" class="btn btn-success" type="button">Search <i class="fas fa-search"></i> </button>
                     </div>
                 </div>
             </div>
         </header>
 
+        <!-- jQuery for search -->
+        <script>
+            $("#search").on('click', function(e){
+                e.preventDefault();
+                s = document.getElementById("searchFor").value;
+                if(s.length > 2)
+                    $.get('productSort.php', {id:localStorage['currentCat'], pageno:1, search:s}, function(d){
+                        $('#display').html(d);
+                    });
+                else
+                    alert("Enter more than 2 letters.");
+            });
+        </script>
+        <!-- jQuery search ends here -->
+
         <div class="mainContent">
             <div class="row">
                 <div class="col-md-4" id="categories">
-                    <a class="text-decoration-none category-active" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
-                    <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
-                    <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
-                    <a class="text-decoration-none" href="#" id="3"><div class="category">ROOT CROPS</div></a>
-                    <a class="text-decoration-none" href="#" id="4"><div class="category">OTHERS</div></a>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <a class="text-decoration-none" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
+                            <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
+                            <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
+                            <a class="text-decoration-none" href="#" id="3"><div class="category">ROOT CROPS</div></a>
+                            <a class="text-decoration-none" href="#" id="4"><div class="category">OTHERS</div></a>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
                 </div>
-
-                <!-- jQuery for sorting and category highlighting -->
-                <script>
-                    for(var i = 0; i < 5; i++){
-                        $("a#"+i).on('click', function(){
-                            for(j = 0; j < 5; j++){
-                                $("a#"+j).removeClass('category-active');
-                            }
-                            $(this).addClass('category-active');
-                            $.get('productSort.php', {id:this.id}, function(d){
-                                $('#display').html(d);
-                            });
-                        }); 
-                    }
-                    
-                </script>
-                <!-- jQuery END -->
 
                 <div class="col-md-8" id="products">
                     <div class="col-md-12">
                         <h2 id="products">PRODUCTS</h2>
                         <hr>
                     </div>
-                    <div class="pageNumbers">
-                        <button type="button" class="btn btn-outline-dark">1</button>
-                        <button type="button" class="btn btn-outline-dark">2</button>
-                    </div>
                     <div id="display">
+                        <!-- Initial display -->
                         <?php include './productSort.php' ?>
+
+                        <!-- jQuery for page refresh -->
+                        <script>
+                            // if a previous category was selected
+                            if(localStorage['currentCat'])
+                                $("a#"+localStorage['currentCat']).addClass('category-active');
+                            else
+                            // if no category was formerly selected
+                                $("a#0").addClass('category-active');
+                                
+                            // if a previous category and page was selected
+                            if(localStorage['currentPage'])
+                                $.get('productSort.php', {id:localStorage['currentCat'], pageno:localStorage['currentPage']}, function(d){
+                                    $('#display').html(d);
+                                });
+                            else {
+                                // if no category was formerly selected
+                                $.get('productSort.php', {id:0, pageno:1}, function(d){
+                                    $('#display').html(d);
+                                });
+                                localStorage['currentCat'] = 0;
+                                localStorage['currentPage'] = 1;
+                            }
+                        </script>
+                        <!-- jQuery END -->
                     </div>
                 </div>
+
+                <!-- jQuery for category filter and category highlighting -->
+                <script>
+                    for(var i = 0; i < 5; i++){
+                        $("a#"+i).on('click', function(e){
+                            e.preventDefault();
+                            for(var j = 0; j < 5; j++){
+                                $("a#"+j).removeClass('category-active');
+                            }
+                            $(this).addClass('category-active');
+                            $.get('productSort.php', {id:this.id, pageno:1}, function(d){
+                                $('#display').html(d);
+                            });
+                            localStorage['currentCat'] = this.id;
+                        }); 
+                    }
+                    
+                </script>
+                <!-- jQuery END -->
+
+                <!-- jQuery for pagination -->
+                <script>
+                    for(var k = 1; k <= <?php echo $total_pages ?>; k++){
+                        $(document).on("click", "button#"+k+"", function(e){
+                            e.preventDefault();
+                            $.get('productSort.php', {pageno:this.id, id:localStorage['currentCat']}
+                            , function(d){
+                                $('#display').html(d);
+                            });
+                            localStorage['currentPage'] = this.id;
+                        }); 
+                    }  
+                </script>
+                <!-- jQuery END -->
+
             </div>
         </div>
         <br><br><br>

@@ -1,3 +1,5 @@
+<?php include('method_seller.php'); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,25 +18,49 @@
     <!--NAV-->
     <nav class="nav guest">
         <div class="col-md-1">
-            <div class="logo"><h1>LOGO</h1></div>
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
         </div>
         <div class="col-md-6"></div>
         <?php include '../navbar/guest.php' ?>
     </nav>
     <!--END NAV-->
 
-    <div class="header">
-        <div class="row">
-            <a class="back" href=""><img src="../media/back1.svg" alt=""></a>
-            <h5>Back to Login</h5>
-        </div>
-        <h2 class="text-center">Register as PhilCafe Seller</h2>
-        <hr class="solid">
-    </div>
+    <h2 class="text-center">Register as PhilCafe Seller</h2>
+    <hr class="solid">
 
     <!--REG FORM-->
     <div class="signup-form">
-        <form action="" method="post">
+        <form method='post' action=''>
+
+            <?php
+            // Display Error message
+            $error_message;
+            $success_message;
+
+            if (!empty($error_message)) {
+            ?>
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> <?= $error_message ?>
+                </div>
+
+            <?php
+            }
+            ?>
+
+            <?php
+            // Display Success message
+            if (!empty($success_message)) {
+            ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> <?= $success_message ?>
+                </div>
+
+            <?php
+            }
+            ?>
+
             <div class="form-group">
                 <div class="row">
                     <div class="col">
@@ -47,10 +73,10 @@
             </div>
             <div class="form-group">
                 <p>Store Description</p>
-                <textarea name="description" class="form-control" name="storeescription" placeholder="" rows="7" required="required"></textarea>
+                <textarea name="storeDescription" class="form-control" placeholder="" rows="7" required="required"></textarea>
             </div>
+            <button type="submit" name="submit" class="btn btn-success btn-lg btn-block">Apply as Seller</button>
         </form>
-        <button type="submit" name="submit-button" class="btn btn-success btn-lg btn-block">Apply as Seller</button>
     </div>
     <!--END OF REG FORM-->
 
