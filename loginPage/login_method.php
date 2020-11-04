@@ -61,17 +61,27 @@
 		{
 			
 
-			$query = "SELECT LGUID, password FROM LGU WHERE LGUemail = '$email' LIMIT 1";
+			$query = "SELECT LGUID, LGUpassword FROM LGU WHERE LGUemail = '$email' LIMIT 1";
 			$results = mysqli_query($db, $query);
 
-			$row = $results->fetch_assoc();
+			
 			
 			// user is admin
-			if(mysqli_num_rows($results) == 1 && password_verify($row['password'], $password))
+			if(mysqli_num_rows($results) == 1)
 			{
-				$_SESSION['user_type'] = 'admin';
-				$_SESSION['LGUID'] = $row['LGUID'];
-				header('Location: ../admin.php');
+				$row = $results->fetch_assoc();
+				if(password_verify($password, $row['LGUpassword']))
+				{
+					$_SESSION['user_type'] = 'admin';
+					$_SESSION['LGUID'] = $row['LGUID'];
+					header('Location: ../admin.php');
+				}
+
+				//password is invalid
+				else
+				{
+					array_push($errors, "Email and password combination does not match.");
+				}
 			}
 
 			//search in customers table
@@ -80,13 +90,15 @@
 				$query = "SELECT userID, password FROM customers WHERE customerEmail = '$email' LIMIT 1";
 				$results = mysqli_query($db, $query);
 
-				$row = $results->fetch_assoc();
-
-				if(mysqli_num_rows($results) == 1 && password_verify($row['password'], $password))
+				if(mysqli_num_rows($results) == 1)
 				{
-					$_SESSION['user_type'] = 'customer';
-					$_SESSION['userID'] = $row['userID'];	
-					header('Location: ../customer.php');
+					$row = $results->fetch_assoc();
+					if(password_verify($password, $row['password']))
+					{
+						$_SESSION['user_type'] = 'customer';
+						$_SESSION['userID'] = $row['userID'];	
+						header('Location: ../customer.php');
+					}	
 				}
 
 				//else, user does not exist
