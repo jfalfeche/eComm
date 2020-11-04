@@ -99,6 +99,11 @@
 						$_SESSION['userID'] = $row['userID'];	
 						header('Location: ../customer.php');
 					}	
+
+					else
+					{
+						array_push($errors, "Email and password combination does not match.");
+					}
 				}
 
 				//else, user does not exist
