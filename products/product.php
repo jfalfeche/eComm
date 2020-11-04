@@ -1,7 +1,6 @@
-<?php
-    $cat = 0;
+<?php 
+    session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,7 +51,7 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            <a class="text-decoration-none category-active" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
+                            <a class="text-decoration-none" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
                             <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
                             <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
                             <a class="text-decoration-none" href="#" id="3"><div class="category">ROOT CROPS</div></a>
@@ -62,7 +61,7 @@
                     </div>
                 </div>
 
-                <!-- jQuery for sorting and category highlighting -->
+                <!-- jQuery for category filter and category highlighting -->
                 <script>
                     for(var i = 0; i < 5; i++){
                         $("a#"+i).on('click', function(){
@@ -70,9 +69,10 @@
                                 $("a#"+j).removeClass('category-active');
                             }
                             $(this).addClass('category-active');
-                            $.get('sortByPages.php', {id:this.id}, function(d){
+                            $.get('sortbyCategoryandPage.php', {id:this.id, pageno:1}, function(d){
                                 $('#display').html(d);
                             });
+                            localStorage['currentCat'] = this.id;
                         }); 
                     }
                     
@@ -85,9 +85,46 @@
                         <hr>
                     </div>
                     <div id="display">
-                        <?php include './sortByPages.php' ?>
+                        <!-- Initial display -->
+                        <?php include './sortbyCategoryandPage.php' ?>
+                        
+                        <!-- jQuery for page refresh -->
+                        <script>
+                            // if a previous category was selected
+                            if(localStorage['currentCat'])
+                                $("a#"+localStorage['currentCat']).addClass('category-active');
+                            else
+                            // if no category was formerly selected
+                                $("a#0").addClass('category-active');
+                            // if a previous category and page was selected
+                            if(localStorage['currentPage'])
+                                $.get('sortByCategoryandPage.php', {id:localStorage['currentCat'], pageno:localStorage['currentPage']}, function(d){
+                                    $('#display').html(d);
+                                });
+                            else
+                            // if no category was formerly selected
+                                $.get('sortByCategoryandPage.php', {id:0, pageno:1}, function(d){
+                                    $('#display').html(d);
+                                });
+                        </script>
+                        <!-- jQuery END -->
                     </div>
                 </div>
+
+                <!-- jQuery for pagination -->
+                <script>
+                    for(var j = 1; j <= <?php echo $total_pages ?>; j++){
+                        $(document).on("click", "button#"+j+"", function(){
+                            $.get('sortbyCategoryandPage.php', {pageno:this.id, id:localStorage['currentCat']}
+                            , function(d){
+                                $('#display').html(d);
+                            });
+                            localStorage['currentPage'] = this.id;
+                        }); 
+                    }  
+                </script>
+                <!-- jQuery END -->
+
             </div>
         </div>
         <br><br><br>

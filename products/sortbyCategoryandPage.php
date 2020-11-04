@@ -1,17 +1,27 @@
-    <?php
-
+<?php
         if (isset($_GET['pageno'])) {
-            $pageno = $_GET['pageno'];
+            $pageno = intval($_GET['pageno']);
         } else {
-            $pageno = 1;
+            if(isset($pageno))
+                {} 
+            else
+                $pageno = 1;
         }
+
+        if(isset($_GET['id'])) {
+            $cat = $_GET['id'];
+        } else {
+            if(isset($cat))
+                {} 
+            else {
+                $cat = 0;
+            }
+        } 
+
         $no_of_records_per_page = 9;
-        $offset = intval($pageno-1) * $no_of_records_per_page;
+        $offset = ($pageno-1) * $no_of_records_per_page;
 
         include_once '../homePage/database.php';
-
-        if(isset($_GET['id']))
-            $cat = $_GET['id'];
 
         if($cat == 0) {
             $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID";
@@ -30,19 +40,17 @@
             $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND (productCategory = ".strval($cat).") ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
         }
         $res_data = mysqli_query($conn,$sql);
-        echo $cat;
 ?>
 
 <!-- PAGE NUMBERS START -->
     <?php 
-        echo "<a href=\"?pageno=1\"><button type=\"button\" class=\"btn btn-outline-dark\">First</button></a>";
-        echo "<a href=";?><?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?><?php echo "><button type=\"button\" class=\"btn btn-outline-dark\"><</button></a>";
+        echo "<button id=\"1\" type=\"button\" class=\"btn btn-outline-dark\">First</button>";
+        echo "<button id=\"";?><?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?><?php echo "\" type=\"button\" class=\"btn btn-outline-dark\"><</button>";
         for($p = 1; $p <= $total_pages; $p++){
-            echo "<a href=\"?pageno=".$p."\"><button type=\"button\" class=\"btn btn-outline-dark\">".$p."</button></a>";
+            echo "<button id=\"".$p."\" type=\"button\" class=\"btn btn-outline-dark\">".$p."</button>";
         }
-        echo "<a href=";?><?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?><?php echo "><button type=\"button\" class=\"btn btn-outline-dark\">></button></a>";
-        echo "<a href=\"?pageno=".$total_pages."\"><button type=\"button\" class=\"btn btn-outline-dark\">Last</button></a>";
-        echo $cat;
+        echo "<button id=\"";?><?php if($pageno >= $total_pages){ echo '#'; } else { echo ($pageno + 1); } ?><?php echo "\" type=\"button\" class=\"btn btn-outline-dark\">></button>";
+        echo "<button id=\"".$total_pages."\" type=\"button\" class=\"btn btn-outline-dark\">Last</button>";
     ?>
 <!-- PAGE NUMBERS END -->
 
