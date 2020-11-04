@@ -39,7 +39,7 @@
 
 				<hr class="rounded-border">
 				<p>Don't have an account?</p>
-				<form method="post" action="registrationPage/" class="reg-button">
+				<form method="post" action="../registrationPage/register.php" class="reg-button">
 					<button type="submit" name="submit-button" class="btn btn-warning">CREATE A NEW ACCOUNT</button>
 				</form>
 			</div>
