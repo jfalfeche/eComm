@@ -92,3 +92,13 @@ h2 {
   margin-bottom: 0%;
   width: 1074px;
 }
+
+.return a {
+   font-weight: 200;
+   color: rgba(0, 0, 0, 1);
+}
+
+.return:hover, .return a:hover, .return i:hover {
+	text-decoration: none;
+	color: rgb(128,128,128);
+}
