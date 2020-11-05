@@ -30,10 +30,41 @@
 	$total_pages = ceil(($total_rows / $no_of_records_per_page));
 
 	$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true LIMIT $offset, $no_of_records_per_page";
+
+	if(isset($_POST['sortStore']))
+		get_store();
+
+	if(isset($_POST['searchPartner'])){
+		search_partner_stores($_POST['searchPartnerVal']);
+		unset($_POST['searchPartner']);
+	}
+		
 	$result_stores = mysqli_query($conn, $partner_stores);
+	$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true LIMIT $offset, $no_of_records_per_page";
+
 
 ?>
-<!-- PAGE NUMBERS START -->
+<span style="font-size: 24px; font-weight: 500;">PARTNER STORES</span>
+<hr class="mt-1 mb-2">
+
+<div class="search">
+	<form name="searchPartnerStore" action="admin_main.php" method="post">
+		<input type="text" name="searchPartnerVal" class="form-control" placeholder="Search Partner Store Name here...">
+		<button type="submit" name ="searchPartner" class="btn btn-primary mb-2">SEARCH   <i class="fas fa-search"></i></button>
+	</form>
+</div>
+
+ <div class="sort">
+	<form name="sortFormStore" action="admin_main.php" method="post">
+			<select name="sortStore" class="form-control" onChange="sortFormStore.submit()">
+				<option>Sort by</option>
+				<option value="oldest-newest">Oldest-Newest</option>
+				<option value="newest-oldest">Newest-Oldest</option>
+			</select>
+	</form>
+</div>
+
+
 <div class="pageNumbers">
     <button id="1" type="button" class="btn btn-outline-dark">First</button>
     <button id="<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>" type="button" class="btn btn-outline-dark"><</button>
@@ -47,17 +78,17 @@
 <!-- PAGE NUMBERS END -->
 
 <?php 
-	if (mysqli_num_rows($result) > 0) 
+	if ($result->num_rows > 0) 
     {
         $i = 1;
         while($row = mysqli_fetch_array($result_stores)){
             if ($i == 1 || $i % 5 == 0){
-                echo '<div class="row products">';
+                echo '<div class="row stores">';
             }
             ?>
 
             <a href="admin_main.php?action=<?php echo $row['sellerID']?>" class="text-reset text-decoration-none">
-                <div class="col<?php if(sizeof($result) < 4) echo '-md-2';?> card">
+                <div class="col<?php if($result_stores->num_rows < 4) echo '-md-2';?> card">
                     <div class="imgwrap">
                         <?php
                             echo '<img class="xcard-img-top img-responsive full-width" src="data:image/jpeg;base64,'.base64_encode( $row['profilePhoto'] ).'" alt="Card image cap">';
@@ -81,7 +112,7 @@
         
     	} 
     }else {
-        echo "No products found.";
+        echo "<span style=\"color: red;\">No partner stores found.</span>";
     }
 ?>
 	

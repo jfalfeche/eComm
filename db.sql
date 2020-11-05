@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS `sellers`;
 CREATE TABLE `sellers`(
 	`sellerID` int(15) AUTO_INCREMENT,
 	`storeStatus` boolean NOT NULL,
+	`dateCreated` date NOT NULL,
 	`storeName` varchar(100) NOT NULL,
 	`storeEmail` varchar(50) NOT NULL,
 	`storeDescription` text NOT NULL,
@@ -105,14 +106,6 @@ CREATE TABLE `orderStatus`(
 
 
 
-DROP TABLE IF EXISTS `productDetail`;
-
-CREATE TABLE `productDetail`(
-	`productDetailID` int(15) AUTO_INCREMENT,
-	`productID` int(15),
-	`quantity` int(10),
-	PRIMARY KEY (`productDetailID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -126,24 +119,39 @@ CREATE TABLE `order`(
 	`status` int(15) NOT NULL,
 	`paymentMethod` varchar(10) NOT NULL,
 	`dateOrdered` date NOT NULL,
-	`dateCompleted` date NOT NULL,
+	`dateCompleted` date ,
 	`totalAmount` decimal(10,2) NOT NULL,
 	`shippingFee` decimal(10,2) NOT NULL,
 	`message` text NOT NULL,
-	`productDetailID` int(15) NOT NULL,
 	PRIMARY KEY (`orderNo`),
 	KEY `buyerID` (`buyerID`),
 	KEY `shippingAddress` (`shippingAddress`),
 	KEY `status` (`status`),
-	KEY `productDetailID` (`productDetailID`),
 	CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
 	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shippingAddress`) REFERENCES `customers` (`permanentAddress`),
-	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`),
-	CONSTRAINT `order_ibfk_4` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`)
+	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
+DROP TABLE IF EXISTS `productDetail`;
+
+CREATE TABLE `productDetail`(
+	`productDetailID` int(15) AUTO_INCREMENT,
+	`productID` int(15),
+	`quantity` int(10),
+	`buyerID` int(15) NOT NULL,
+	`inOrder` boolean NOT NULL,
+	`orderNo` int(15),
+	PRIMARY KEY (`productDetailID`),
+	KEY `productID` (`productID`),
+	KEY `buyerID` (`buyerID`),
+	KEY `orderNo` (`orderNo`),
+	CONSTRAINT `productDetail_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
+	CONSTRAINT `productDetail_ibfk_2` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
+	CONSTRAINT `productDetail_ibfk_3` FOREIGN KEY (`orderNo`) REFERENCES `order` (`orderNo`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
@@ -152,12 +160,9 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart`(
 	`cartID` int(15) AUTO_INCREMENT,
 	`userID` int(15),
-	`productDetailID` int(15),
 	PRIMARY KEY (`cartID`),
 	KEY `userID` (`userID`),
-	KEY `productDetailID` (`productDetailID`),
-	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customers` (`userID`),
-	CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productDetailID`) REFERENCES `productDetail` (`productDetailID`)
+	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customers` (`userID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 

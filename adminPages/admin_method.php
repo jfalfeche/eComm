@@ -2,35 +2,35 @@
 	
 	function get_order()
 	{
-		if(isset($_POST['sort']))
+		if(isset($_POST['sortOrder']))
 		{
 
 			global $order;
-			$sort = $_POST['sort']; 
+			$sort = $_POST['sortOrder']; 
 			if($sort == "oldest-newest")
-				$order = "SELECT * from `order` WHERE status>22 AND status<27 ORDER BY dateOrdered ASC";
+				$order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
 			else if($sort == "newest-oldest")
-				$order = "SELECT * from `order` WHERE status>22 AND status<27 ORDER BY dateOrdered DESC";
+				$order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered DESC";
 			else if($sort == "pending")
-				$order = "SELECT * from `order` WHERE status=23 ORDER BY dateOrdered ASC";
+				$order = "SELECT * from `order` WHERE status=1 ORDER BY dateOrdered ASC";
 			else if($sort == "approved")
-				$order = "SELECT * from `order` WHERE status=24  ORDER BY dateOrdered ASC";
+				$order = "SELECT * from `order` WHERE status=2  ORDER BY dateOrdered ASC";
 			else if($sort == "packed")
-				$order = "SELECT * from `order` WHERE status=25  ORDER BY dateOrdered ASC";
+				$order = "SELECT * from `order` WHERE status=3  ORDER BY dateOrdered ASC";
 			else if($sort == "shipped")
-				$order = "SELECT * from `order` WHERE status=26  ORDER BY dateOrdered ASC";
+				$order = "SELECT * from `order` WHERE status=4  ORDER BY dateOrdered ASC";
 		}
 	}
 
 	function get_status_color($value)
 	{
-		if($value == "23")
+		if($value == "1")
 			return "#FF0000";
-		else if($value == "24")
+		else if($value == "2")
 			return "#00FFD9";
-		else if($value == "25")
+		else if($value == "3")
 			return "#0057FF";
-		else if($value == "26")
+		else if($value == "4")
 			return "#FFF500";
 
 	}
@@ -52,7 +52,7 @@
 	{
 		global $conn;
 
-		$sql = "SELECT firstName, middleName, lastName from `customers` WHERE userID=$id LIMIT 1";
+		$sql = "SELECT firstName, middleName, lastName FROM `customers` WHERE userID=$id LIMIT 1";
     	$result = $conn->query($sql);
 
     	if(mysqli_num_rows($result) == 1)
@@ -63,11 +63,71 @@
     	}
 	}
 
-	function get_product_details($id)
+	function get_product_details($id, $orderNo)
 	{
+		global $conn;
 
+		$sql = "SELECT productDetail.productID, productDetail.quantity, product.productName FROM `productDetail` INNER JOIN `product` ON productDetail.productID=product.productID WHERE productDetail.buyerID=1 AND productDetail.orderNo=1";
+		$result = $conn->query($sql);
+
+		$product_list = "";
+
+		if(mysqli_num_rows($result) > 0)
+		{
+    		while ($row = $result->fetch_assoc())
+    		{
+    			$product_list = $product_list.$row['quantity']." x ".$row['productName']."    ";
+    		}
+		}
+
+		echo substr(strtoupper($product_list), 0, 200);
 	}
 
+
+	function get_pending_store()
+	{
+		if(isset($_POST['sortPendingStore']))
+		{
+
+			global $store;
+
+			$sort = $_POST['sortPendingStore']; 
+			if($sort == "oldest-newest")
+				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY dateCreated ASC";
+			else if($sort == "newest-oldest")
+				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY dateCreated DESC";
+		}
+	}
+
+	function search_pending_store($value)
+	{
+		global $store;
+		$store = "SELECT * from `sellers` WHERE (storeStatus=false AND storeName LIKE '%{$value}%')";
+	}
+
+
+	function get_store()
+	{
+		if(isset($_POST['sortStore']))
+		{
+
+			global $partner_stores, $offset, $no_of_records_per_page;
+
+			$sort = $_POST['sortStore']; 
+
+			if($sort == "oldest-newest")
+				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY dateCreated ASC LIMIT $offset, $no_of_records_per_page ";
+			else if($sort == "newest-oldest")
+				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY dateCreated DESC LIMIT $offset, $no_of_records_per_page ";
+		}
+	}
+
+	function search_partner_stores($value)
+	{
+		global $partner_stores, $offset, $no_of_records_per_page;
+
+		$partner_stores = "SELECT * from `sellers` WHERE (storeStatus=true AND storeName LIKE '%{$value}%') LIMIT $offset, $no_of_records_per_page ";
+	}
 ?>
 
 

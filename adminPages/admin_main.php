@@ -6,7 +6,7 @@
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $order = "SELECT * from `order` WHERE status>22 AND status<27 ORDER BY dateOrdered ASC";
+    $order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
    	$store = "SELECT * from `sellers` WHERE storeStatus=false";
 
    include 'admin_method.php';
@@ -32,8 +32,8 @@
 			<span style="font-size: 24px; font-weight: 500;">PENDING ORDERS</span>
 			<hr class="mt-1 mb-2">
 			<div class="sort">
-				<form name="sortForm" action="admin_main.php" method="post">
-					<select name="sort" class="form-control" id="pending-sort" onChange="sortForm.submit()">
+				<form name="sortFormOrder" action="admin_main.php" method="post">
+					<select name="sortOrder" class="form-control" onChange="sortFormOrder.submit()">
 						<option>Sort by</option>
 						<option value="oldest-newest">Oldest-Newest</option>
 						<option value="newest-oldest">Newest-Oldest</option>
@@ -83,7 +83,7 @@
 	                                <?php get_customer_name($row['buyerID']); ?>
 	                            </td>
 	                            <td>
-	                                <?php get_product_details($row['productDetailID']) ?>
+	                                <?php get_product_details($row['buyerID'], $row['orderNo']) ?>
 	                            </td>
 	                            <td>
 	                                
@@ -109,7 +109,31 @@
 		<div id="store-applications" class="p-2">
 			<span style="font-size: 24px; font-weight: 500;">STORE APPLICATIONS</span>
 			<hr class="mt-1 mb-2">
-			
+
+			<div class="search">
+				<form name="searchPendingStore" action="admin_main.php" method="post">
+					<input type="text" name="searchPendingVal" class="form-control" placeholder="Search Pending Store Name here...">
+					<button type="submit" name ="searchPending" class="btn btn-primary mb-2">SEARCH   <i class="fas fa-search"></i></button>	
+				</form>
+			</div>
+			<?php
+				if(isset($_POST['searchPending'])){
+					search_pending_store($_POST['searchPendingVal']);
+					unset($_POST['searchPending']);
+				}
+			?>
+			<div class="sort">
+				<form name="sortFormPendingStore" action="admin_main.php" method="post">
+						<select name="sortPendingStore" class="form-control" onChange="sortFormPendingStore.submit()">
+							<option>Sort by</option>
+							<option value="oldest-newest">Oldest-Newest</option>
+							<option value="newest-oldest">Newest-Oldest</option>
+						</select>
+				</form>
+			</div>
+
+
+
 			<table id="store-applications-table" class="table table-hover">
 				<thead>
 					<tr>
@@ -123,7 +147,13 @@
 				</thead>
 				<tbody>
 					<?php
+						if(isset($_POST['sortPendingStore'])){
+							get_pending_store();
+							unset($_POST['sortPendingStore']);
+						}
+
 						$result = $conn->query($store);
+						
 		                if ($result->num_rows > 0) 
 		                {
 		                    // output data of each row
@@ -161,8 +191,7 @@
 		</div>
 
 		<div id="partner-stores" class="p-2">	
-			<span style="font-size: 24px; font-weight: 500;">PARTNER STORES</span>
-			<hr class="mt-1 mb-2">
+			
 			<!--insert search bar here-->
 
 			
