@@ -1,10 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; 
 }
 
-#pending-orders, #store-applications
+body
+{
+	background: #F7F6F4;
+}
+
+table
+{
+	background: #FFFFFF;
+}
+
+#pending-orders, #store-applications, #partner-stores
 {
 	margin: auto;
 	width: 75%;
@@ -41,3 +51,4 @@ hr
 {
 	color: #f00000;
 }
+

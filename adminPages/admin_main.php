@@ -21,7 +21,9 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="../assets/css/productCard.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/admin-style.css">
+
 
 </head>
 <body>
@@ -145,7 +147,7 @@
 	                                <?php echo $row['storeEmail']; ?>
 	                            </td>
 	                            <td>
-	                            	<a href="DELETEStore.php?sellerID=<?php echo $row['sellerID'] ?>"><i class="fas fa-trash-alt fa-2x"></i></a>
+	                            	<a href="deleteStore.php?sellerID=<?php echo $row['sellerID'] ?>"><i class="fas fa-trash-alt fa-2x"></i></a>
 	                            </td>
 	                        </tr>
 	                       
@@ -159,6 +161,18 @@
 		</div>
 
 		<div id="partner-stores" class="p-2">	
+			<span style="font-size: 24px; font-weight: 500;">PARTNER STORES</span>
+			<hr class="mt-1 mb-2">
+			<!--insert search bar here-->
+
+			
+
+
+			<?php
+				include 'admin_pagination.php';
+		       
+			?>
+
 		</div>
 	</div>
 	
@@ -181,4 +195,18 @@
 	    });
 
 	});
+
+
+	for(var k = 1; k <= <?php echo $total_pages ?>; k++)
+	{
+        $(document).on("click", "button#"+k+"", function(e)
+        {
+            e.preventDefault();
+            $.get('admin_pagination.php', {pageno:this.id}
+            , function(d){
+                $('#partner-stores').html(d);
+            });
+            localStorage['currentPage'] = this.id;
+        }); 
+    }
 </script>

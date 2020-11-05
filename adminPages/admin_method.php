@@ -21,6 +21,7 @@
 				$order = "SELECT * from `order` WHERE status=26  ORDER BY dateOrdered ASC";
 		}
 	}
+
 	function get_status_color($value)
 	{
 		if($value == "23")
@@ -66,4 +67,7 @@
 	{
 
 	}
+
 ?>
+
+
