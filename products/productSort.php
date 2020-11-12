@@ -111,3 +111,20 @@
                         }
     ?>
 <!-- PRODUCT DISPLAY END -->
+<?php
+    if(($pageno == $total_pages) && $i <= 3) {
+        echo '</div>';
+    }
+?>
+<!-- PAGE NUMBERS START -->
+<div class="pageNumbers">
+    <button id="1" type="button" class="btn btn-outline-dark">First</button>
+    <button id="<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>" type="button" class="btn btn-outline-dark"><</button>
+    <?php
+        for($p = 1; $p <= $total_pages; $p++){ ?>
+            <button id="<?php echo $p; ?>" type="button" class="<?php if($p == $pageno) echo 'btn-active'; ?> btn btn-outline-dark"><?php echo $p ?></button>
+    <?php        } ?>
+    <button id="<?php if($pageno >= $total_pages){ echo '#'; } else { echo ($pageno + 1); } ?>" type="button" class="btn btn-outline-dark">></button>
+    <button id="<?php echo $total_pages; ?>" type="button" class="btn btn-outline-dark">Last</button>
+</div>
+<!-- PAGE NUMBERS END -->
