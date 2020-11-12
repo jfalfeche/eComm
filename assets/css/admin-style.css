@@ -91,4 +91,8 @@ img
 	background: #008f3c;
 }
 
+.searchbtn, .inputfld {
+	position: relative;
+	display: inline-block;
+}
 

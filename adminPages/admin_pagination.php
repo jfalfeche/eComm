@@ -49,8 +49,8 @@
 
 <div class="search">
 	<form name="searchPartnerStore" action="admin_main.php" method="post">
-		<input type="text" name="searchPartnerVal" class="form-control" placeholder="Search Partner Store Name here...">
-		<button type="submit" name ="searchPartner" class="btn btn-primary mb-2">SEARCH   <i class="fas fa-search"></i></button>
+		<input type="text" name="searchPartnerVal" class="form-control inputfld" placeholder="Search Partner Store Name here...">
+		<button type="submit" name ="searchPartner" class="btn btn-primary mb-2 searchbtn">SEARCH   <i class="fas fa-search"></i></button>
 	</form>
 </div>
 

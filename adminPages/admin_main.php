@@ -112,8 +112,8 @@
 
 			<div class="search">
 				<form name="searchPendingStore" action="admin_main.php" method="post">
-					<input type="text" name="searchPendingVal" class="form-control" placeholder="Search Pending Store Name here...">
-					<button type="submit" name ="searchPending" class="btn btn-primary mb-2">SEARCH   <i class="fas fa-search"></i></button>	
+					<input type="text" name="searchPendingVal" class="form-control inputfld" placeholder="Search Pending Store Name here...">
+					<button type="submit" name ="searchPending" class="btn btn-primary mb-2 searchbtn">SEARCH   <i class="fas fa-search"></i></button>	
 				</form>
 			</div>
 			<?php
