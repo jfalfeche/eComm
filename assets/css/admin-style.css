@@ -34,7 +34,8 @@ hr
 
 .sort
 {
-	width: 25%;
+	float: right;
+	width: 15%;
 	margin-bottom: 1%;
 }
 
@@ -76,9 +77,19 @@ img
 	padding: 0;
 }
 
-.search input, .search button
+.search 
 {
-	width: 35%;
+	width: 70%;
+}
+
+.search input
+{
+	width: 50%;
+}
+
+.search button
+{
+	width: 20%;
 }
 
 .search button
@@ -91,8 +102,7 @@ img
 	background: #008f3c;
 }
 
-.searchbtn, .inputfld {
+.searchbtn, .inputfld, .search, .sort {
 	position: relative;
 	display: inline-block;
 }
-
