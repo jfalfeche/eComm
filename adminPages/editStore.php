@@ -114,6 +114,6 @@
 	}
 
 	else
-		//insert something
+		header("Location: admin_main.php");
 
  ?>

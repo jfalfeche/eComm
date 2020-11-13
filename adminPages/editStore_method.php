@@ -5,6 +5,11 @@
 		update_seller();
 	}
 
+	else
+	{
+		header("Location: admin_main.php");
+	}
+
 	function update_seller()
 	{
 		global $conn, $sellerID, $storeStatus;
