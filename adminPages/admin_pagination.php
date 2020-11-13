@@ -58,6 +58,8 @@
 	<form name="sortFormStore" action="admin_main.php" method="post">
 			<select name="sortStore" class="form-control" onChange="sortFormStore.submit()">
 				<option>Sort by</option>
+                <option value="A-to-Z">A to Z</option>
+                <option value="Z-to-A">Z to A</option>
 				<option value="oldest-newest">Oldest-Newest</option>
 				<option value="newest-oldest">Newest-Oldest</option>
 			</select>
@@ -91,7 +93,7 @@
                 <div class="col<?php if($result_stores->num_rows < 4) echo '-md-2';?> card">
                     <div class="imgwrap">
                         <?php
-                            echo '<img class="xcard-img-top img-responsive full-width" src="data:image/jpeg;base64,'.base64_encode( $row['profilePhoto'] ).'" alt="Card image cap">';
+                            echo '<img class="xcard-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['profilePhoto'].'" alt="Card image cap">';
                         ?>
                     </div>
                     <div class="card-body text-left">

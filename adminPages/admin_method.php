@@ -92,7 +92,11 @@
 			global $store;
 
 			$sort = $_POST['sortPendingStore']; 
-			if($sort == "oldest-newest")
+			if($sort == "A-to-Z")
+				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY storeName ASC";
+			else if($sort == "Z-to-A")
+				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY storeName DESC";
+			else if($sort == "oldest-newest")
 				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY dateCreated ASC";
 			else if($sort == "newest-oldest")
 				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY dateCreated DESC";
@@ -114,8 +118,11 @@
 			global $partner_stores, $offset, $no_of_records_per_page;
 
 			$sort = $_POST['sortStore']; 
-
-			if($sort == "oldest-newest")
+			if($sort == "A-to-Z")
+				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY storeName ASC LIMIT $offset, $no_of_records_per_page ";
+			else if($sort == "Z-to-A")
+				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY storeName DESC LIMIT $offset, $no_of_records_per_page ";
+			else if($sort == "oldest-newest")
 				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY dateCreated ASC LIMIT $offset, $no_of_records_per_page ";
 			else if($sort == "newest-oldest")
 				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY dateCreated DESC LIMIT $offset, $no_of_records_per_page ";

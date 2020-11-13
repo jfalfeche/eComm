@@ -126,6 +126,8 @@
 				<form name="sortFormPendingStore" action="admin_main.php" method="post">
 						<select name="sortPendingStore" class="form-control" onChange="sortFormPendingStore.submit()">
 							<option>Sort by</option>
+							<option value="A-to-Z">A to Z</option>
+							<option value="Z-to-A">Z to A</option>
 							<option value="oldest-newest">Oldest-Newest</option>
 							<option value="newest-oldest">Newest-Oldest</option>
 						</select>

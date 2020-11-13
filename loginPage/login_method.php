@@ -74,7 +74,7 @@
 				{
 					$_SESSION['user_type'] = 'admin';
 					$_SESSION['LGUID'] = $row['LGUID'];
-					header('Location: ../admin.php');
+					header('Location: ../adminPages/admin_main.php');
 				}
 
 				//password is invalid
