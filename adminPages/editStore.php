@@ -29,13 +29,14 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<a href="#" class="return" onclick="goBack()">
-				<i class="fas fa-arrow-circle-left fa-2x"></i>
-			</a>
-			&nbsp;&nbsp;
+			<form id="form-id">
+				<button type="submit" name="back-btn" id="submit-id">
+					<i class="fas fa-arrow-circle-left fa-2x "></i>
+				</button>
+			</form>
 			<span style="font-size: 2em;">EDIT STORE PROFILE</span>
 			&nbsp;&nbsp;
-			<i class="fas fa-pen fa-2x	"></i>
+			<i class="fas fa-pen fa-2x"></i>
 		</div>
 
 		<div id="main" class="row">
@@ -81,9 +82,9 @@
                 	<label class="file form-control">
 	                	<input type="file" name="profilePhoto" class="inputfile" >
 	                    <i class="fas fa-upload form-control-file">
-	                    	<span style="font-family: 'Roboto';">Upload image</span></i>
+	                    	<span style="font-family: 'Roboto';">Upload image</span></i><br>
+                 	<span style="font-size: 10px; font-weight: 500; width: 100%;"><i>click save changes to see if the photo was uploaded successfully</i></span>
                  	</label>
-
 					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">SAVE CHANGES</button>
 				</form>
 				</div>
@@ -95,10 +96,6 @@
 </html>
 
 <script>
-	function goBack() {
-	  window.history.back();
-	}
-
 	window.addEventListener("DOMContentLoaded", function () 
 	{
 		var form = document.getElementById("form-id");
@@ -111,6 +108,7 @@
 
 
 <?php
+
 	}
 
 	else

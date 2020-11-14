@@ -9,7 +9,10 @@
     $order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
    	$store = "SELECT * from `sellers` WHERE storeStatus=false";
 
-   include 'admin_method.php';
+   	$page = $_SERVER["REQUEST_URI"];
+	$_SESSION['prevUrl'] = $page;
+
+   	include 'admin_method.php';
  ?>
 
 <!DOCTYPE html>
@@ -21,6 +24,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" type="text/css" href="../assets/css/productCard.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/admin-style.css">
 
@@ -179,7 +183,11 @@
 	                                <?php echo $row['storeEmail']; ?>
 	                            </td>
 	                            <td>
-	                            	<a href="deleteStore.php?sellerID=<?php echo $row['sellerID'] ?>"><i class="fas fa-trash-alt fa-2x"></i></a>
+	                            	
+	                            		<!--<a href="deleteStore.php?sellerID=<?php //echo $row['sellerID'] ?>">-->
+	                            		<button type="button" class="btn fas fa-trash-alt fa-2x">	</button>
+	                            		
+	                            	</button>
 	                            </td>
 	                        </tr>
 	                       
@@ -206,13 +214,18 @@
 
 		</div>
 	</div>
-	
+
+	<!--DELETE MODAL-->
+
+
 </body>
 </html>
 
 <?php
 	$conn->close();
 ?>
+
+
 <script>
 	//when a row is clicked, a search is done for the href belonging to an anchor. If one is found, the window’s location is set to that href
 	$(document).ready(function() 
@@ -224,7 +237,6 @@
 	            window.location = href;
 	        }
 	    });
-
 	});
 
 

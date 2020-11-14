@@ -5,11 +5,21 @@
 		update_seller();
 	}
 
-	else
+	else if(!isset($_GET['sellerID']))
 	{
 		header("Location: admin_main.php");
 	}
 
+	if(isset($_POST['back-btn']))
+	{
+		back();
+	}
+
+
+	function back()
+	{
+		header("Location: ".$_SESSION['prevUrl']);
+	}
 	function update_seller()
 	{
 		global $conn, $sellerID, $storeStatus;
@@ -38,9 +48,18 @@
 		}
 
 		if ($conn->query($sql))
-			header("Location: editStore.php?sellerID=$sellerID&success");	
+		{
+			unset($_POST['submit-button']);
+			echo "<script>window.alert(\"Success: Store Update!\");</script>";
+			//header("Location: editStore.php?sellerID=$sellerID&success");	
+		}
 		else
-			 die ('Error updating database<br />' . mysqli_errno($conn) . ": " . mysqli_error($conn));
+		{	
+			unset($_POST['submit-button']);
+			echo "<script>window.alert(\"Error: Store Failed!\");</script>";
+			//echo die ('Error updating database<br />' . mysqli_errno($conn) . ": " . mysqli_error($conn));
 			//header("Location: editStore.php?sellerID=$sellerID&fail");
+		}
 	}
+
 ?>
