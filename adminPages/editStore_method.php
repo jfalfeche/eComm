@@ -51,14 +51,14 @@
 		{
 			unset($_POST['submit-button']);
 			echo "<script>window.alert(\"Success: Store Update!\");</script>";
-			//header("Location: editStore.php?sellerID=$sellerID&success");	
+			header("Refresh:0");
 		}
 		else
 		{	
 			unset($_POST['submit-button']);
-			echo "<script>window.alert(\"Error: Store Failed!\");</script>";
+			echo "<script>window.alert(\"Error: Store Update Failed! Cannot upload the photo. \");</script>";
 			//echo die ('Error updating database<br />' . mysqli_errno($conn) . ": " . mysqli_error($conn));
-			//header("Location: editStore.php?sellerID=$sellerID&fail");
+			header("Refresh:0");
 		}
 	}
 

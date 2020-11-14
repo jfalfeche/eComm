@@ -29,14 +29,16 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<form id="form-id">
-				<button type="submit" name="back-btn" id="submit-id">
-					<i class="fas fa-arrow-circle-left fa-2x "></i>
+			<form id="form-id" class="inline">
+				<button type="submit" name="back-btn" id="submit-id" class="inline">
+					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>
 			</form>
-			<span style="font-size: 2em;">EDIT STORE PROFILE</span>
+
+			<span style="font-size: 2em;" class="inline">EDIT STORE PROFILE</span>
 			&nbsp;&nbsp;
-			<i class="fas fa-pen fa-2x"></i>
+			<i class="fas fa-pen fa-2x inline"></i>
+			<hr class="mt-1 mb-2">
 		</div>
 
 		<div id="main" class="row">
@@ -82,9 +84,10 @@
                 	<label class="file form-control">
 	                	<input type="file" name="profilePhoto" class="inputfile" >
 	                    <i class="fas fa-upload form-control-file">
-	                    	<span style="font-family: 'Roboto';">Upload image</span></i><br>
-                 	<span style="font-size: 10px; font-weight: 500; width: 100%;"><i>click save changes to see if the photo was uploaded successfully</i></span>
+	                    	<span style="font-family: 'Roboto';">Upload image</span></i>
+                 	<span style="font-size: 10px; font-weight: 500; width: 100%;"><br><br><i>click save changes to see if the photo was uploaded successfully</i></span>
                  	</label>
+
 					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">SAVE CHANGES</button>
 				</form>
 				</div>
