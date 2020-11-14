@@ -28,9 +28,38 @@
 	<link rel="stylesheet" type="text/css" href="../assets/css/productCard.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/admin-style.css">
 
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 </head>
 <body>
+
+	<!--START: DELETE MODAL-->
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deleteModal">Confirm Delete</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">&times;</button>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete a Store Application, this procedure is irreversible.</p>
+                    <p class="seller-name"></p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--END: DELETE MODAL-->
+
 	<div id="container" class="d-flex flex-column">
 		<div id="pending-orders" class="p-2">
 			<span style="font-size: 24px; font-weight: 500;">PENDING ORDERS</span>
@@ -185,9 +214,9 @@
 	                            <td>
 	                            	
 	                            		<!--<a href="deleteStore.php?sellerID=<?php //echo $row['sellerID'] ?>">-->
-	                            		<button type="button" class="btn fas fa-trash-alt fa-2x">	</button>
+	                            	<button type="button" class="btn fas fa-trash-alt fa-2x" data-seller="<?php echo $row['storeName'] ?>"data-href="deleteStore.php?sellerID=<?php echo $row['sellerID'] ?>"  data-toggle="modal" data-target="#confirm-delete" id="delModal">	</button>
 	                            		
-	                            	</button>
+	                            	
 	                            </td>
 	                        </tr>
 	                       
@@ -202,11 +231,6 @@
 
 		<div id="partner-stores" class="p-2">	
 			
-			<!--insert search bar here-->
-
-			
-
-
 			<?php
 				include 'admin_pagination.php';
 		       
@@ -215,7 +239,8 @@
 		</div>
 	</div>
 
-	<!--DELETE MODAL-->
+
+
 
 
 </body>
@@ -225,8 +250,16 @@
 	$conn->close();
 ?>
 
-
 <script>
+	$('#confirm-delete').on('show.bs.modal', function(e) 
+	{
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        
+        $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+
+        $('.seller-name').html('Store Name: <strong>' + $(e.relatedTarget).data('seller') + '</strong>');
+    });
+
 	//when a row is clicked, a search is done for the href belonging to an anchor. If one is found, the window’s location is set to that href
 	$(document).ready(function() 
 	{

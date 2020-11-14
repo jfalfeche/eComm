@@ -49,14 +49,14 @@ hr
 	color: #008f3c;
 }
 
-.fa-trash-alt
+.fa-trash-alt, td button
 {
 	color: #F43131;
 }
 
-.fa-trash-alt:hover
+.fa-trash-alt:hover, td button:hover
 {
-	color: #f00000;
+	color: #bf2c2c;
 }
 
 .stores
