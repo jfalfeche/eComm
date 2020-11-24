@@ -98,7 +98,7 @@
                     </div>
                     <div class="card-body text-left">
                         <h4 class="card-title"><?php echo $row["storeName"]; ?></h4>
-                        <a href="storeProfileA.php?sellerID=<?php echo $row['sellerID'];?>" class="btn btn-primary">
+                        <a href="../products/storetest.php?action=<?php echo $row['sellerID']?>" class="btn btn-primary">
                             <h5 class="card-text">View Profile</h5>
                         </a>
                     </div>
