@@ -170,13 +170,13 @@
 				</div>
 
 				<div class="search col">
-					<form name="searchProducts" action="storeProfile.php" method="post">
+					<form name="searchProducts" action="storeProfile.php?sellerID=<?php echo $sellerID; ?>" method="post">
 						<input type="text" name="searchProductsVal" class="form-control inputfld" placeholder="Search Products here...">
 						<button type="submit" name ="srchProduct" class="btn btn-primary mb-2 searchbtn">SEARCH   <i class="fas fa-search"></i></button>	
 					</form>
 				</div>
 			</div>
-
+			
 			<?php
 				include 'storeProfile_pagination.php';
 		       

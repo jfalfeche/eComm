@@ -18,10 +18,7 @@
             $pageno = 1;
     }
 
-	if(isset($_POST['srchProduct'])){
-        search_products($_POST['searchProductsVal']);
-        unset($_POST['srchProduct']);
-    }
+
 
 	$no_of_records_per_page = 12;
 	$offset = ($pageno-1) * $no_of_records_per_page;
@@ -34,8 +31,14 @@
 
 	$products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
 
+	if(isset($_POST['srchProduct'])){
+        search_products($_POST['searchProductsVal']);
+        unset($_POST['srchProduct']);
+    }
+
 	$result_products = mysqli_query($conn, $products);
 
+    $products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
 
 ?>
 
