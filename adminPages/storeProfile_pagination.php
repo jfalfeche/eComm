@@ -59,58 +59,59 @@
 <!-- PAGE NUMBERS END -->
 <br>
 
-<?php 
-	if ($result->num_rows > 0) 
-    {
-        $i = 1;
+<div class="p_display">
+    <?php 
+        if ($result->num_rows > 0) 
+        {
+            $i = 1;
 
-        
-        while($row = mysqli_fetch_array($result_products)){
-            if ($i == 1 || $i % 5 == 0){
-                echo '<div class="row stores">';
-            }
-            ?>
+            
+            while($row = mysqli_fetch_array($result_products)){
+                if ($i == 1 || $i % 5 == 0){
+                    echo '<div class="row stores">';
+                }
+                ?>
 
-            <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
-                <div class="col<?php if($result_products->num_rows % 4 != 0) echo '-md-2';?> card">
-                    <div class="imgwrap">
-                        <?php
-                            echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
-                        ?>
-                    </div>
-                    <div class="card-body text-left">
-                        <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
-                        <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
-                        <p class="card-text"><?php echo "Per ".ucwords($row["name"]); ?></p><br>
-                        <p class="card-text">Available Stock: &emsp; <span style="font-weight: 500; text-align: right;"><?php echo ucwords($row["stock"]); ?></span></p>
-                        <br><br>
+                <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
+                    <div class="col<?php if($result_products->num_rows % 4 != 0) echo '-md-2';?> card">
+                        <div class="imgwrap">
+                            <?php
+                                echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
+                            ?>
+                        </div>
+                        <div class="card-body text-left">
+                            <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
+                            <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
+                            <p class="card-text"><?php echo "Per ".ucwords($row["name"]); ?></p><br>
+                            <p class="card-text">Available Stock: &emsp; <span style="font-weight: 500; text-align: right;"><?php echo ucwords($row["stock"]); ?></span></p>
+                            <br><br>
 
-                        <div id="product-buttons"class="row">
-                            <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="btn btn-info col-6">
-                                <h5 class="card-text">Update</h5>
-                            </a>
-                            <a class=" btn btn-danger col-4" data-product="<?php echo $row['productName'] ?>" data-href="deleteProduct.php?sellerID=<?php echo $sellerID ?>&productID=<?php echo $row['productID'] ?>"  data-toggle="modal" data-target="#confirm-delete-product" id="delModal"
-                            >
-                                <i class="fas fa-trash-alt fa-2x"></i>
-                            </a>
+                            <div id="product-buttons"class="row">
+                                <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="btn btn-info col-6">
+                                    <h5 class="card-text">Update</h5>
+                                </a>
+                                <a class=" btn btn-danger col-4" data-product="<?php echo $row['productName'] ?>" data-href="deleteProduct.php?sellerID=<?php echo $sellerID ?>&productID=<?php echo $row['productID'] ?>"  data-toggle="modal" data-target="#confirm-delete-product" id="delModal"
+                                >
+                                    <i class="fas fa-trash-alt fa-2x"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-<?php
-            if ($i % 4 == 0 && $i != 0) {
-                echo '</div>';
-                $i = 0;
-            }
-            $i++;
-        
-    	} 
-    }else {
-        echo "<span style=\"color: red;\">No products found.</span>";
-    }
-?>
-
+    <?php
+                if ($i % 4 == 0 && $i != 0) {
+                    echo '</div><br><br>';
+                    $i = 0;
+                }
+                $i++;
+            
+            } 
+        }else {
+            echo "<span style=\"color: red;\">No products found.</span>";
+        }
+    ?>
+</div>
 </div>
 
 

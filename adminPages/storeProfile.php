@@ -176,10 +176,8 @@
 					</form>
 				</div>
 			</div>
-			
 			<?php
 				include 'storeProfile_pagination.php';
-		       
 			?>
 		</div>
 
