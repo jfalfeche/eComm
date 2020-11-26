@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	if(isset($_GET['sellerID']))
 	{
 		$servername = "localhost";
@@ -38,11 +39,8 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<form id="form-id" class="inline">
-				<button type="submit" name="back-btn" id="submit-id" class="inline">
-					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
-				</button>
-			</form>
+			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+			<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 
 			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>
 			&nbsp;&nbsp;

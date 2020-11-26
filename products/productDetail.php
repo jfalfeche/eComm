@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once '../homePage/database.php';
     if(isset($_GET['action'])) {
         $id =  $_GET['action'];
@@ -41,7 +42,7 @@
     <!--END NAV-->
 
     <div class="back">
-        <a href="./product.php" class="text-decoration-none" >
+        <a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
             <i class="fa fa-arrow-circle-left fa-3x"></i>&nbsp;
         </a>
         <div class="title">

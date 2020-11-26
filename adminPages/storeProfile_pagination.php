@@ -71,7 +71,7 @@
             }
             ?>
 
-            <a href="viewProduct.php?productID=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
+            <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
                 <div class="col<?php if($result_products->num_rows < 4) echo '-md-2';?> card">
                     <div class="imgwrap">
                         <?php
@@ -86,7 +86,7 @@
                         <br><br>
 
                         <div id="product-buttons"class="row">
-                            <a href="updateProduct.php?productID=<?php echo $row['productID']?>" class="btn btn-info col-6">
+                            <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="btn btn-info col-6">
                                 <h5 class="card-text">Update</h5>
                             </a>
                             <a class=" btn btn-danger col-4" data-product="<?php echo $row['productName'] ?>" data-href="deleteProduct.php?productID=<?php echo $row['productID'] ?>"  data-toggle="modal" data-target="#confirm-delete-product" id="delModal"

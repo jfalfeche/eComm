@@ -1,5 +1,7 @@
 <?php 
     session_start();
+    $page = $_SERVER["REQUEST_URI"];
+	$_SESSION['prevUrl'] = $page;
 ?>
 <!DOCTYPE html>
 <html lang="en">

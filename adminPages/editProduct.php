@@ -1,5 +1,6 @@
 <?php
-	if(isset($_GET['sellerID']))
+	session_start();
+	if(isset($_GET['productID']))
 	{
 		$servername = "localhost";
 	    $username = "root";
@@ -9,10 +10,10 @@
 	    $conn = new mysqli($servername, $username, $password, $dbname);
 
 		//get sellerID
-		$sellerID =  $_GET['sellerID'];
+		$productID =  $_GET['productID'];
 
-		function getSeller($sellerID) {
-			return $sql = "SELECT * FROM product, productunit, productcategory WHERE (productunit.productUnitID = product.productUnitID) AND (productcategory.productCategoryID = product.productCategory) AND (seller=$sellerID) LIMIT 1";
+		function getSeller($productID) {
+			return $sql = "SELECT * FROM product, productunit, productcategory WHERE (productunit.productUnitID = product.productUnitID) AND (productcategory.productCategoryID = product.productCategory) AND product.productID = $productID";
 		}
 
 		function getUnit() {
@@ -27,15 +28,16 @@
 			return $result = $conn->query($sql);
 		}
 
-		$sql = getSeller($sellerID);
+		$sql = getSeller($productID);
 		$result = getResult($conn,$sql);
 		
+		include 'editProduct_method.php';
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PhilCafe - Add Product</title>
+	<title>PhilCafe - Edit Product</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
@@ -44,11 +46,8 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<form id="form-id" class="inline">
-				<button type="submit" name="back-btn" id="submit-id" class="inline">
-					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
-				</button>
-			</form>
+			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+			<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 
 			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>
 			&nbsp;&nbsp;
@@ -58,7 +57,7 @@
 
 		<div id="main" class="row">
 			<div class="col-8">
-				<form method="post" action="editStore.php?sellerID=<?php echo $sellerID;?>" enctype="multipart/form-data" id="form-id">
+				<form method="post" action="editProduct.php?productID=<?php echo $productID;?>" enctype="multipart/form-data" id="form-id">
 					<?php
 						if(mysqli_num_rows($result) == 1)
 							$row = $result->fetch_assoc();
@@ -70,19 +69,18 @@
 					
 					<br><br>
 					<label>Product Description</label>
-					<textarea name="productDesc" class ="form-control" rows="7" required><?php echo $row['productDesc']; ?></textarea>
+					<textarea name="productDesc" class ="form-control" rows="7" required><?php echo $row['description']; ?></textarea>
 
 					<br><br>
 					<label>Price</label>
-					<input type="number" min="1" step="any" name="productPrice">
+					<input type="number" min="1" step="any" name="productPrice" value="<?php echo $row['price']; ?>">
 					<span>per</span>
-					<select name="" id="">
+					<select name="productUnit" value="<?php echo $row['productUnitID']; ?>">
 						<?php
 							$sql = getUnit();
 							$result = getResult($conn,$sql);
 							
 							while ($row = $result->fetch_assoc()){
-								echo "<p>".$row['name']."</p>";
 								echo "<option value='". $row['productUnitID'] ."'>" .$row['name'] ."</option>" ;
 							}
 						?>
@@ -90,13 +88,12 @@
 					
 					<br><br>
 					<label>Category</label>
-					<select name="" id="">
+					<select name="productCategory" id="" value="<?php echo $row['productCategory']; ?>">
 						<?php
 							$sql = getCategory();
 							$result = getResult($conn,$sql);
 							
 							while ($row = $result->fetch_assoc()){
-								echo "<p>".$row['name']."</p>";
 								echo "<option value='". $row['productCategoryID'] ."'>" .$row['name'] ."</option>" ;
 							}
 						?>
@@ -104,7 +101,12 @@
 
 					<br><br>
 					<label>Quantity</label>
-					<input type="number" min="1" name="productPrice">
+					<?php 
+						$sql = getSeller($productID);
+						$result = getResult($conn,$sql);
+						$row = $result->fetch_assoc();
+					?>
+					<input type="number" min="1" name="quantity" value="<?php echo $row['stock']; ?>">
 
 			</div>
 
@@ -112,7 +114,7 @@
 
 				<div class="imgwrap">
                     <?php
-                        	echo '<img class="img-thumbnail mx-auto mx-auto d-block full-width" src="data:image/jpeg;base64,'. $row['profilePhoto'].'" alt="Store Profile Picture">';
+                        	echo '<img class="img-thumbnail mx-auto mx-auto d-block full-width" src="data:image/jpeg;base64,'. $row['image'].'" alt="Store Profile Picture">';
                         }
                     ?>
                      
@@ -120,13 +122,13 @@
 
                 <div class="col text-center">
                 	<label class="file form-control">
-	                	<input type="file" name="profilePhoto" class="inputfile" >
+	                	<input type="file" name="productPhoto" class="inputfile" >
 	                    <i class="fas fa-upload form-control-file">
 	                    	<span style="font-family: 'Roboto';">Upload image</span></i>
                  	<span style="font-size: 10px; font-weight: 500; width: 100%;"><br><br><i>click save changes to see if the photo was uploaded successfully</i></span>
                  	</label>
 
-					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">SAVE CHANGES</button>
+					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">UPDATE PRODUCT</button>
 				</form>
 				</div>
 			</div>
