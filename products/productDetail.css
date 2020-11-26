@@ -154,3 +154,8 @@ i, .title {
     border-top: 2px solid rgba(0, 0, 0);
     width: 40%;
 }
+
+#quan, #avail {
+    position: relative;
+    display: inline-block;
+}

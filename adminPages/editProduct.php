@@ -42,6 +42,7 @@
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" type="text/css" href="../assets/css/edit-store-style.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
 </head>
 <body>
 	<div id="container">
@@ -49,7 +50,6 @@
 			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
 				<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 			</a>
-			
 			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>
 			&nbsp;&nbsp;
 			<i class="fas fa-pen fa-2x inline"></i>
@@ -107,7 +107,11 @@
 						$result = getResult($conn,$sql);
 						$row = $result->fetch_assoc();
 					?>
-					<input type="number" min="1" name="quantity" value="<?php echo $row['stock']; ?>">
+					<div class="def-number-input number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+						<input id="q" class="quantity" min="1" name="quantity" value="<?php echo $row['stock']; ?>" type="number">
+						<button onclick="this.parentNode.querySelector('#q').stepUp()" class="plus"></button>
+					</div>
 
 			</div>
 
@@ -150,6 +154,13 @@
 		  form.submit();
 		});
 	});
+
+	var buttons = document.querySelectorAll('form button:not([type="submit"])');
+		for (i = 0; i < buttons.length; i++) {
+		buttons[i].addEventListener('click', function(e) {
+			e.preventDefault();
+		});
+	}
 </script>
 
 

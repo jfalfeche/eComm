@@ -35,6 +35,7 @@
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" type="text/css" href="../assets/css/edit-store-style.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
 </head>
 <body>
 	<div id="container">
@@ -88,7 +89,11 @@
 
 					<br><br>
 					<label>Quantity</label>
-					<input type="number" min="1" step="1" name="quantity">
+					<div class="def-number-input number-input safari_only">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+						<input class="quantity" type="number" min="1" name="quantity" value="<?php echo $row['stock']; ?>">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+					</div>
 
 			</div>
 

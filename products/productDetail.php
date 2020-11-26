@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="../navbar/nav.css">
     <link rel="stylesheet" href="../footer/footer.css">
     <link rel="stylesheet" href="./productDetail.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
 </head>
 <body>
     <!--NAV-->
@@ -79,13 +80,16 @@
             </p>
             <p>
                 Quantity:
-                <button id="0" type="button" class="btn btn-outline-dark adjust">-</button>
-                <button id="quantity" type="button" class="btn btn-outline-dark quantity">1</button>
-                <button id="1" type="button" class="btn btn-outline-dark adjust">+</button>
-
-                <?php 
-                    echo $row["stock"]." ".ucwords($row["name"]); if($row["stock"] > 1) echo "s";
-                ?> available
+                <div class="def-number-input number-input" id="quan">
+                    <button id="0" class="minus"></button>
+                    <input id="quantity" class="quantity" min="1" name="quantity" value="1" type="number">
+                    <button id="1" class="plus"></button>
+                </div>
+                <div id="avail">
+                    <?php 
+                        echo $row["stock"]." ".ucwords($row["name"]); if($row["stock"] > 1) echo "s";
+                    ?> available
+                </div>
             </p>
             <br>
             <a href="#!" class="btn btn-primary">
@@ -99,18 +103,16 @@
     <script>
         $('button#0').on('click', function(e){
             e.preventDefault();
-            var count = document.getElementById("quantity").innerHTML;
+            var count = document.getElementById("quantity").value;
             if(count > 1) {
-                count--;
-                document.getElementById("quantity").innerHTML = count;
+                document.getElementById("quantity").stepDown();
             }
         })
         $('button#1').on('click', function(e){
             e.preventDefault();
-            var count = document.getElementById("quantity").innerHTML;
+            var count = document.getElementById("quantity").value;
             if(count >= 1 && count < <?php echo $row["stock"] ?>) {
-                count++;
-                document.getElementById("quantity").innerHTML = count;
+                document.getElementById("quantity").stepUp();
             }
         })
     </script>
