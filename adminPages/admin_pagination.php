@@ -90,7 +90,7 @@
             ?>
 
             <a href="storeProfile.php?sellerID=<?php echo $row['sellerID']?>" class="text-reset text-decoration-none">
-                <div class="col<?php if($result_stores->num_rows < 4) echo '-md-2';?> card">
+                <div class="col<?php if($result_products->num_rows % 4 != 0) echo '-md-2';?> card">
                     <div class="imgwrap">
                         <?php
                             echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['profilePhoto'].'" alt="Card image cap">';

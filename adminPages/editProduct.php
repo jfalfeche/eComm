@@ -74,9 +74,9 @@
 
 					<br><br>
 					<label>Price</label>
-					<input type="number" min="1" step="any" name="productPrice" value="<?php echo $row['price']; ?>">
+					<input class ="price" type="number" min="1" step="any" name="productPrice" value="<?php echo $row['price']; ?>">
 					<span>per</span>
-					<select name="productUnit" value="<?php echo $row['productUnitID']; ?>">
+					<select class="dropdown" name="productUnit" value="<?php echo $row['productUnitID']; ?>">
 						<?php
 							$sql = getUnit();
 							$result = getResult($conn,$sql);
@@ -89,7 +89,7 @@
 					
 					<br><br>
 					<label>Category</label>
-					<select name="productCategory" id="" value="<?php echo $row['productCategory']; ?>">
+					<select class="dropdown" name="productCategory" id="" value="<?php echo $row['productCategory']; ?>">
 						<?php
 							$sql = getCategory();
 							$result = getResult($conn,$sql);

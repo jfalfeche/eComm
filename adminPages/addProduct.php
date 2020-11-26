@@ -61,9 +61,9 @@
 
 					<br><br>
 					<label>Price</label>
-					<input type="number" min="1" step="any" name="productPrice" required>
+					<input class ="price" type="number" min="1" step="any" name="productPrice" required>
 					<span>per</span>
-					<select name="productUnit" id="">
+					<select class="dropdown" name="productUnit" id="">
 						<?php
 							$sql = getUnit();
 							$result = getResult($conn,$sql);
@@ -76,7 +76,7 @@
 					
 					<br><br>
 					<label>Category</label>
-					<select name="productCategory" id="">
+					<select class="dropdown" name="productCategory" id="">
 						<?php
 							$sql = getCategory();
 							$result = getResult($conn,$sql);
@@ -91,7 +91,7 @@
 					<label>Quantity</label>
 					<div class="def-number-input number-input safari_only">
 						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-						<input class="quantity" type="number" min="1" name="quantity" value="<?php echo $row['stock']; ?>">
+						<input class="quantity" type="number" min="1" name="quantity" value="1">
 						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
 					</div>
 
@@ -132,6 +132,13 @@
 		  form.submit();
 		});
 	});
+
+	var buttons = document.querySelectorAll('form button:not([type="submit"])');
+		for (i = 0; i < buttons.length; i++) {
+		buttons[i].addEventListener('click', function(e) {
+			e.preventDefault();
+		});
+	}
 </script>
 
 

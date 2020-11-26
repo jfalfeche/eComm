@@ -83,3 +83,13 @@ margin-top: -.3rem;
 }
 }
 }
+
+.dropdown, .price {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  margin-left: 0;
+  border-style: solid;
+  border-width: thin;
+  border-color: rgba(128, 128, 128, 0.52);
+}

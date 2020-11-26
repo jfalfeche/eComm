@@ -82,7 +82,7 @@
                 }
                 ?>
                 <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
-                    <div class="col<?php if(sizeof($result) < 3) echo '-md-2';?> card">
+                    <div class="col<?php if($result_products->num_rows % 3 != 0) echo '-md-2';?> card">
                         <div class="imgwrap">
                             <?php
                                 echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
