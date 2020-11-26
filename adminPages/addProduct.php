@@ -40,8 +40,8 @@
 	<div id="container">
 		<div id="title">
 			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
-			<i class="fas fa-arrow-circle-left fa-3x inline"></i>
-
+				<i class="fas fa-arrow-circle-left fa-3x inline"></i>
+			</a>
 			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>
 			&nbsp;&nbsp;
 			<i class="fas fa-pen fa-2x inline"></i>
