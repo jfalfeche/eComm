@@ -2,7 +2,7 @@
 
 	if(isset($_POST['submit-button']))
 	{
-		update_seller();
+		add_product();
 	}
 
 	else if(!isset($_GET['sellerID']))
@@ -21,24 +21,23 @@
 		header("Location: ".$_SESSION['prevUrl']);
     }
     
-	function update_seller()
+	function add_product()
 	{
-		global $conn, $sellerID, $storeStatus;
+		global $conn;
 
+		//get sellerID
+		$sellerID =  $_GET['sellerID'];
         $productName = $_POST['productName'];
         $image = base64_encode(file_get_contents(addslashes($_FILES['productPhoto']['tmp_name'])));
 		$productDesc = $_POST['productDesc'];
         $productPrice = $_POST['productPrice'];
-        $productUnit = $_POST['productUnit'];
-        $quantity = $_POST['quantity'];
+		$productUnit = $_POST['productUnit'];
+		$productCategory = $_POST['productCategory'];
+        $stock = $_POST['quantity'];
 
-		if(empty($_FILES['profilePhoto']['tmp_name']))
-		{
-			if($storeStatus)
-				$sql = "INSERT INTO product (productName,description,image,stock,price,productUnitID,productCategory) VALUES ($productName, $image, $productDesc, $productPrice, $productUnit, $quantity) WHERE `sellerID` = '$sellerID'";
-		}
+		$sql = "INSERT INTO product (productName, description, image, stock, price, productUnitID, productCategory, seller) VALUES ($productName, $productDesc, $image, $stock, $productPrice, $productUnit, $productCategory, $sellerID)";
 
-		if ($conn->query($sql))
+		if (mysqli_query($conn,$sql))
 		{
 			unset($_POST['submit-button']);
 			echo "<script>window.alert(\"Success: Product Added!\");</script>";
@@ -47,7 +46,7 @@
 		else
 		{	
 			unset($_POST['submit-button']);
-			echo "<script>window.alert(\"Error: Store Update Failed! Cannot upload the photo. \");</script>";
+			echo "<script>window.alert(\"Error: Couldn't add product! Cannot upload the photo. \");</script>";
 			//echo die ('Error updating database<br />' . mysqli_errno($conn) . ": " . mysqli_error($conn));
 			header("Refresh:0");
 		}

@@ -8,11 +8,28 @@
 	    // Create connection
 	    $conn = new mysqli($servername, $username, $password, $dbname);
 
-	    //get sellerID
-	    $sellerID =  $_GET['sellerID'];
+		//get sellerID
+		$sellerID =  $_GET['sellerID'];
 
-	    $sql = "SELECT * FROM sellers WHERE sellerID=$sellerID LIMIT 1";
-	    $result = $conn->query($sql);
+		function getSeller($sellerID) {
+			return $sql = "SELECT * FROM product, productunit, productcategory WHERE (productunit.productUnitID = product.productUnitID) AND (productcategory.productCategoryID = product.productCategory) AND (seller=$sellerID) LIMIT 1";
+		}
+
+		function getUnit() {
+			return $sql = "SELECT * FROM  productunit";
+		}
+	
+		function getCategory() {
+			return $sql = "SELECT * FROM productcategory";
+		}
+		
+		function getResult($conn,$sql) {
+			return $result = $conn->query($sql);
+		}
+
+		$sql = getSeller($sellerID);
+		$result = getResult($conn,$sql);
+		
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +50,7 @@
 				</button>
 			</form>
 
-			<span style="font-size: 2em;" class="inline">EDIT STORE PROFILE</span>
+			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>
 			&nbsp;&nbsp;
 			<i class="fas fa-pen fa-2x inline"></i>
 			<hr class="mt-1 mb-2">
@@ -48,24 +65,47 @@
     					{
     				?>
 
-					<label>Store Name</label>
-					<input type="text" name="storeName" class ="form-control" required value="<?php echo $row['storeName']; ?>">
+					<label>Product Name</label>
+					<input type="text" name="productName" class ="form-control" required value="<?php echo $row['productName']; ?>">
 					
 					<br><br>
-					<label>Email Address</label>
-					<input type="email" name="storeEmail" class ="form-control" required value="<?php echo $row['storeEmail']; ?>">
-					
-					<br><br>
-					<label>Store Description</label>
-					<textarea name="storeDescription" class ="form-control" rows="7" required><?php echo $row['storeDescription']; ?></textarea>
+					<label>Product Description</label>
+					<textarea name="productDesc" class ="form-control" rows="7" required><?php echo $row['productDesc']; ?></textarea>
 
-					<?php
-						if(!$row['storeStatus'])
-							$storeStatus = false;
-						else
-							$storeStatus = true;
-					?>
-				
+					<br><br>
+					<label>Price</label>
+					<input type="number" min="1" step="any" name="productPrice">
+					<span>per</span>
+					<select name="" id="">
+						<?php
+							$sql = getUnit();
+							$result = getResult($conn,$sql);
+							
+							while ($row = $result->fetch_assoc()){
+								echo "<p>".$row['name']."</p>";
+								echo "<option value='". $row['productUnitID'] ."'>" .$row['name'] ."</option>" ;
+							}
+						?>
+					</select>
+					
+					<br><br>
+					<label>Category</label>
+					<select name="" id="">
+						<?php
+							$sql = getCategory();
+							$result = getResult($conn,$sql);
+							
+							while ($row = $result->fetch_assoc()){
+								echo "<p>".$row['name']."</p>";
+								echo "<option value='". $row['productCategoryID'] ."'>" .$row['name'] ."</option>" ;
+							}
+						?>
+					</select>
+
+					<br><br>
+					<label>Quantity</label>
+					<input type="number" min="1" name="productPrice">
+
 			</div>
 
 			<div class="col-4">
@@ -91,6 +131,8 @@
 				</div>
 			</div>
 
+
+
 		</div>
 	</div>
 </body>
@@ -114,5 +156,4 @@
 
 	else
 		header("Location: admin_main.php");
-
  ?>
