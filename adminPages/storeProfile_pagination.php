@@ -89,7 +89,7 @@
                             <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="btn btn-info col-6">
                                 <h5 class="card-text">Update</h5>
                             </a>
-                            <a class=" btn btn-danger col-4" data-product="<?php echo $row['productName'] ?>" data-href="deleteProduct.php?productID=<?php echo $row['productID'] ?>"  data-toggle="modal" data-target="#confirm-delete-product" id="delModal"
+                            <a class=" btn btn-danger col-4" data-product="<?php echo $row['productName'] ?>" data-href="deleteProduct.php?sellerID=<?php echo $sellerID ?>&productID=<?php echo $row['productID'] ?>"  data-toggle="modal" data-target="#confirm-delete-product" id="delModal"
                             >
                                 <i class="fas fa-trash-alt fa-2x"></i>
                             </a>

@@ -10,19 +10,22 @@
 
 	    //get sellerID
 	    $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
-
-	    $sql = "DELETE FROM sellers WHERE sellerID = ?";
+	    
+	    //get productID
+	    $productID =  filter_var($_GET['productID'], FILTER_SANITIZE_NUMBER_INT);
+	    
+	    $sql = "DELETE FROM product WHERE `seller` = ? AND `productID` = ?";
 	    $sql = $conn->prepare($sql);
 
-	    $sql->bind_param('s', $sellerID);
+	    $sql->bind_param('ss', $sellerID, $productID);
 	    
 	  	if ($sql->execute() === TRUE)
 	  	{
 	    	$result = $sql->get_result();
 			echo '<script>
-					alert("Success: Store application deleted.");
-					window.location.href="admin_main.php";
-			</script>';
+					alert("Success: Store product deleted.");
+					window.location.href="storeProfile.php?sellerID='.$sellerID.'";
+				</script>';
 	  	}	
 	  	else
 	  	{
