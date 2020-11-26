@@ -1,4 +1,5 @@
 <?php
+
 	if(isset($_GET['sellerID']))
 	{
 		$servername = "localhost";
@@ -15,6 +16,7 @@
 	    $result = $conn->query($sql);
 	    
 	    include 'editStore_method.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<form id="form-id" class="inline">
+			<form method="post" action="editStore.php?sellerID=<?php echo $sellerID;?>" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>
@@ -46,8 +48,8 @@
 				<form method="post" action="editStore.php?sellerID=<?php echo $sellerID;?>" enctype="multipart/form-data" id="form-id">
 					<?php
 						if(mysqli_num_rows($result) == 1)
-							$row = $result->fetch_assoc();
     					{
+							$row = $result->fetch_assoc();
     				?>
 
 					<label>Store Name</label>
@@ -59,8 +61,8 @@
 					
 					<br><br>
 					<label>Store Description</label>
+					
 					<textarea name="storeDescription" class ="form-control" rows="7" required><?php echo $row['storeDescription']; ?></textarea>
-
 					<?php
 						if(!$row['storeStatus'])
 							$storeStatus = false;
@@ -76,18 +78,23 @@
                     <?php
                         	echo '<img class="img-thumbnail mx-auto mx-auto d-block full-width" src="data:image/jpeg;base64,'. $row['profilePhoto'].'" alt="Store Profile Picture">';
                         }
+                        
+                        else
+							header("Location: admin_main.php");
                     ?>
                      
+                     <div class="caption" style="font-size: 10px; font-weight: 500; width: 100%;">
+                     	<i>click save changes to see if the photo was uploaded successfully</i>
+                     </div>
                 </div>
 
                 <div class="col text-center">
                 	<label class="file form-control">
 	                	<input type="file" name="profilePhoto" class="inputfile" >
 	                    <i class="fas fa-upload form-control-file">
-	                    	<span style="font-family: 'Roboto';">Upload image</span></i>
-                 	<span style="font-size: 10px; font-weight: 500; width: 100%;"><br><br><i>click save changes to see if the photo was uploaded successfully</i></span>
-                 	</label>
-
+	                    	<span style="font-family: 'Roboto';">Upload image</span>
+	                    </i>
+	                 <br> <br>	
 					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">SAVE CHANGES</button>
 				</form>
 				</div>
@@ -104,14 +111,13 @@
 		var form = document.getElementById("form-id");
 
 		document.getElementById("submit-id").addEventListener("click", function () {
-		  form.submit();
+		  		form.submit();
 		});
 	});
 </script>
 
 
 <?php
-
 	}
 
 	else

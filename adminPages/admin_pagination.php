@@ -83,22 +83,28 @@
 	if ($result->num_rows > 0) 
     {
         $i = 1;
+
+        
         while($row = mysqli_fetch_array($result_stores)){
             if ($i == 1 || $i % 5 == 0){
                 echo '<div class="row stores">';
             }
             ?>
 
-            <a href="admin_main.php?action=<?php echo $row['sellerID']?>" class="text-reset text-decoration-none">
-                <div class="col<?php if($result_stores->num_rows < 4) echo '-md-2';?> card">
+            <a href="storeProfile.php?sellerID=<?php echo $row['sellerID']?>" class="text-reset text-decoration-none">
+                <div class="col<?php if($result_stores->num_rows < 4) echo '-md';?> card">
                     <div class="imgwrap">
                         <?php
-                            echo '<img class="xcard-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['profilePhoto'].'" alt="Card image cap">';
+                            echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['profilePhoto'].'" alt="Card image cap">';
                         ?>
                     </div>
                     <div class="card-body text-left">
                         <h4 class="card-title"><?php echo $row["storeName"]; ?></h4>
+<<<<<<< HEAD
                         <a href="../products/storetest.php?action=<?php echo $row['sellerID']?>" class="btn btn-primary">
+=======
+                        <a href="storeProfile.php?sellerID=<?php echo $row['sellerID'];?>" class="btn btn-primary">
+>>>>>>> b12a0122683f9ae80f970350d2f222d531d217db
                             <h5 class="card-text">View Profile</h5>
                         </a>
                     </div>

@@ -9,6 +9,8 @@
     $order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
    	$store = "SELECT * from `sellers` WHERE storeStatus=false";
 
+   	session_start();
+   	//save current page url
    	$page = $_SERVER["REQUEST_URI"];
 	$_SESSION['prevUrl'] = $page;
 
