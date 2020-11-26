@@ -70,8 +70,7 @@
 							$result = getResult($conn,$sql);
 							
 							while ($row = $result->fetch_assoc()){
-								echo "<p>".$row['name']."</p>";
-								echo "<option value='". $row['productUnitID'] ."'>" .$row['name'] ."</option>" ;
+								echo "<option value='". intval($row['productUnitID']) ."'>" .$row['name'] ."</option>" ;
 							}
 						?>
 					</select>
@@ -84,8 +83,7 @@
 							$result = getResult($conn,$sql);
 							
 							while ($row = $result->fetch_assoc()){
-								echo "<p>".$row['name']."</p>";
-								echo "<option value='". $row['productCategoryID'] ."'>" .$row['name'] ."</option>" ;
+								echo "<option value='". intval($row['productCategoryID']) ."'>" .$row['name'] ."</option>" ;
 							}
 						?>
 					</select>
@@ -113,7 +111,7 @@
                  	<span style="font-size: 10px; font-weight: 500; width: 100%;"><br><br><i>click save changes to see if the photo was uploaded successfully</i></span>
                  	</label>
 
-					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">SAVE CHANGES</button>
+					<button type="submit" name="submit-button" class="btn btn-primary" id="submit-id">ADD PRODUCT</button>
 				</form>
 				</div>
 			</div>
