@@ -9,13 +9,16 @@
 	    $conn = new mysqli($servername, $username, $password, $dbname);
 
 	    //get sellerID
-	    $sellerID =  $_GET['sellerID'];
+	    $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
-	    $sql = "DELETE FROM sellers WHERE sellerID = '$sellerID'";
-	    $result = $conn->query($sql);
+	    $sql = "DELETE FROM sellers WHERE sellerID = ?";
+	    $sql = $conn->prepare($sql);
+
+	    $sql->bind_param('s', $sellerID);
 	    
-	  	if ($conn->query($sql) === TRUE)
+	  	if ($sql->execute() === TRUE)
 	  	{
+	    	$result = $sql->get_result();
 			echo '<script>
 					alert("Success: Store application deleted.");
 					window.location.href="admin_main.php";

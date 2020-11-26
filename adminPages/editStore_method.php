@@ -26,16 +26,18 @@
 	{
 		global $conn, $sellerID, $storeStatus;
 
-		$storeName = $_POST['storeName'];
-		$storeEmail = $_POST['storeEmail'];
-		$storeDescription = $_POST['storeDescription'];
+		$storeName = filter_var($_POST['storeName'], FILTER_SANITIZE_STRING);
+		$storeEmail = filter_var($_POST['storeEmail'], FILTER_SANITIZE_EMAIL);
+		$storeDescription = filter_var($_POST['storeDescription'], FILTER_SANITIZE_STRING);
 
 		if(empty($_FILES['profilePhoto']['tmp_name']))
 		{
 			if($storeStatus)
-				$sql = "UPDATE `sellers` SET storeName = '$storeName', storeEmail = '$storeEmail', storeDescription = 'storeDescription' WHERE `sellerID` = '$sellerID'";
+				//$sql = "UPDATE `sellers` SET storeName = '$storeName', storeEmail = '$storeEmail', storeDescription = 'storeDescription' WHERE `sellerID` = '$sellerID'";
+				$sql = "UPDATE `sellers` SET storeName = ?, storeEmail = ?, storeDescription = ? WHERE `sellerID` = ?";
+
 			else
-				$sql = "UPDATE `sellers` SET storeName = '$storeName', storeEmail = '$storeEmail', storeDescription = '$storeDescription', storeStatus = true WHERE `sellerID` = '$sellerID'";
+				$sql = "UPDATE `sellers` SET storeName = ?, storeEmail = ?, storeDescription = ?, storeStatus = true WHERE `sellerID` = ?";
 		}
 
 		else	
@@ -43,13 +45,17 @@
 			$image = base64_encode(file_get_contents(addslashes($_FILES['profilePhoto']['tmp_name'])));
 
 			if($storeStatus)
-				$sql = "UPDATE `sellers` SET storeName = '$storeName', storeEmail = '$storeEmail', storeDescription = 'storeDescription', profilePhoto = '$image' WHERE `sellerID` = '$sellerID'";
+				$sql = "UPDATE `sellers` SET storeName = ?', storeEmail = ?, storeDescription = ?, profilePhoto = '$image' WHERE `sellerID` = ?'";
 				else
-					$sql = "UPDATE `sellers` SET storeName = '$storeName', storeEmail = '$storeEmail', storeDescription = 'storeDescription', storeStatus = true, profilePhoto = '$image' WHERE `sellerID` = '$sellerID'";
+					$sql = "UPDATE `sellers` SET storeName = ?, storeEmail = ?, storeDescription = ?, storeStatus = true, profilePhoto = '$image' WHERE `sellerID` = ?";
 	
 		}
 
-		if ($conn->query($sql))
+		$sql = $conn->prepare($sql);
+
+	    $sql->bind_param('ssss', $storeName, $storeEmail, $storeDescription, $sellerID);
+
+		if ($sql->execute())
 		{
 			echo "<script>window.alert(\"Success: Store Update!\");</script>";
 			unset($_POST['submit-button']);

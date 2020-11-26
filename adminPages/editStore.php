@@ -10,7 +10,7 @@
 	    $conn = new mysqli($servername, $username, $password, $dbname);
 
 	    //get sellerID
-	    $sellerID =  $_GET['sellerID'];
+	     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
 	    $sql = "SELECT * FROM sellers WHERE sellerID=$sellerID LIMIT 1";
 	    $result = $conn->query($sql);
