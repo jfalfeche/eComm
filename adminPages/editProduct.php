@@ -51,7 +51,7 @@
 			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
 				<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 			</a>
-			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>
+			<span style="font-size: 2em;" class="inline">EDIT PRODUCT</span>
 			&nbsp;&nbsp;
 			<i class="fas fa-pen fa-2x inline"></i>
 			<hr class="mt-1 mb-2">
