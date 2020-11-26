@@ -25,6 +25,7 @@
 	<title>PhilCafe - Edit Store</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="../assets/css/edit-store-style.css">
 </head>
@@ -76,7 +77,7 @@
 
 				<div class="imgwrap">
                     <?php
-                        	echo '<img class="img-thumbnail mx-auto mx-auto d-block full-width" src="data:image/jpeg;base64,'. $row['profilePhoto'].'" alt="Store Profile Picture">';
+                        	echo '<img id="pimg" class="img-thumbnail mx-auto mx-auto d-block full-width" src="data:image/jpeg;base64,'. $row['profilePhoto'].'" alt="Store Profile Picture">';
                         }
                         
                         else
@@ -90,7 +91,7 @@
 
                 <div class="col text-center">
                 	<label class="file form-control">
-	                	<input type="file" name="profilePhoto" class="inputfile" >
+	                	<input id="imgInp" type="file" name="profilePhoto" class="inputfile" >
 	                    <i class="fas fa-upload form-control-file">
 	                    	<span style="font-family: 'Roboto';">Upload image</span>
 	                    </i>
@@ -113,6 +114,22 @@
 		document.getElementById("submit-id").addEventListener("click", function () {
 		  		form.submit();
 		});
+	});
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			
+			reader.onload = function(e) {
+			$('#pimg').attr('src', e.target.result);
+			}
+			
+			reader.readAsDataURL(input.files[0]); // convert to base64 string
+		}
+	}
+
+	$("#imgInp").change(function() {
+		readURL(this);
 	});
 </script>
 
