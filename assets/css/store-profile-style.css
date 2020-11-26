@@ -12,6 +12,7 @@ body
 
 #container 
 {
+	width: 100%;
     max-width: 100% !important;
     overflow-x: hidden !important;
 }
@@ -114,10 +115,8 @@ body
 
 #orders
 {
-	position: absolute;
 	margin-top: 5%;
-	padding: 5%;
-	width: 100%;
+	padding: 5% 0;
 }
 
 
@@ -170,10 +169,8 @@ hr
 
 #manage-products
 {
-	position: absolute;
 	margin-top: 30%;
-	padding: 5%;
-	width: 100%;
+	padding: 5% 0;
 }
 
 .add-product
@@ -235,6 +232,13 @@ hr
 	margin-right: 5%;
 }
 
-.p_display {
-	padding: 3em 0 3em 10em;
+#manage-products, #orders {
+	position: relative;
+	margin: auto;
+	width: 75%;
+	padding: 5% 0 1% 0;
+}
+
+.stores {
+	width: 125%;
 }
