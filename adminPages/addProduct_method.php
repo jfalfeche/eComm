@@ -42,6 +42,8 @@
 		$stmt->close();
 
 		unset($_POST['submit-button']);
+		echo "<script>window.alert(\"Success: Product Added!\");</script>";
+		header("Refresh:0");
 		/*
 		if (mysqli_query($conn,$sql))
 		{

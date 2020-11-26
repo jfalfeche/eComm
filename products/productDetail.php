@@ -53,7 +53,7 @@
     <div class="productDetails">
         <div class="imgwrap">
             <?php 
-                echo '<img class="productImg img-responsive full-width" src="data:image/jpeg;base64,'.base64_encode( $row['image'] ).'" alt="Card image cap">';
+                echo '<img class="productImg img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
             ?>
         </div>
         <div class="productInfo">

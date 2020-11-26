@@ -75,7 +75,7 @@
                 <div class="col<?php if($result_products->num_rows < 4) echo '-md-2';?> card">
                     <div class="imgwrap">
                         <?php
-                            echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.base64_encode($row['image']).'" alt="Card image cap">';
+                            echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
                         ?>
                     </div>
                     <div class="card-body text-left">
