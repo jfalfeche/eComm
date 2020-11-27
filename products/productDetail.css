@@ -159,3 +159,7 @@ i, .title {
     position: relative;
     display: inline-block;
 }
+
+.price {
+    border: none;
+}

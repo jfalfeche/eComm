@@ -26,8 +26,8 @@
 
     <link rel="stylesheet" href="../navbar/nav.css">
     <link rel="stylesheet" href="../footer/footer.css">
-    <link rel="stylesheet" href="./productDetail.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
+    <link rel="stylesheet" href="./productDetail.css">
 </head>
 <body>
     <!--NAV-->
@@ -115,6 +115,14 @@
                 document.getElementById("quantity").stepUp();
             }
         })
+        var quant = document.getElementById("quantity");
+        quant.addEventListener('keyup', function() {
+            if(quant.value > <?php echo $row["stock"] ?>)
+                quant.value = <?php echo $row["stock"] ?>;
+            else if (quant.value < 1)
+                quant.value = 1;
+        })
+        
     </script>
 
     <div class="whiteSquare"></div>

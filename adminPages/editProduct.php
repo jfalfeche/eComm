@@ -147,8 +147,7 @@
 </html>
 
 <script>
-	window.addEventListener("DOMContentLoaded", function () 
-	{
+	window.addEventListener("DOMContentLoaded", function () {
 		var form = document.getElementById("form-id");
 
 		document.getElementById("submit-id").addEventListener("click", function () {
