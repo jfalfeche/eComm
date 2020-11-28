@@ -15,6 +15,8 @@
 
     // Register user
     if (isset($_POST['submit'])) {
+        $dateCreated = date("Y/m/d");
+        $storeStatus = false;
         $storeName = trim($_POST["storeName"]);
         $storeEmail = trim($_POST["storeEmail"]);
         $storeDescription = trim($_POST["storeDescription"]);
@@ -55,9 +57,9 @@
 
         // Insert records to database
         if ($isValid) {
-            $insertSQL = "INSERT INTO sellers(storeName,storeEmail,storeDescription) values(?,?,?)";
+            $insertSQL = "INSERT INTO sellers(datecreated, storeStatus, storeName,storeEmail,storeDescription) values(?,?,?,?,?)";
             $stmt = $con->prepare($insertSQL);
-            $stmt->bind_param("sss", $storeName, $storeEmail, $storeDescription);
+            $stmt->bind_param("sssss", $dateCreated, $storeStatus, $storeName, $storeEmail, $storeDescription);
             $stmt->execute();
             $stmt->close();
 
