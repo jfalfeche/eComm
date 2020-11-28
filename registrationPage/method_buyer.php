@@ -24,6 +24,7 @@
         $gender = trim($_POST["gender"]);
         $birthday = trim($_POST["birthday"]);
         $password = trim($_POST["password"]);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $confirmPassword = trim($_POST["confirmPassword"]);
         $confirmEmail = trim($_POST["confirmEmail"]);
 
@@ -55,10 +56,19 @@
         }
 
         // Check if confirm password matches
-        if ($isValid && ($password != $confirmPassword)) {
+    /*    if ($isValid && ($password != $confirmPassword)) {
+           $isValid = false;
+           $error_message = "Confirm password not matching";
+        } */
+
+        if ($isValid && (password_verify($confirmPassword, $password))) {
+          // Success!
+            $success_message = "";
+        } else {
+            // Invalid credentials
             $isValid = false;
             $error_message = "Confirm password not matching";
-        }
+        } 
 
         // Insert records to database
         if ($isValid) {
@@ -71,3 +81,5 @@
             $success_message = "Account created successfully. Please log in your account to continue.";
         }
     }
+
+?>
