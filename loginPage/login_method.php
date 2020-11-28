@@ -97,7 +97,7 @@
 					{
 						$_SESSION['user_type'] = 'customer';
 						$_SESSION['userID'] = $row['userID'];	
-						header('Location: ../customer.php');
+						header('Location: ../profiles/profile_buyer.php');
 					}	
 
 					else
