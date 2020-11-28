@@ -28,15 +28,19 @@
                 <h1>REGISTER</h1>
                 <p class="hint-text">as</p>
                 <div class="form-group">
-                    <div class="row">                       
-                        <form action="register_buyer.php" method="post"><div class="col"><button type="submit" class="btn btn-success btn1 btn-lg btn-block">BUYER</button></div></form>                      
-                        <form action="register_seller.php" method="post"><div class="col"><button type="submit" class="btn btn-success btn2 btn-lg btn-block">SELLER</button></div></form>                       
+                    <div class="row">
+                        <form action="register_buyer.php" method="post">
+                            <div class="col"><button type="submit" class="btn btn-success btn1 btn-lg btn-block">BUYER</button></div>
+                        </form>
+                        <form action="register_seller.php" method="post">
+                            <div class="col"><button type="submit" class="btn btn-success btn2 btn-lg btn-block">SELLER</button></div>
+                        </form>
                     </div>
                 </div>
 
                 <form action="../loginPage/login.php" method="post">
                     <hr class="rounded-border">
-                    <div class="text-center" style="color:black; margin-top:30px">Already have an account?</div>
+                    <div class="text-center" style="color:black; margin-top:30px; margin-bottom:20px">Already have an account?</div>
                     <div class="center"><button type="submit" class="btn btn-success btn3 btn-lg btn-block">LOGIN</button></div>
                 </form>
             </div>
