@@ -177,6 +177,12 @@
 	$("#imgInp").change(function() {
 		readURL(this);
 	});
+
+	var quant = document.getElementById("q");
+	quant.addEventListener('keyup', function() {
+		if (quant.value < 1)
+			quant.value = 1;
+	})
 </script>
 
 

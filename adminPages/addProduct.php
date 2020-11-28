@@ -92,7 +92,7 @@
 					<label>Quantity</label>
 					<div class="def-number-input number-input safari_only">
 						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-						<input class="quantity" type="number" min="1" name="quantity" value="1">
+						<input id="q" class="quantity" type="number" min="1" name="quantity" value="1">
 						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
 					</div>
 
@@ -153,6 +153,12 @@
 	$("#imgInp").change(function() {
 		readURL(this);
 	});
+
+	var quant = document.getElementById("q");
+	quant.addEventListener('keyup', function() {
+		if (quant.value < 1)
+			quant.value = 1;
+	})
 </script>
 
 
