@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	if(isset($_GET['sellerID']))
 	{
 		$servername = "localhost";
@@ -41,7 +40,7 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+			<a href="storeProfile.php?sellerID=<?php echo $sellerID;?>" class="text-decoration-none" >
 				<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 			</a>
 			<span style="font-size: 2em;" class="inline">ADD PRODUCT</span>

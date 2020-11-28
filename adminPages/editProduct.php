@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	if(isset($_GET['productID']))
 	{
 		$servername = "localhost";
@@ -32,6 +31,10 @@
 		$result = getResult($conn,$sql);
 		
 		include 'editProduct_method.php';
+
+		if(mysqli_num_rows($result) == 1)
+			$row = $result->fetch_assoc();
+		{
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +51,7 @@
 <body>
 	<div id="container">
 		<div id="title">
-			<a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+			<a href="storeProfile.php?sellerID=<?php echo $row['seller'];?>" class="text-decoration-none" >
 				<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 			</a>
 			<span style="font-size: 2em;" class="inline">EDIT PRODUCT</span>
@@ -60,12 +63,6 @@
 		<div id="main" class="row">
 			<div class="col-8">
 				<form method="post" action="editProduct.php?productID=<?php echo $productID;?>" enctype="multipart/form-data" id="form-id">
-					<?php
-						if(mysqli_num_rows($result) == 1)
-							$row = $result->fetch_assoc();
-    					{
-    				?>
-
 					<label>Product Name</label>
 					<input type="text" name="productName" class ="form-control" required value="<?php echo $row['productName']; ?>">
 					
