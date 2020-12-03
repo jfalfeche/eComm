@@ -150,7 +150,7 @@
 			    	<a href="pendingOrders.php?sellerID=<?php echo $row['sellerID'] ?>">
 						<i class="far fa-check-circle fa-3x"></i>
 						<br><br>
-						<b>Pending Order History</b>
+						<b>Pending Orders</b>
 					</a>
 			    </div>
 			  </div>
