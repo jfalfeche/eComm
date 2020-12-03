@@ -11,13 +11,6 @@
 		header("Location: admin_main.php");
 	}
 
-	function back()
-	{
-		session_start();
-		if(!isset($_SESSION['prevUrl']))
-			header("Location: admin_main.php");
-		header("Location: ".$_SESSION['prevUrl']);
-	}
 
 	function get_order()
 	{
