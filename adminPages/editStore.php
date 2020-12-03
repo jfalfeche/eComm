@@ -38,7 +38,7 @@
 				</button>
 			</form>
 
-			<span style="font-size: 2em;" class="inline">EDIT STORE PROFILE</span>
+			<span style="font-size: 2em;  font-weight: 500;" class="inline">EDIT STORE PROFILE</span>
 			&nbsp;&nbsp;
 			<i class="fas fa-pen fa-2x inline"></i>
 			<hr class="mt-1 mb-2">

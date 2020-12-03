@@ -7,7 +7,9 @@
 
 			global $order;
 			$sort = $_POST['sortOrder']; 
-			if($sort == "oldest-newest")
+			if($sort == "all")
+				$order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
+			else if($sort == "oldest-newest")
 				$order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
 			else if($sort == "newest-oldest")
 				$order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered DESC";
@@ -67,7 +69,7 @@
 	{
 		global $conn;
 
-		$sql = "SELECT productDetail.productID, productDetail.quantity, product.productName FROM `productDetail` INNER JOIN `product` ON productDetail.productID=product.productID WHERE productDetail.buyerID=1 AND productDetail.orderNo=1";
+		$sql = "SELECT productDetail.productID, productDetail.quantity, product.productName FROM `productDetail` INNER JOIN `product` ON productDetail.productID=product.productID WHERE productDetail.buyerID='$id' AND productDetail.orderNo='$orderNo'";
 		$result = $conn->query($sql);
 
 		$product_list = "";
@@ -80,7 +82,7 @@
     		}
 		}
 
-		echo substr(strtoupper($product_list), 0, 200);
+		echo substr(strtoupper($product_list), 0, 25);
 	}
 
 
@@ -92,7 +94,9 @@
 			global $store;
 
 			$sort = $_POST['sortPendingStore']; 
-			if($sort == "A-to-Z")
+			if($sort == "all")
+					$store = "SELECT * from `sellers` WHERE storeStatus=false";
+			else if($sort == "A-to-Z")
 				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY storeName ASC";
 			else if($sort == "Z-to-A")
 				$store = "SELECT * from `sellers` WHERE storeStatus=false ORDER BY storeName DESC";

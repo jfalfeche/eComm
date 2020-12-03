@@ -70,6 +70,7 @@
 				<form name="sortFormOrder" action="admin_main.php" method="post">
 					<select name="sortOrder" class="form-control" onChange="sortFormOrder.submit()">
 						<option>Sort by</option>
+						<option value="all">All</option>
 						<option value="oldest-newest">Oldest-Newest</option>
 						<option value="newest-oldest">Newest-Oldest</option>
 						<option value="pending">Status: Pending</option>
@@ -112,7 +113,7 @@
 	                            	</span>
 	                            </td>
 	                            <td>
-	                                <?php echo $row['dateOrdered'] ?>
+	                                <?php echo date('d M Y', strtotime($row['dateOrdered'])) ?>
 	                            </td>
 	                            <td>
 	                                <?php get_customer_name($row['buyerID']); ?>
@@ -161,6 +162,7 @@
 				<form name="sortFormPendingStore" action="admin_main.php" method="post">
 						<select name="sortPendingStore" class="form-control" onChange="sortFormPendingStore.submit()">
 							<option>Sort by</option>
+							<option value="all">All</option>
 							<option value="A-to-Z">A to Z</option>
 							<option value="Z-to-A">Z to A</option>
 							<option value="oldest-newest">Oldest-Newest</option>

@@ -143,27 +143,20 @@ CREATE TABLE `productDetail`(
 	`buyerID` int(15) NOT NULL,
 	`inOrder` boolean NOT NULL,
 	`orderNo` int(15),
+	`sellerID` int(15) NOT NULL,
 	PRIMARY KEY (`productDetailID`),
 	KEY `productID` (`productID`),
 	KEY `buyerID` (`buyerID`),
 	KEY `orderNo` (`orderNo`),
+	KEY `sellerID` (`sellerID`),
 	CONSTRAINT `productDetail_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
 	CONSTRAINT `productDetail_ibfk_2` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
-	CONSTRAINT `productDetail_ibfk_3` FOREIGN KEY (`orderNo`) REFERENCES `order` (`orderNo`)
+	CONSTRAINT `productDetail_ibfk_3` FOREIGN KEY (`orderNo`) REFERENCES `order` (`orderNo`),
+	CONSTRAINT `productDetail_ibfk_4` FOREIGN KEY (`sellerID`) REFERENCES `sellers` (`sellerID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 
-DROP TABLE IF EXISTS `cart`;
-
-CREATE TABLE `cart`(
-	`cartID` int(15) AUTO_INCREMENT,
-	`userID` int(15),
-	PRIMARY KEY (`cartID`),
-	KEY `userID` (`userID`),
-	CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `customers` (`userID`)
-
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
