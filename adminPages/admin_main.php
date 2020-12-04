@@ -1,4 +1,4 @@
-div<?php
+<?php
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -126,8 +126,8 @@ div<?php
 	                                	<?php echo $row['totalAmount'] ?>	
 	                                </div>
 	                            </td>
-	                            <td>
-	                            	<a href="orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary" style="display: none;"></a>
+	                            <td style="display: none;">
+	                            	<a href="orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary"></a>
 	                            </td>
 	                        </tr>
 	                       

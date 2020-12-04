@@ -75,3 +75,14 @@ hr
 	margin: 1% 0% 1% 5%;
 	width: 15%;
 }
+
+
+.black-top-border td,
+{
+	border-top-color: #000000;
+}
+
+.total td
+{
+	border-top: 2px solid;
+}
