@@ -77,7 +77,7 @@
         <!--links-->
         <div class="center">
             <div class="row text-center">
-                <div class="col"><a href="#">
+                <div class="col"><a href="../cart/cart.php">
                         <i class="material-icons md-60 red">shopping_cart</i><br>
                         <span>Go To My Cart</span></a>
                 </div>

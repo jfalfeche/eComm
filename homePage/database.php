@@ -1,9 +1,8 @@
 <?php
-    $url='127.0.0.1:3306';
-    $username='root';
-    $password='';
-    $conn=mysqli_connect($url,$username,$password,"philcafe");
-    if(!$conn){
-    die('Could not Connect My Sql:' .mysql_error());
-    }
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "philcafe";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 ?>

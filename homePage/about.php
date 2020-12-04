@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,15 +25,27 @@
 </head>
 <body>
     <script>AOS.init();</script>
-    <!-- NAV BAR GUEST STARTS HERE -->
-    <nav class="nav guest">
+    <!--NAV-->
+    <nav class="nav guest fixed-top">
         <div class="col-md-3">
-            <div class="logo"><h1>LOGO</h1></div>
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
         </div>
+        <?php 
+            if (isset($_SESSION['userID'])) {
+        ?>
+        <div class="col-md-2"></div>
+        <?php 
+                include '../navbar/buyer.php';
+            } else {
+        ?>
         <div class="col-md-4"></div>
-            <?php include '../navbar/guest.php' ?>
+        <?php
+                include '../navbar/guest.php';}
+        ?>
     </nav>
-    <!-- NAV BAR GUEST ENDS HERE -->
+    <!--END NAV-->
     <!-- Header image -->
     <header>
         <div class="overlay"></div>
@@ -39,7 +54,7 @@
             <div class="d-flex h-100 text-center align-items-center">
                 <div class="w-100 text-white">
                     <h1 class="display-3">PhilCafe</h1>
-                    <p class="lead mb-0">Quality Products Picked Specially for You</p>
+                    <p class="lead mb-0">Tagline Here</p>
                 </div>
             </div>
         </div>

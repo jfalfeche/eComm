@@ -92,7 +92,7 @@
                             <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
                             <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
                             <p class="card-text"><?php echo "Per ".ucwords($row["name"]); ?></p><br><br>
-                            <a href="#!" class="btn btn-primary">
+                            <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="btn btn-primary">
                                 <img src="../media/cart.png" alt="cart">
                                 <h5 class="card-text">Add to Cart</h5>
                             </a>
@@ -116,15 +116,3 @@
         echo '</div>';
     }
 ?>
-<!-- PAGE NUMBERS START -->
-<div class="pageNumbers">
-    <button id="1" type="button" class="btn btn-outline-dark">First</button>
-    <button id="<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>" type="button" class="btn btn-outline-dark"><</button>
-    <?php
-        for($p = 1; $p <= $total_pages; $p++){ ?>
-            <button id="<?php echo $p; ?>" type="button" class="<?php if($p == $pageno) echo 'btn-active'; ?> btn btn-outline-dark"><?php echo $p ?></button>
-    <?php        } ?>
-    <button id="<?php if($pageno >= $total_pages){ echo '#'; } else { echo ($pageno + 1); } ?>" type="button" class="btn btn-outline-dark">></button>
-    <button id="<?php echo $total_pages; ?>" type="button" class="btn btn-outline-dark">Last</button>
-</div>
-<!-- PAGE NUMBERS END -->

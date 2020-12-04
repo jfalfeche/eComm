@@ -1,8 +1,5 @@
 <?php
     $cat = 0;
-?>
-
-<?php 
     session_start();
     $page = $_SERVER["REQUEST_URI"];
 	$_SESSION['prevUrl'] = $page;
@@ -42,15 +39,25 @@
         </div>
     </header>
 
-    <!-- NAV BAR GUEST STARTS HERE -->
+    <!-- NAV BAR STARTS HERE -->
     <nav class="nav guest">
         <div class="col-md-3">
             <div class="logo"><h1>LOGO</h1></div>
         </div>
+        <?php 
+            if (isset($_SESSION['userID'])) {
+        ?>
+        <div class="col-md-2"></div>
+        <?php 
+                include '../navbar/buyer.php';
+            } else {
+        ?>
         <div class="col-md-4"></div>
-            <?php include '../navbar/guest.php' ?>
+        <?php
+                include '../navbar/guest.php';}
+        ?>
     </nav>
-    <!-- NAV BAR GUEST ENDS HERE -->
+    <!-- NAV BAR ENDS HERE -->
         
     <section class="my-5">
         <div class="container text-center align-items-center">

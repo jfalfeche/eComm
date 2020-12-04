@@ -31,8 +31,18 @@
                 <h1>LOGO</h1>
             </div>
         </div>
+        <?php 
+            if (isset($_SESSION['userID'])) {
+        ?>
+        <div class="col-md-3"></div>
+        <?php 
+                include '../navbar/buyer.php';
+            } else {
+        ?>
         <div class="col-md-5"></div>
-        <?php include '../navbar/guest.php' ?>
+        <?php
+                include '../navbar/guest.php';}
+        ?>
     </nav>
     <!--END NAV-->
 

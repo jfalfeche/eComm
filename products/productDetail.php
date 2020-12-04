@@ -1,6 +1,7 @@
 <?php
     session_start();
-    include_once '../homePage/database.php';
+    include '../homePage/database.php';
+    include '../cart/add_to_cart.php';
     if(isset($_GET['action'])) {
         $id =  $_GET['action'];
     }
@@ -9,7 +10,7 @@
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
 
-    //if (mysqli_num_rows($result) > 0)
+    if (mysqli_num_rows($result) > 0) {
         
 ?>
 <!DOCTYPE html>
@@ -37,8 +38,18 @@
                 <h1>LOGO</h1>
             </div>
         </div>
+        <?php 
+            if (isset($_SESSION['userID'])){
+        ?>
+        <div class="col-md-3"></div>
+        <?php 
+                include '../navbar/buyer.php';
+            } else {
+        ?>
         <div class="col-md-5"></div>
-        <?php include '../navbar/guest.php' ?>
+        <?php
+                include '../navbar/guest.php';}
+        ?>
     </nav>
     <!--END NAV-->
 
@@ -78,29 +89,36 @@
                     <?php echo $row["description"] ?>
                 </p>
             </p>
-            <p>
-                Quantity:
-                <div class="def-number-input number-input" id="quan">
-                    <button id="0" class="minus"></button>
-                    <input id="quantity" class="quantity" min="1" name="quantity" value="1" type="number">
-                    <button id="1" class="plus"></button>
-                </div>
-                <div id="avail">
-                    <?php 
-                        echo $row["stock"]." ".ucwords($row["name"]); if($row["stock"] > 1) echo "s";
-                    ?> available
-                </div>
-            </p>
-            <br>
-            <a href="#!" class="btn btn-primary">
-                <img class="cartIcon" src="../media/cart.png" alt="cart">
-                <h5 class="cartText">Add to Cart</h5>
-            </a>
+            <form method="post" action="productDetail.php?action=<?php echo $id ?>" id="addtocartform" enctype="multipart/form-data">
+                <p>
+                    Quantity:
+                    <div class="def-number-input number-input" id="quan">
+                        <button id="0" class="minus"></button>
+                        <input id="quantity" class="quantity" min="1" name="quantity" value="1" type="number">
+                        <button id="1" class="plus"></button>
+                    </div>
+                    <div id="avail">
+                        <?php 
+                            echo $row["stock"]." ".ucwords($row["name"]); if($row["stock"] > 1) echo "s";
+                        ?> available
+                    </div>
+                </p>
+                <br>
+                <button id="addtocart" name="submit-button" href="" class="btn btn-primary">
+                    <img class="cartIcon" src="../media/cart.png" alt="cart">
+                    <h5 class="cartText">Add to Cart</h5>
+                </button>
+            </form>
         </div>
         
     </div>
 
     <script>
+        var form = document.getElementById("addtocartform");
+        $('button#addtocart').on('click', function(e){
+            form.submit();
+        })
+
         $('button#0').on('click', function(e){
             e.preventDefault();
             var count = document.getElementById("quantity").value;
@@ -122,7 +140,6 @@
             else if (quant.value < 1)
                 quant.value = 1;
         })
-        
     </script>
 
     <div class="whiteSquare"></div>
@@ -130,5 +147,9 @@
     <div class="bottom">
         <?php include '../footer/shortfooter.php';?>
     </div>
+    <?php
+        } else
+            header("Location: ../products/product.php");
+    ?>
 </body>
 </html>
