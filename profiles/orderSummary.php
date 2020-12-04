@@ -9,7 +9,7 @@
 		    $conn = new mysqli($servername, $username, $password, $dbname);
 
 		    //get orderNo
-		     $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
+		    $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
 
 		    $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
 				INNER JOIN `product` ON productdetail.productDetailID = product.productID 
@@ -161,6 +161,6 @@
 	}
 
 	else
-		header("Location: admin_main.php");
+		header("Location: profile_buyer.php");
 
  ?>

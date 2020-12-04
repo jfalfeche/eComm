@@ -63,7 +63,7 @@
 
 		<div id="main">
 			<span style="font-size: 12px; font-weight: 500;"><i>click on any item to view details</i></span>
-			<table id="pending-orders-table" class="table table-hover">
+			<table id="order-history-table" class="table table-hover">
 				<thead>
 					<tr>
 					    <th scope="col">ORDER #</th>
@@ -133,7 +133,7 @@
 	$(document).ready(function() 
 	{
 
-	    $('#pending-orders-table tr').click(function() {
+	    $('#order-history-table tr').click(function() {
 	        var href = $(this).find("a").attr("href");
 	        if(href) {
 	            window.location = href;
