@@ -34,6 +34,7 @@
 				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=3  ORDER BY order.dateOrdered ASC";
 			else if($sort == "shipped")
 				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=4  ORDER BY order.dateOrdered ASC";
+
 		}
 	}
 
@@ -99,7 +100,7 @@
     		}
 		}
 
-		echo substr(strtoupper($product_list), 0, 200);
+		echo substr(strtoupper($product_list), 0, 25);
 	}
 
 
@@ -124,6 +125,10 @@
 				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=3  ORDER BY order.dateOrdered ASC";
 			else if($sort == "shipped")
 				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=4  ORDER BY order.dateOrdered ASC";
+			else if($sort == "completed")
+				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=5  ORDER BY order.dateOrdered ASC";
+			else if($sort == "cancelled")
+				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=6  ORDER BY order.dateOrdered ASC";
 		}
 	}
 ?>

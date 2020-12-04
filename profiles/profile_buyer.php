@@ -82,12 +82,12 @@
                         <span>Go To My Cart</span></a>
                 </div>
 
-                <div class="col"><a href="#">
+                <div class="col"><a href="pendingOrders.php?buyerID=<?php echo $userID; ?>">
                         <i class="material-icons md-60 green">check_circle_outline</i><br>
                         <span>Pending Orders</span></a>
                 </div>
 
-                <div class="col"><a href="#">
+                <div class="col"><a href="orderHistory.php?buyerID=<?php echo $userID; ?>">
                         <i class="material-icons md-60 blue">history</i><br>
                         <span>Go To Order History</span></a>
                 </div>

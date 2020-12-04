@@ -1,4 +1,4 @@
-<?php
+div<?php
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -122,10 +122,9 @@
 	                                <?php get_product_details($row['buyerID'], $row['orderNo']) ?>
 	                            </td>
 	                            <td>
-	                                
 	                                <div style="text-align: right;">
 	                                	<?php echo $row['totalAmount'] ?>	
-	                                	</div>
+	                                </div>
 	                            </td>
 	                            <td>
 	                            	<a href="orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary" style="display: none;"></a>
