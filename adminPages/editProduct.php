@@ -1,40 +1,45 @@
 <?php
-	if(isset($_GET['productID']))
-	{
-		$servername = "localhost";
-	    $username = "root";
-	    $password = "";
-	    $dbname = "philcafe";
-	    // Create connection
-	    $conn = new mysqli($servername, $username, $password, $dbname);
-
-		//get sellerID
-		$productID =  $_GET['productID'];
-
-		function getSeller($productID) {
-			return $sql = "SELECT * FROM product, productunit, productcategory WHERE (productunit.productUnitID = product.productUnitID) AND (productcategory.productCategoryID = product.productCategory) AND product.productID = $productID";
-		}
-
-		function getUnit() {
-			return $sql = "SELECT * FROM  productunit";
-		}
-	
-		function getCategory() {
-			return $sql = "SELECT * FROM productcategory";
-		}
-		
-		function getResult($conn,$sql) {
-			return $result = $conn->query($sql);
-		}
-
-		$sql = getSeller($productID);
-		$result = getResult($conn,$sql);
-		
-		include 'editProduct_method.php';
-
-		if(mysqli_num_rows($result) == 1)
-			$row = $result->fetch_assoc();
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_GET['productID']))
 		{
+			$servername = "localhost";
+		    $username = "root";
+		    $password = "";
+		    $dbname = "philcafe";
+		    // Create connection
+		    $conn = new mysqli($servername, $username, $password, $dbname);
+
+			//get sellerID
+			$productID =  $_GET['productID'];
+
+			function getSeller($productID) {
+				return $sql = "SELECT * FROM product, productunit, productcategory WHERE (productunit.productUnitID = product.productUnitID) AND (productcategory.productCategoryID = product.productCategory) AND product.productID = $productID";
+			}
+
+			function getUnit() {
+				return $sql = "SELECT * FROM  productunit";
+			}
+		
+			function getCategory() {
+				return $sql = "SELECT * FROM productcategory";
+			}
+			
+			function getResult($conn,$sql) {
+				return $result = $conn->query($sql);
+			}
+
+			$sql = getSeller($productID);
+			$result = getResult($conn,$sql);
+			
+			include 'editProduct_method.php';
+
+			if(mysqli_num_rows($result) == 1)
+				$row = $result->fetch_assoc();
+			{
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +50,26 @@
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/edit-store-style.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
+
 </head>
 <body>
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-2">
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+        <?php 
+            include '../navbar/admin.php';
+        ?>
+    </nav>
+    <!--END NAV-->
+    
 	<div id="container">
 		<div id="title">
 			<a href="storeProfile.php?sellerID=<?php echo $row['seller'];?>" class="text-decoration-none" >
@@ -185,8 +206,11 @@
 
 <?php
 
-	}
+		}
 
-	else
-		header("Location: admin_main.php");
+		else
+			header("Location: admin_main.php");
+	}
+    else
+        header("Location: ../loginPage/login.php");
  ?>

@@ -1,22 +1,27 @@
 <?php
-	$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "philcafe";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname); 
-
-	if (isset($_GET['pageno'])) 
-	{
-        $pageno = intval($_GET['pageno']);
-    } 
-    else 
-    {
-        if(isset($pageno))
-            {} 
-        else
-            $pageno = 1;
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
+    if(isset($_SESSION['LGUID']))
+    {
+    	$servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "philcafe";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname); 
+
+    	if (isset($_GET['pageno'])) 
+    	{
+            $pageno = intval($_GET['pageno']);
+        } 
+        else 
+        {
+            if(isset($pageno))
+                {} 
+            else
+                $pageno = 1;
+        }
 
 
 
@@ -40,8 +45,6 @@
 	}
 		
 	$result_stores = mysqli_query($conn, $partner_stores);
-	$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true LIMIT $offset, $no_of_records_per_page";
-
 
 ?>
 <span style="font-size: 24px; font-weight: 500;">PARTNER STORES</span>
@@ -58,6 +61,7 @@
 	<form name="sortFormStore" action="admin_main.php" method="post">
 			<select name="sortStore" class="form-control" onChange="sortFormStore.submit()">
 				<option>Sort by</option>
+                <option value="all">All</option>
                 <option value="A-to-Z">A to Z</option>
                 <option value="Z-to-A">Z to A</option>
 				<option value="oldest-newest">Oldest-Newest</option>
@@ -82,11 +86,11 @@
 <?php 
 	if ($result->num_rows > 0) 
     {
-        $i = 1;
-        while($row = mysqli_fetch_array($result_stores)){
-            if ($i == 1 || $i % 5 == 0){
-                echo '<div class="row stores">';
-            }
+            $i = 1;
+            while($row = mysqli_fetch_array($result_stores)){
+                if ($i == 1 || $i % 5 == 0){
+                    echo '<div class="row stores">';
+                }
             ?>
 
             <a href="storeProfile.php?sellerID=<?php echo $row['sellerID']?>" class="text-reset text-decoration-none">
@@ -105,16 +109,19 @@
                 </div>
             </a>
 <?php
-            if ($i % 4 == 0 && $i != 0) {
-                echo '</div>';
-                $i = 0;
-            }
-            $i++;
-        
-    	} 
-    }else {
-        echo "<span style=\"color: red;\">No partner stores found.</span>";
+                if ($i % 4 == 0 && $i != 0) {
+                    echo '</div>';
+                    $i = 0;
+                }
+                $i++;
+            
+        	} 
+        }else {
+            echo "<span style=\"color: red;\">No partner stores found.</span>";
+        }
     }
+    else
+        header("Location: ../loginPage/login.php");
 ?>
 	
 	

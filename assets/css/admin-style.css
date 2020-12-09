@@ -4,9 +4,21 @@
     font-family: 'Roboto', sans-serif; 
 }
 
+/*NAV*/
+  .logo {
+    position: absolute;
+    left: 2em;
+    top: 1em;
+    background: #246F75;
+    z-index: 3;
+    border-radius: 20px;
+  }
+/*END NAV*/
+
 body
 {
 	background: #F7F6F4;
+	overflow-x: hidden !important;
 }
 
 table

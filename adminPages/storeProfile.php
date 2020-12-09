@@ -1,26 +1,30 @@
 <?php
-	if(isset($_GET['sellerID']))
-	{
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_GET['sellerID']))
+		{
 
-		$servername = "localhost";
-	    $username = "root";
-	    $password = "";
-	    $dbname = "philcafe";
-	    // Create connection
-	    $conn = new mysqli($servername, $username, $password, $dbname);
+			$servername = "localhost";
+		    $username = "root";
+		    $password = "";
+		    $dbname = "philcafe";
+		    // Create connection
+		    $conn = new mysqli($servername, $username, $password, $dbname);
 
-	    session_start();
-	    //save current page url
-	    $page = $_SERVER["REQUEST_URI"];
-		$_SESSION['prevUrl'] = $page;
+		    //save current page url
+		    $page = $_SERVER["REQUEST_URI"];
+			$_SESSION['prevUrl'] = $page;
 
-	    //get sellerID
-	     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
+		    //get sellerID
+		     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
-	    $sql = "SELECT * FROM sellers WHERE sellerID=$sellerID LIMIT 1";
-	    $result = $conn->query($sql);
+		    $sql = "SELECT * FROM sellers WHERE sellerID=$sellerID LIMIT 1";
+		    $result = $conn->query($sql);
 
-	    include 'storeProfile_method.php';
+		    include 'storeProfile_method.php';
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +37,25 @@
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
+	
+    <link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/productCard.css">
 	<link rel="stylesheet" href="../assets/css/store-profile-style.css">
 </head>
 <body>
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-2">
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+        <?php 
+            include '../navbar/admin.php';
+        ?>
+    </nav>
+    <!--END NAV-->
 
 <!--START: DELETE STORE PROFILE MODAL-->
 	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
@@ -220,9 +238,12 @@
 
 
 <?php
+		}
+		
+		else
+			header("Location: admin_main.php");
 	}
-	
-	else
-		header("Location: admin_main.php");
+    else
+        header("Location: ../loginPage/login.php");
 	
 ?>

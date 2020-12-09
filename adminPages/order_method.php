@@ -1,16 +1,25 @@
 <?php
-	
-	if(isset($_POST['back-btn']))
-	{
-		back();
-		unset($_POST['back-btn']);
-	}
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_POST['back-btn']))
+		{
+			back();
+			unset($_POST['back-btn']);
+		}
 
-	else if(!isset($_GET['sellerID']))
-	{
-		header("Location: admin_main.php");
+		else if(!isset($_GET['sellerID']))
+		{
+			header("Location: admin_main.php");
+		}
 	}
+	else
+        header("Location: ../loginPage/login.php");
+?>
 
+<?php
 
 	function get_order()
 	{

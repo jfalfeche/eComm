@@ -1,20 +1,25 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "philcafe";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
-   	$store = "SELECT * from `sellers` WHERE storeStatus=false";
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+	    $servername = "localhost";
+	    $username = "root";
+	    $password = "";
+	    $dbname = "philcafe";
+	    // Create connection
+	    $conn = new mysqli($servername, $username, $password, $dbname);
 
-   	session_start();
-   	//save current page url
-   	$page = $_SERVER["REQUEST_URI"];
-	$_SESSION['prevUrl'] = $page;
+	    $order = "SELECT * from `order` WHERE status>0 AND status<5 ORDER BY dateOrdered ASC";
+	   	$store = "SELECT * from `sellers` WHERE storeStatus=false";
 
-   	include 'admin_method.php';
+	   	//save current page url
+	   	$page = $_SERVER["REQUEST_URI"];
+		$_SESSION['prevUrl'] = $page;
+
+	   	include 'admin_method.php';
  ?>
 
 <!DOCTYPE html>
@@ -27,6 +32,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
+
+    <link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/productCard.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/admin-style.css">
 
@@ -35,6 +42,19 @@
 
 </head>
 <body>
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-2">
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+        <?php 
+            include '../navbar/admin.php';
+        ?>
+    </nav>
+    <!--END NAV-->
 
 	<!--START: DELETE MODAL-->
 	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
@@ -123,7 +143,7 @@
 	                            </td>
 	                            <td>
 	                                <div style="text-align: right;">
-	                                	<?php echo $row['totalAmount'] ?>	
+	                                	PHP&emsp;<?php echo number_format($row['totalAmount'], 2, '.', ' ') ?>
 	                                </div>
 	                            </td>
 	                            <td style="display: none;">
@@ -250,7 +270,12 @@
 </html>
 
 <?php
-	$conn->close();
+		$conn->close();
+	}
+
+	else
+		header("Location: ../loginPage/login.php");
+
 ?>
 
 <script>

@@ -1,23 +1,28 @@
 <?php
-	if(isset($_GET['orderNo']) && is_numeric($_GET['orderNo']))
-		{
-			$servername = "localhost";
-		    $username = "root";
-		    $password = "";
-		    $dbname = "philcafe";
-		    // Create connection
-		    $conn = new mysqli($servername, $username, $password, $dbname);
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_GET['orderNo']) && is_numeric($_GET['orderNo']))
+			{
+				$servername = "localhost";
+			    $username = "root";
+			    $password = "";
+			    $dbname = "philcafe";
+			    // Create connection
+			    $conn = new mysqli($servername, $username, $password, $dbname);
 
-		    //get orderNo
-		     $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
+			    //get orderNo
+			     $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
 
-		    $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
-				INNER JOIN `product` ON productdetail.productDetailID = product.productID 
-				INNER JOIN `sellers` ON product.seller = sellers.sellerID
-				WHERE orderNo  = '$orderNo'";
+			    $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
+					INNER JOIN `product` ON productdetail.productID = product.productID 
+					INNER JOIN `sellers` ON product.seller = sellers.sellerID
+					WHERE orderNo  = '$orderNo'";
 
-		   $total = "SELECT shippingFee, totalAmount FROM `order` WHERE orderNo = '$orderNo'";
-		    include 'orderSummary_method.php';
+			   $total = "SELECT shippingFee, totalAmount FROM `order` WHERE orderNo = '$orderNo'";
+			    include 'orderSummary_method.php';
 		
 ?>
 
@@ -31,9 +36,24 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" href="../assets/css/order-style.css">
 </head>
 <body>
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-2">
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+        <?php 
+            include '../navbar/admin.php';
+        ?>
+    </nav>
+    <!--END NAV-->
+
 	<div id="container">
 		<div id="title">
 			<form method="post" action="#" id="form-id" class="inline" >
@@ -131,7 +151,7 @@
 		            		<td>Shipping Fee</td>
 		            		<td>
 		            			<div style="text-align: right;">
-		            				<?php echo $row['shippingFee'] ?>
+		            				<?php echo  number_format($row['shippingFee'], 2, '.', ' ') ?>
 		            			</div>
 		            		</td>
 		                </tr>
@@ -140,10 +160,10 @@
 		                	<td></td>
 		            		<td></td>
 		            		<td></td>
-		            		<td><b>TOTAL</b></td>
+		            		<td style="font-size: 1.25em;"><b>TOTAL</b></td>
 		            		<td>
-		            			<div style="text-align: right;">
-		            				<b><?php echo $row['totalAmount'] ?></b>
+		            			<div style="text-align: right; font-size: 1.25em;">
+		            				<b>PHP&emsp;<?php echo number_format($row['totalAmount'], 2, '.', ' ') ?></b>
 		            			</div>
 		            		</td>
 		                </tr>
@@ -158,9 +178,11 @@
 </html>
 
 <?php
+		}
+
+		else
+			header("Location: admin_main.php");
 	}
-
-	else
-		header("Location: admin_main.php");
-
+    else
+        header("Location: ../loginPage/login.php");
  ?>

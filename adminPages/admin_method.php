@@ -1,5 +1,11 @@
 <?php
-	
+	if(!isset($_SESSION['LGUID']))
+        Header("Location: ../loginPage/login.php");
+
+?>
+
+<?php
+
 	function get_order()
 	{
 		if(isset($_POST['sortOrder']))
@@ -41,13 +47,13 @@
 	{
 		global $conn;
 		$sql = "SELECT name from `orderStatus` WHERE orderStatusID=$status_id LIMIT 1";
-    	$result = $conn->query($sql);
+		$result = $conn->query($sql);
 
-    	if(mysqli_num_rows($result) == 1)
-    	{
-    		$row = $result->fetch_assoc();
-    		echo strtoupper($row['name']);
-    	}
+		if(mysqli_num_rows($result) == 1)
+		{
+			$row = $result->fetch_assoc();
+			echo strtoupper($row['name']);
+		}
 	}
 
 	function get_customer_name($id)
@@ -55,14 +61,14 @@
 		global $conn;
 
 		$sql = "SELECT firstName, middleName, lastName FROM `customers` WHERE userID=$id LIMIT 1";
-    	$result = $conn->query($sql);
+		$result = $conn->query($sql);
 
-    	if(mysqli_num_rows($result) == 1)
-    	{
-    		$row = $result->fetch_assoc();
-    		$name = $row['firstName']." ".$row['middleName']." ".$row['lastName'];
-    		echo strtoupper($name);
-    	}
+		if(mysqli_num_rows($result) == 1)
+		{
+			$row = $result->fetch_assoc();
+			$name = $row['firstName']." ".$row['middleName']." ".$row['lastName'];
+			echo strtoupper($name);
+		}
 	}
 
 	function get_product_details($id, $orderNo)
@@ -76,10 +82,10 @@
 
 		if(mysqli_num_rows($result) > 0)
 		{
-    		while ($row = $result->fetch_assoc())
-    		{
-    			$product_list = $product_list.$row['quantity']." x ".$row['productName']."    ";
-    		}
+			while ($row = $result->fetch_assoc())
+			{
+				$product_list = $product_list.$row['quantity']." x ".$row['productName']."    ";
+			}
 		}
 
 		echo substr(strtoupper($product_list), 0, 25);
@@ -122,7 +128,9 @@
 			global $partner_stores, $offset, $no_of_records_per_page;
 
 			$sort = $_POST['sortStore']; 
-			if($sort == "A-to-Z")
+			if($sort == "all")
+				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true LIMIT $offset, $no_of_records_per_page";
+			else if($sort == "A-to-Z")
 				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY storeName ASC LIMIT $offset, $no_of_records_per_page ";
 			else if($sort == "Z-to-A")
 				$partner_stores = "SELECT * FROM `sellers` WHERE storeStatus=true ORDER BY storeName DESC LIMIT $offset, $no_of_records_per_page ";

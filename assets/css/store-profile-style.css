@@ -10,6 +10,17 @@ body
     overflow-x: hidden !important;
 }
 
+/*NAV*/
+  .logo {
+    position: absolute;
+    left: 2em;
+    top: 1em;
+    background: #246F75;
+    z-index: 3;
+    border-radius: 20px;
+  }
+/*END NAV*/
+
 #container 
 {
 	width: 100%;

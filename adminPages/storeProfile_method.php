@@ -1,3 +1,9 @@
+
+<?php
+	if(!isset($_SESSION['LGUID']))
+        Header("Location: ../loginPage/login.php");
+
+?>
 <?php
 	function search_products($value)
 	{

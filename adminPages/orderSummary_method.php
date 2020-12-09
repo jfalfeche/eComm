@@ -1,12 +1,18 @@
 <?php
+	if(!isset($_SESSION['LGUID']))
+        Header("Location: ../loginPage/login.php");
+
+?>
+
+<?php
 	
 	function get_item_total($price, $quantity)
 	{
-		return number_format($price * $quantity, 2);
+		return number_format($price * $quantity, 2, '.', ' ');
 	}
 
 	function get_subtotal($total, $shippingfee)
 	{
-		return number_format($total - $shippingfee, 2);
+		return number_format($total - $shippingfee, 2, '.', ' ');
 	}
 ?>

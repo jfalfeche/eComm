@@ -1,19 +1,24 @@
 <?php
-	if(isset($_GET['sellerID']) && is_numeric($_GET['sellerID']))
-		{
-			$servername = "localhost";
-		    $username = "root";
-		    $password = "";
-		    $dbname = "philcafe";
-		    // Create connection
-		    $conn = new mysqli($servername, $username, $password, $dbname);
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_GET['sellerID']) && is_numeric($_GET['sellerID']))
+			{
+				$servername = "localhost";
+			    $username = "root";
+			    $password = "";
+			    $dbname = "philcafe";
+			    // Create connection
+			    $conn = new mysqli($servername, $username, $password, $dbname);
 
-		    //get sellerID
-		     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
+			    //get sellerID
+			     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
-		    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC";
-		   
-		    include 'order_method.php';
+			    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC";
+			   
+			    include 'order_method.php';
 		
 ?>
 
@@ -27,10 +32,24 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" href="../assets/css/order-style.css">
 </head>
 <body>
-
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-2">
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+        <?php 
+            include '../navbar/admin.php';
+        ?>
+    </nav>
+    <!--END NAV-->
+    
 	<div id="container">
 		<div id="title">
 			<form method="post" action="storeProfile.php?sellerID=<?php echo $sellerID;?>" id="form-id" class="inline" >
@@ -139,9 +158,11 @@
 </script>
 
 <?php
+		}
+
+		else
+			header("Location: admin_main.php");
 	}
-
-	else
-		header("Location: admin_main.php");
-
+    else
+        header("Location: ../loginPage/login.php");
  ?>

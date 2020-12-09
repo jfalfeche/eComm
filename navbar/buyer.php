@@ -1,6 +1,7 @@
 <?php
 if(isset($_GET['logout']) && ($_GET['logout'] == true)){
     unset($_SESSION['userID']);
+    unset($_SESSION['user_type']);
     header("Refresh:0");
 }
 

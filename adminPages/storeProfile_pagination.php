@@ -1,44 +1,49 @@
 <?php
-	$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "philcafe";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname); 
-
-	if (isset($_GET['pageno'])) 
-	{
-        $pageno = intval($_GET['pageno']);
-    } 
-    else 
+if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
     {
-        if(isset($pageno))
-            {} 
-        else
-            $pageno = 1;
-    }
+    	$servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "philcafe";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname); 
+
+    	if (isset($_GET['pageno'])) 
+    	{
+            $pageno = intval($_GET['pageno']);
+        } 
+        else 
+        {
+            if(isset($pageno))
+                {} 
+            else
+                $pageno = 1;
+        }
 
 
 
-	$no_of_records_per_page = 12;
-	$offset = ($pageno-1) * $no_of_records_per_page;
+    	$no_of_records_per_page = 12;
+    	$offset = ($pageno-1) * $no_of_records_per_page;
 
-	$total_pages_sql = "SELECT COUNT(*) FROM `product` WHERE seller = $sellerID";
+    	$total_pages_sql = "SELECT COUNT(*) FROM `product` WHERE seller = $sellerID";
 
-	$result = mysqli_query($conn,$total_pages_sql);
-	$total_rows = mysqli_fetch_array($result)[0];
-	$total_pages = ceil(($total_rows / $no_of_records_per_page));
+    	$result = mysqli_query($conn,$total_pages_sql);
+    	$total_rows = mysqli_fetch_array($result)[0];
+    	$total_pages = ceil(($total_rows / $no_of_records_per_page));
 
-	$products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
+    	$products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
 
-	if(isset($_POST['srchProduct'])){
-        search_products($_POST['searchProductsVal']);
-        unset($_POST['srchProduct']);
-    }
+    	if(isset($_POST['srchProduct'])){
+            search_products($_POST['searchProductsVal']);
+            unset($_POST['srchProduct']);
+        }
 
-	$result_products = mysqli_query($conn, $products);
+    	$result_products = mysqli_query($conn, $products);
 
-    $products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
+        $products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
 
 ?>
 
@@ -72,7 +77,7 @@
                 }
                 ?>
 
-                <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
+                <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
                     <div class="col-md-2 card">
                         <div class="imgwrap">
                             <?php
@@ -113,6 +118,11 @@
     ?>
 </div>
 </div>
+<?php
+    }
+    else
+        header("Location: ../loginPage/login.php");
+?>
 
 
 	

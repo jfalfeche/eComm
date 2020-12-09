@@ -1,21 +1,32 @@
 <?php
 
-	if(isset($_POST['submit-button']))
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+		
+	if(isset($_SESSION['LGUID']))
 	{
-		add_product();
+		if(isset($_POST['submit-button']))
+		{
+			add_product();
+		}
+
+		else if(!isset($_GET['sellerID']))
+		{
+			header("Location: admin_main.php"); // Change to store main later on
+		}
+
+		if(isset($_POST['back-btn']))
+		{
+			back();
+		}
 	}
+	
+	else
+		header("Location: ../loginPage/login.php");
+?>
 
-	else if(!isset($_GET['sellerID']))
-	{
-		header("Location: admin_main.php"); // Change to store main later on
-	}
-
-	if(isset($_POST['back-btn']))
-	{
-		back();
-	}
-
-
+<?php
 	function back()
 	{
 		header("Location: ".$_SESSION['prevUrl']);
@@ -60,5 +71,4 @@
 		}
 		*/
 	}
-
 ?>

@@ -72,7 +72,6 @@
 				$row = $results->fetch_assoc();
 				if(password_verify($password, $row['LGUpassword']))
 				{
-					$_SESSION['user_type'] = 'admin';
 					$_SESSION['LGUID'] = $row['LGUID'];
 					header('Location: ../adminPages/admin_main.php');
 				}
@@ -95,8 +94,7 @@
 					$row = $results->fetch_assoc();
 					if(password_verify($password, $row['password']))
 					{
-						$_SESSION['user_type'] = 'customer';
-						$_SESSION['userID'] = $row['userID'];	
+						$_SESSION['userID'] = $row['userID'];
 						header('Location: ../profiles/profile_buyer.php');
 					}	
 

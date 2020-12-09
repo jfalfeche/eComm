@@ -1,29 +1,34 @@
 <?php
-	if(isset($_GET['sellerID']))
-	{
-		$servername = "localhost";
-	    $username = "root";
-	    $password = "";
-	    $dbname = "philcafe";
-	    // Create connection
-	    $conn = new mysqli($servername, $username, $password, $dbname);
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_GET['sellerID']))
+		{
+			$servername = "localhost";
+		    $username = "root";
+		    $password = "";
+		    $dbname = "philcafe";
+		    // Create connection
+		    $conn = new mysqli($servername, $username, $password, $dbname);
 
-		//get sellerID
-		$sellerID =  $_GET['sellerID'];
+			//get sellerID
+			$sellerID =  $_GET['sellerID'];
 
-		function getUnit() {
-			return $sql = "SELECT * FROM  productunit";
-		}
-	
-		function getCategory() {
-			return $sql = "SELECT * FROM productcategory";
-		}
+			function getUnit() {
+				return $sql = "SELECT * FROM  productunit";
+			}
 		
-		function getResult($conn,$sql) {
-			return $result = $conn->query($sql);
-		}
+			function getCategory() {
+				return $sql = "SELECT * FROM productcategory";
+			}
+			
+			function getResult($conn,$sql) {
+				return $result = $conn->query($sql);
+			}
 
-		include 'addProduct_method.php';
+			include 'addProduct_method.php';
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +41,25 @@
 
 	<link rel="stylesheet" type="text/css" href="../assets/css/edit-store-style.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
+    <link rel="stylesheet" href="../navbar/nav.css">
+	
 </head>
 <body>
+
+	<!--NAV-->
+    <nav class="nav guest">
+        <div class="col-md-2">
+            <div class="logo">
+                <h1>LOGO</h1>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+        <?php 
+            include '../navbar/admin.php';
+        ?>
+    </nav>
+    <!--END NAV-->
+
 	<div id="container">
 		<div id="title">
 			<a href="storeProfile.php?sellerID=<?php echo $sellerID;?>" class="text-decoration-none" >
@@ -163,8 +185,12 @@
 
 <?php
 
-	}
+		}
 
+		else
+			header("Location: admin_main.php");
+	}
+	
 	else
-		header("Location: admin_main.php");
+		header("Location: ../loginPage/login.php");
  ?>

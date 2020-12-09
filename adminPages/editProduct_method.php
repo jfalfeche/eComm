@@ -1,10 +1,19 @@
 <?php
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['LGUID']))
+    {
+		if(isset($_POST['submit-button']))
+		{
+			update_product();
+		}
+    }
+    else
+        header("Location: ../loginPage/login.php");
+?>
 
-	if(isset($_POST['submit-button']))
-	{
-		update_product();
-	}
-
+<?php
 	function update_product()
 	{
 		global $conn;
@@ -36,5 +45,4 @@
         echo "<script>window.alert(\"Success: Product Updated!\");</script>";
 		header("Refresh:0");
 	}
-
 ?>
