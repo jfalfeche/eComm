@@ -10,20 +10,9 @@
 
         $userID =  $_SESSION['userID'];
 
-        //$sql = "SELECT * FROM productdetail, sellers, product WHERE (buyerID = $userID AND inOrder = 0) 
-        //    INNER JOIN sellers on productdetail.sellerID = sellers.sellerID
-        //   INNER JOIN product on productdetail.productID = product.productID
-        //    ";
-
-        //$sql = "SELECT * FROM productdetail, sellers, product WHERE (buyerID = 1 AND inOrder = 0) AND productdetail.sellerID = sellers.sellerID AND productdetail.productID = product.productID"
         $sql = "SELECT * FROM productdetail INNER JOIN sellers on productdetail.sellerID = sellers.sellerID INNER JOIN product on productdetail.productID = product.productID INNER JOIN productunit on product.productUnitID = productunit.productUnitID WHERE (buyerID = $userID AND inOrder = 0)";
         $result = mysqli_query($conn,$sql);
     }
-    // initialize arrays for row data
-    $quantity = array();
-    $stocks = array();
-    $price = array();
-    $total = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +34,8 @@
     <script> // initialize array to store values
         window.stock = new Array();
         window.price = new Array();
+        window.product = new Array();
+        window.quantity = new Array();
     </script>
 </head>
 <body>
@@ -73,7 +64,6 @@
 		</div>
 
         <div id="main">
-			<span style="font-size: 12px; font-weight: 500;"><i>click on any item to view details</i></span>
 			<table id="pending-orders-table" class="table table-hover">
 				<thead>
 					<tr>
@@ -96,6 +86,8 @@
                         <script> // set array values
                             stock[x] = <?php echo $row['stock']; ?>;
                             price[x] = <?php echo $row['price']; ?>;
+                            product[x] = <?php echo $row['productID']; ?>;
+                            quantity[x] = <?php echo $row['quantity']; ?>;
                         </script>
 	                        <tr>
 	                            <td> <!-- SOLD BY -->
@@ -116,10 +108,7 @@
 	                            </td>
 	                            <td> <!-- TOTAL -->
                                     <p id="total<?php echo $x ?>">
-                                        <?php 
-                                            $total[$x] = $row['price'] * $row['quantity'];
-                                            echo $total[$x];
-                                        ?>
+                                        <?php echo $row['price'] * $row['quantity']; ?>
                                     </p>
 	                            </td>
 	                        </tr>
@@ -135,9 +124,36 @@
                     else echo "Database is empty";
                 ?>
     <script>
-        function updateTotal(q){
+        function updateTotal(q) {
             var total = document.getElementById(`total${q}`);
-            total.innerHTML = document.getElementById(`quantity${q}`).value * price[parseInt(q)];//needs multiplier
+            total.innerHTML = document.getElementById(`quantity${q}`).value * price[parseInt(q)];
+        }
+
+        function updateDatabase(q) {
+            var x = product[parseInt(q)];
+            var y = document.getElementById(`quantity${q}`).value;
+            $.get('update_cart.php',
+            {
+                update:'true',
+                action:x, 
+                quantity:y
+            }, function(d){
+                $(`#quantity${q}`).html(d);
+            });
+        }
+
+        function updateStock(q) { // update stock array value
+            if(parseInt(document.getElementById(`quantity${q}`).value) > quantity[parseInt(q)])
+                stock[parseInt(q)] = stock[parseInt(q)] - (parseInt(document.getElementById(`quantity${q}`).value) - quantity[parseInt(q)]);
+            else
+                stock[parseInt(q)] = stock[parseInt(q)] + (quantity[parseInt(q)] - parseInt(document.getElementById(`quantity${q}`).value));
+        }
+
+        function updateAll(q) {
+            updateTotal(q);
+            updateDatabase(q);
+            updateStock(q);
+            quantity[parseInt(q)] = parseInt(document.getElementById(`quantity${q}`).value);
         }
 
         document.addEventListener("DOMContentLoaded", function () 
@@ -146,22 +162,37 @@
                 e.preventDefault();
                 q = this.id.substring(1);
                 if (this.id.charAt(0) == '0') {
-                    document.getElementById(`quantity${q}`).stepDown();
+                    if(parseInt(document.getElementById(`quantity${q}`).value) <= 1) {
+                        alert("Invalid quantity.");
+                        return;
+                    } else
+                        document.getElementById(`quantity${q}`).stepDown();
                 } else if (this.id.charAt(0) == '1') {
-                    document.getElementById(`quantity${q}`).stepUp();
+                    if(parseInt(document.getElementById(`quantity${q}`).value) >= (quantity[parseInt(q)] + stock[parseInt(q)])) {
+                        alert("Invalid quantity.");
+                        return;
+                    } else
+                        document.getElementById(`quantity${q}`).stepUp();
                 }
-                updateTotal(q);
+                updateAll(q);
             })
 
             $('input').on('keyup', function() {
                 q = this.id.substring(8); // id no
-                if(this.value > stock[parseInt(q)])
-                    this.value = stock[parseInt(q)];
-                else if (this.value < 1)
+                
+                if(parseInt(this.value) >= 1){
+
+                } else {
+                    alert("Invalid quantity.");
                     this.value = 1;
-                updateTotal(q);
-            })
-            
+                }
+
+                if(parseInt(this.value) > (quantity[parseInt(q)] + stock[parseInt(q)])) {
+                    alert("Invalid quantity.");
+                    this.value = quantity[parseInt(q)] + stock[parseInt(q)];
+                }
+                updateAll(q);
+            }) 
         })
     </script>
 </body>

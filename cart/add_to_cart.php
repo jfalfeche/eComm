@@ -1,7 +1,7 @@
 <?php
     if(isset($_SESSION['userID'])){
-        if(isset($_POST['submit-button']))
-		    add_to_cart();
+        if(isset($_POST['submit-button']) || isset($_GET['update']))
+            add_to_cart();		    
     } else {
         if(isset($_POST['submit-button'])) {
             echo "<script>window.alert(\"Login to add to cart.\");</script>";
