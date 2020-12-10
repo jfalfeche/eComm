@@ -9,3 +9,8 @@
 }
 /*END NAV*/
 
+body {
+    background: url(../assets/img/cart-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
