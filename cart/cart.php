@@ -12,7 +12,7 @@
 
         $sql = "SELECT * FROM productdetail INNER JOIN sellers on productdetail.sellerID = sellers.sellerID INNER JOIN product on productdetail.productID = product.productID INNER JOIN productunit on product.productUnitID = productunit.productUnitID WHERE (buyerID = $userID AND inOrder = 0)";
         $result = mysqli_query($conn,$sql);
-    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,14 +53,13 @@
 
     <div id="container">
 		<div id="title">
-			<form method="post" action="storeProfile.php?sellerID=<?php echo $sellerID;?>" id="form-id" class="inline" >
-				<button type="submit" name="back-btn" id="submit-id" class="inline">
-					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
-				</button>
-			</form>
-
-			<span style="font-size: 2em; font-weight: 500;" class="inline">YOUR CART</span>
-			<hr class="mt-1 mb-2">
+            <div class="back">
+                <a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+                    <i class="fa fa-arrow-circle-left fa-3x"></i>&nbsp;
+                </a>
+                <span style="font-size: 2em; font-weight: 500;" class="inline">YOUR CART</span>
+                <hr class="mt-1 mb-2">
+            </div>
 		</div>
 
         <div id="main">
@@ -114,15 +113,14 @@
 	                        </tr>
                             <?php $x++; ?>
                             <script> x++; // increment x</script>   
-                        <?php } // close while loop?> 
+                        <?php } // close while loop
+                    } else echo "Database is empty";
+                ?>
 				</tbody>
 			</table>
 		</div> 
     </div>
-                <?php
-                    } 
-                    else echo "Database is empty";
-                ?>
+                
     <!-- Footer -->
     <?php include '../footer/shortfooter.php' ?>
     <!-- Footer -->
@@ -198,5 +196,9 @@
             }) 
         })
     </script>
+    <?php 
+        } else
+        header("Location:../homePage/home.php");
+    ?>
 </body>
 </html>

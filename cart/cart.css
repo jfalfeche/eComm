@@ -13,4 +13,11 @@ body {
     background: url(../assets/img/cart-bg.png);
     background-size: cover;
     background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
