@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
     <script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="reg.css">
+    <link rel="stylesheet" type="text/css" href="register.css">
     <link rel="stylesheet" href="../navbar/nav.css">
     <link rel="stylesheet" href="../footer/footer.css">
 </head>
@@ -29,9 +29,9 @@
     <!--END NAV-->
 
     <div class="return">
-        <a href="../loginPage/login.php">
+        <a href="../registrationPage/register.php">
             <i class="far fa-arrow-alt-circle-left fa-lg"></i>&nbsp;
-        <span style="font-size: 18px;">Back to Login</span>
+        <span style="font-size: 18px;">Back to Register As page</span>
         </a>
     </div>
 
@@ -129,7 +129,8 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" name="submit" class="btn btn-success btn-lg btn-block">Create Account</button>
+            <div class="container">
+            <button type="submit" name="submit" class="btn btn-success btn-lg float-right">Create Account</button></div>
         </form>
     </div>
 
@@ -139,5 +140,4 @@
     <?php include '../footer/shortfooter.php'; ?>
     <!--END FOOTER-->
 </body>
-
 </html>
