@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="edit_buyer.css">
+        <link rel="stylesheet" type="text/css" href="editProfile.css">
         <link rel="stylesheet" href="../navbar/nav.css">
         <link rel="stylesheet" href="../footer/footer.css">
     </head>

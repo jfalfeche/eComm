@@ -51,7 +51,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="prof_buyer.css">
+        <link rel="stylesheet" type="text/css" href="profile_buyer.css">
         <link rel="stylesheet" href="../navbar/nav.css">
         <link rel="stylesheet" href="../footer/footer.css">
     </head>
@@ -105,38 +105,30 @@
                 <h2>Personal Profile</h2>
 
                 <div class="info">
-                    <div class="row">
-                        <div class="col">
-                            <p>Full Name</p>
-                            <p class="p2" style="color:black;"><?php get_customer_name($row['userID']); ?></p>
-                        </div>
-                        <div class="col">
-                            <p>Gender</p>
-                            <p class="p2" style="color:black;">&nbsp;&nbsp;<?php echo $row["gender"] ?></p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <p>Email Address</p>
-                            <p class="p2" style="color:black;"><?php echo hide_mail($row["customerEmail"]) ?></p>
-                        </div>
-                        <div class="col">
-                            <p>Birthday</p>
-                            <p class="p2" style="color:black;"><?php echo $row["birthday"] ?></p>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <p>Mobile</p>
-                        <p class="p2" style="color:black;">&nbsp;&nbsp;&nbsp;<?php echo hide_mobile($row["contactNumber"]) ?></p>
-                    </div>
-
-                    <div class="col">
-                        <p>Address</p>
-                        <p class="p2" style="color:black;">&nbsp;&nbsp;<?php echo $row["permanentAddress"] ?></p>
-                    </div>
-
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td style="color:#787575;">Full Name</td>
+                                <td><?php get_customer_name($row['userID']); ?></td>
+                                <td style="color:#787575;">Gender</td>
+                                <td><?php echo $row["gender"] ?></td>
+                            </tr>
+                            <tr>
+                                <td style="color:#787575;">Email Address</td>
+                                <td><?php echo hide_mail($row["customerEmail"]) ?></td>
+                                <td style="color:#787575;">Birthday</td>
+                                <td><?php echo $row["birthday"] ?></td>
+                            </tr>
+                            <tr>
+                                <td style="color:#787575;">Mobile</td>
+                                <td><?php echo hide_mobile($row["contactNumber"]) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="color:#787575;">Address</td>
+                                <td><?php echo $row["permanentAddress"] ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             <?php
@@ -144,7 +136,7 @@
             ?>
 
             <!--BUTTONS-->
-            <div class="row">
+            <div class="row box">
                 <div class="buttons">
                     <form action="editProfile.php" method="post"><button type="submit" class="btn btn-success">EDIT PROFILE</button></form>
                     <form action="changePass.php" method="post"><button type="submit" class="btn btn-success">CHANGE PASSWORD</button></form>

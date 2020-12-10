@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background: #F7F6F4;
+    overflow-x: hidden;
+}
+
+/*NAV*/
+  .logo {
+    position: absolute;
+    left: 2em;
+    top: 1em;
+    background: #246F75;
+    z-index: 3;
+    border-radius: 20px;
+  }
+/*END NAV*/
+
+.center span {
+    font-weight: 500;
+    font-size: 24px;
+    color: black;
+}
+
+.underline {
+    display: inline-block;
+    position: relative;
+    font-size: 35px;
+}
+
+.underline::before {
+    content: none;
+}
+
+.underline::after {
+    content: '';
+    height: 2px;
+    width: 50%;
+    background: #000000;
+    position: absolute;
+    left: calc(11% - 10%);
+    bottom: 1px;
+}
+
+.center .row div:first-child {
+    padding-right: 10px;
+}
+
+.center .row div:last-child {
+    padding-left: 10px;
+}
+
+.center:hover, .center .col:hover {
+    text-decoration: none;
+    color: rgb(128,128,128);
+}
+
+.center {
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+.header {
+    margin: 50px 80px;
+    display: flex;
+    align-items: center;
+}
+
+.header i {
+    margin-right: 8px;
+}
+
+.container {
+    max-width: 85%;
+    background: #ffffff;
+    padding: 3%;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.container h2 {
+    font-size: 35px;
+    font-weight: 400;                                                                                                                                                                                                                                                                                                                                                             
+}
+
+.info {
+    padding: 3% 6%;
+}
+
+table {
+    font-size: 25px;
+}
+
+.buttons .btn {
+    background: rgba(5, 56, 107, 0.8);
+    border-radius: 5px;
+    border-style: none;
+    width: 400px;
+    height: 65px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.buttons .btn:hover { 
+    background: rgb(7, 79, 151);
+}
+
+.box {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.material-icons.red {color: #FC0000;}
+.material-icons.green {color: #238823;}
+.material-icons.blue {color: #05386B;}
+.material-icons.grey {color: #858383;}
+.material-icons.md-60 {font-size: 60px;}
+.material-icons.md-48 {font-size: 48px;}
+.material-icons.md-35 {font-size: 35px;}

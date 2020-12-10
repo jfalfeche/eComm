@@ -6,6 +6,7 @@
 
 body{
     background: #F7F6F4;
+    overflow-x: hidden;
 }
 
 /*NAV*/
@@ -18,12 +19,6 @@ body{
     border-radius: 20px;
   }
 /*END NAV*/
-
-.center span {
-    font-weight: 500;
-    font-size: 24px;
-    color: black;
-}
 
 .underline {
     display: inline-block;
@@ -45,81 +40,61 @@ body{
     bottom: 1px;
 }
 
-.center .row div:first-child {
-    padding-right: 10px;
-}
-
-.center .row div:last-child {
-    padding-left: 10px;
-}
-
-.center i:hover, .center a:hover {
-    text-decoration: none;
-    color: rgb(128,128,128);
-}
-
-.center {
-    width: 60%;
-    margin: 0 auto;
-    padding: 10px 0;
-    justify-content: center;
-}
-
 .header {
     margin: 50px 80px;
     display: flex;
     align-items: center;
 }
 
-.header i {
+.header i  {
     margin-right: 8px;
 }
 
+.fa-arrow-circle-left:hover {
+    color: rgb(128,128,128) !important;
+}
+
 .container {
-    max-width: 85%;
+    max-width: 65%;
     background: #ffffff;
     padding: 3%;
     margin-top: 30px;
     margin-bottom: 50px;
 }
 
-.container h2 {
-    font-size: 35px;
-    font-weight: 400;
-}
-
 .info {
-    padding: 3% 6%;
+    padding: 2% 10%;
 }
 
-.info p {
-    margin-bottom: 40px;
-    font-size: 24px;
-    color: #787575;
-}
-
-.info .row div:last-child {
-    padding-left: 200px;
-}
-
-.buttons .btn {
+.btn {
     background: rgba(5, 56, 107, 0.8);
     border-radius: 5px;
     border-style: none;
-    width: 412px;
-    height: 68px;
+    width: 40%;
+    height: 2em;
     margin-bottom: 20px;
+    margin-top: 30px;
+    margin-left: 10%;
     font-size: 30px;
     font-weight: 400;
 }
 
-.buttons .btn:hover { 
+.btn:hover { 
     background: rgb(7, 79, 151);
 }
 
-.material-icons.red {color: #FC0000;}
-.material-icons.green {color: #238823;}
-.material-icons.blue {color: #05386B;}
-.material-icons.grey {color: #858383;}
-.material-icons.md-60 {font-size: 60px;}
-.material-icons.md-48 {font-size: 48px;}
+.material-icons.md-35 {font-size: 35px; margin-left: 15px; margin-bottom: 5px;;}
+
+td input.form-control {
+    height: 3.5em;
+    width: 150%;
+    margin-left: 30%;
+	box-shadow: 0px 1.5px rgba(0, 0, 0, 0.25);
+    color: #969fa4;
+}
+
+td {
+    font-size: 24px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
