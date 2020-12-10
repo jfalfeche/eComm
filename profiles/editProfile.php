@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="editProfile.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/editProfile.css">
         <link rel="stylesheet" href="../navbar/nav.css">
         <link rel="stylesheet" href="../footer/footer.css">
     </head>
@@ -96,7 +96,7 @@
                                 </tr>
                                 <tr>
                                     <td>Address</td>
-                                    <td><textarea class="form-control" name="permanentAddress" placeholder="<?php echo $row["permanentAddress"] ?>" rows="3" required="required"></textarea></td>
+                                    <td><textarea class="form-control" name="permanentAddress" rows="3" required><?php echo $row["permanentAddress"] ?></textarea></td>
                                 </tr>
                             </table>
                         </div>

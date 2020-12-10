@@ -95,7 +95,7 @@
 					if(password_verify($password, $row['password']))
 					{
 						$_SESSION['userID'] = $row['userID'];
-						header('Location: ../profiles/profile_buyer.php');
+						header('Location: ../homePage/home.php');
 					}	
 
 					else
