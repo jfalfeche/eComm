@@ -19,7 +19,7 @@
 		    //get productID
 		    $productID =  filter_var($_GET['productID'], FILTER_SANITIZE_NUMBER_INT);
 		    
-		    $sql = "DELETE FROM product WHERE `seller` = ? AND `productID` = ?";
+		    $sql = "UPDATE product SET stock = '-1' WHERE `seller` = ? AND `productID` = ?";
 		    $sql = $conn->prepare($sql);
 
 		    $sql->bind_param('ss', $sellerID, $productID);

@@ -38,8 +38,8 @@
 			include 'editProduct_method.php';
 
 			if(mysqli_num_rows($result) == 1)
-				$row = $result->fetch_assoc();
 			{
+				$row = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>

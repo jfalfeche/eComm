@@ -30,15 +30,27 @@
 
         if($cat == 0) {
             if(isset($search)) {
-                $total_pages_sql = "SELECT COUNT(*) FROM product WHERE product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%'";
+                $total_pages_sql = "SELECT COUNT(*) FROM product 
+                                WHERE product.stock > -1 
+                                AND product.productName LIKE '%{$search}%' 
+                                OR product.description LIKE '%{$search}%'";
             } else
-                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID";
+                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit 
+                                    WHERE product.stock > -1 
+                                    AND productunit.productUnitID = product.productUnitID";
         }
         if($cat > 0) {
             if(isset($search)) {
-                $total_pages_sql = "SELECT COUNT(*) FROM product WHERE (product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%') AND productCategory = ".strval($cat)."";
+                $total_pages_sql = "SELECT COUNT(*) FROM product 
+                                    WHERE product.stock > -1 
+                                    AND (product.productName LIKE '%{$search}%' 
+                                        OR product.description LIKE '%{$search}%') 
+                                    AND productCategory = ".strval($cat)."";
             } else
-                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND productCategory = ".strval($cat)."";
+                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit 
+                                    WHERE product.stock > -1 
+                                    AND productunit.productUnitID = product.productUnitID 
+                                    AND productCategory = ".strval($cat)."";
         }
         $result = mysqli_query($conn,$total_pages_sql);
         $total_rows = mysqli_fetch_array($result)[0];
@@ -80,6 +92,9 @@
                 if ($i == 1 || $i % 4 == 0){
                     echo '<div class="row products">';
                 }
+
+                if($row['stock'] > 0)
+                {
                 ?>
                 <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
                     <div class="col-md-3 card">
@@ -105,6 +120,9 @@
                                     $i = 0;
                                 }
                                 $i++;
+                            }
+                            else
+                                continue;
                             }
                         } else {
                             echo "No products found.";

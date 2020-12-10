@@ -75,6 +75,9 @@ if (session_status() == PHP_SESSION_NONE) {
                 if ($i == 1 || $i % 5 == 0){
                     echo '<div class="row stores">';
                 }
+
+                if($row["stock"] > -1)
+                {
                 ?>
 
                 <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
@@ -87,7 +90,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <div class="card-body text-left">
                             <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
                             <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
-                            <p class="card-text"><?php echo "Per ".ucwords($row["name"]); ?></p><br>
+                            <p class="card-text"><?php echo "per ".strtolower($row["name"]); ?></p><br>
                             <p class="card-text">Available Stock: &emsp; <span style="font-weight: 500; text-align: right;"><?php echo ucwords($row["stock"]); ?></span></p>
                             <br><br>
 
@@ -105,12 +108,14 @@ if (session_status() == PHP_SESSION_NONE) {
                 </a>
 
     <?php
-                if ($i % 4 == 0 && $i != 0) {
-                    echo '</div><br><br>';
-                    $i = 0;
+                    if ($i % 4 == 0 && $i != 0) {
+                        echo '</div><br><br>';
+                        $i = 0;
+                    }
+                    $i++;
                 }
-                $i++;
-            
+                else
+                    continue;
             } 
         }else {
             echo "<span style=\"color: red;\">No products found.</span>";

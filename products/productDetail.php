@@ -99,7 +99,7 @@
                     </div>
                     <div id="avail">
                         <?php 
-                            echo $row["stock"]." ".ucwords($row["name"]); if($row["stock"] > 1) echo "s";
+                            echo $row["stock"]." ".strtolower($row["name"]); if($row["stock"] > 1) echo "s";
                         ?> available
                     </div>
                 </p>
