@@ -118,7 +118,14 @@
                 ?>
 				</tbody>
 			</table>
-		</div> 
+		</div>
+        <!-- Buttons here -->
+        <div class="row">
+            <div class="col-md-12 buttons">
+                <form action="" method="post"><button type="submit" class="btn btn-success submit" id="summary">VIEW CART SUMMARY</button></form>
+                <form action="" method="post"><button type="submit" class="btn btn-success submit" id="checkout">PROCEED TO CHECKOUT</button></form>
+            </div>
+        </div>
     </div>
                 
     <!-- Footer -->
