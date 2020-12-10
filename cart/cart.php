@@ -19,6 +19,11 @@
         $sql = "SELECT * FROM productdetail INNER JOIN sellers on productdetail.sellerID = sellers.sellerID INNER JOIN product on productdetail.productID = product.productID INNER JOIN productunit on product.productUnitID = productunit.productUnitID WHERE (buyerID = $userID AND inOrder = 0)";
         $result = mysqli_query($conn,$sql);
     }
+    // initialize arrays for row data
+    $quantity = array();
+    $stocks = array();
+    $price = array();
+    $total = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,8 +83,12 @@
 					<?php
 		                if ($result->num_rows > 0) 
 		                {
-		                    // output data of each row
+                            // output data of each row
+                            $x = 0;
 		                    while ($row = mysqli_fetch_array($result)) {
+                                $quantity[$x] = $row['quantity'];
+                                $stocks[$x] = $row['stock'];
+                                $price[$x] = $row['price'];
 	                ?>
 	                        <tr>
 	                            <td> <!-- SOLD BY -->
@@ -89,65 +98,76 @@
 	                            	<?php echo $row['productName']; ?>
 	                            </td>
 	                            <td> <!-- PRICE -->
-	                                <?php echo "PHP ".$row['price']." per ".$row['name'] ?>
+	                                <?php echo "PHP ".$price[$x]." per ".$row['name'] ?>
 	                            </td>
 	                            <td> <!-- QUANTITY -->
                                     <div class="def-number-input number-input" id="quan">
-                                        <button id="0" class="minus"></button>
-                                        <input id="quantity" class="quantity" min="1" name="quantity" value="<?php echo $row['quantity']; ?>" type="number">
-                                        <button id="1" class="plus"></button>
+                                        <button id="<?php echo $x ?>" class="minus"></button>
+                                        <input id="quantity<?php echo $x ?>" class="quantity" min="1" name="quantity<?php echo $x ?>" value="<?php echo $quantity[$x]; ?>" type="number">
+                                        <button id="1<?php echo $x ?>" class="plus"></button>
                                     </div>
 	                            </td>
 	                            <td> <!-- TOTAL -->
-                                    <p id="total">
+                                    <p id="total<?php echo $x ?>">
                                         <?php 
-                                            $total = $row['price'] * $row['quantity'];
-                                            echo $total;
+                                            $total[$x] = $price[$x] * $quantity[$x];
+                                            echo $total[$x];
                                         ?>
                                     </p>
 	                            </td>
 	                        </tr>
+                            <?php
+                                $x++;    
+                            } 
+                        ?>
 				</tbody>
 			</table>
 		</div> 
     </div>
-    <script>
-        var total = document.getElementById("total");
-        $('button#0').on('click', function(e){
-            e.preventDefault();
-            var count = document.getElementById("quantity").value;
-            if(count > 1) {
-                document.getElementById("quantity").stepDown();
-                updateTotal();
-            }
-        })
-        $('button#1').on('click', function(e){
-            e.preventDefault();
-            var count = document.getElementById("quantity").value;
-            if(count >= 1 && count < <?php echo $row["stock"] ?>) {
-                document.getElementById("quantity").stepUp();
-                updateTotal();
-            }
-        })
-        
-        var quant = document.getElementById("quantity");
-        quant.addEventListener('keyup', function() {
-            if(quant.value > <?php echo $row["stock"] ?>)
-                quant.value = <?php echo $row["stock"] ?>;
-            else if (quant.value < 1)
-                quant.value = 1;
-            updateTotal();
-        })
-
-        function updateTotal(){
-            total.innerHTML = quant.value * <?php echo $row['price'] ?>;
-        }
-    </script>
                 <?php
-                        }
-
                     } 
                     else echo "Database is empty";
                 ?>
+    <script>
+        function updateTotal(q){
+            var total = document.getElementById(`total${q}`);
+            total.innerHTML = document.getElementById(`quantity${q}`).value;//needs multiplier
+        }
+
+        document.addEventListener("DOMContentLoaded", function () 
+        {
+            for(x = 0; x < <?php echo $result->num_rows ?>; x++) {
+                //var total = document.getElementById(`total${x}`);
+                //var count = document.getElementById(`quantity${x}`);
+
+                $('button#0'+x).on('click', function(e){
+                    e.preventDefault();
+                    q = this.id.substring(1);
+                    if(parseInt(q)) {
+                        document.getElementById(`quantity${q}`).stepDown();
+                        updateTotal(q);
+                    }
+                })
+
+                $('button#1'+x).on('click', function(e){
+                    e.preventDefault();
+                    q = this.id.substring(1);
+                    if(parseInt(q) > 1) {
+                        document.getElementById(`quantity${q}`).stepUp();
+                        updateTotal(q);
+                    }
+                })
+/*
+                count.addEventListener('keyup', function() {
+                    if(count.value > <?php //echo $stocks[$x] ?>)
+                        count.value = <?php //echo $stocks[$x] ?>;
+                    else if (quant.value < 1)
+                        count.value = 1;
+                    updateTotal();
+                })
+*/                        
+            }
+        })
+    </script>
 </body>
 </html>
