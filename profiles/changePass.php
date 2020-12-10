@@ -1,19 +1,4 @@
-<?php
-session_start();
-if (isset($_SESSION['userID'])) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "philcafe";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    $userID =  $_SESSION['userID'];
-    $sql = "SELECT password FROM customers WHERE userID=$userID LIMIT 1";
-    $result = $conn->query($sql);
-
-    include 'changePass_method.php';
-?>
+<?php include('changePass_method.php');?>
 
     <!DOCTYPE html>
     <html>
@@ -50,6 +35,34 @@ if (isset($_SESSION['userID'])) {
 
         <div class="container">
             <form action="#" method="post">
+           
+           <?php
+            // Display Error message
+            $error_message;
+            $success_message;
+
+            if (!empty($error_message)) {
+            ?>
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> <?= $error_message ?>
+                </div>
+
+            <?php
+            }
+            ?>
+
+            <?php
+            // Display Success message
+            if (!empty($success_message)) {
+            ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> <?= $success_message ?>
+                </div>
+
+            <?php
+            }
+            ?>
+            
                 <div class="info">
                     <table>
                         <tr>
@@ -67,8 +80,6 @@ if (isset($_SESSION['userID'])) {
                     </table>
                 </div>
 
-
-
                 <button type="submit" name="update" class="btn btn-success">SAVE CHANGES</button>
             </form>
         </div>
@@ -79,7 +90,3 @@ if (isset($_SESSION['userID'])) {
     </body>
 
     </html>
-
-<?php
-} else header("Location: profile_buyer.php");
-?>

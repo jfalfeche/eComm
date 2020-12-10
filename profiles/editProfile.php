@@ -1,33 +1,4 @@
-<?php
-session_start();
-if (isset($_SESSION['userID'])) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "philcafe";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    $userID =  $_SESSION['userID'];
-
-    $sql = "SELECT * FROM customers WHERE userID=$userID LIMIT 1";
-    $result = $conn->query($sql);
-
-    function hide_mail($customerEmail)
-    {
-        $mail_part = explode("@", $customerEmail);
-        $mail_part[0] = substr($customerEmail, 0, 4) . str_repeat("*", strlen($mail_part[0]) - 4);
-        return implode("@", $mail_part);
-    }
-
-    function hide_mobile($contactNumber)
-    {
-        $mask_number =  str_repeat("*", strlen($contactNumber) - 4) . substr($contactNumber, -4);
-        return $mask_number;
-    }
-
-    include 'editProfile_method.php';
-?>
+<?php include('editProfile_method.php');?>
 
     <!DOCTYPE html>
     <html>
@@ -69,21 +40,6 @@ if (isset($_SESSION['userID'])) {
                     $row = $result->fetch_assoc();
                 ?>
                     <?php
-                    // Display Error message
-                    $error_message;
-                    $success_message;
-
-                    if (!empty($error_message)) {
-                    ?>
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong> <?= $error_message ?>
-                        </div>
-
-                    <?php
-                    }
-                    ?>
-
-                    <?php
                     // Display Success message
                     if (!empty($success_message)) {
                     ?>
@@ -94,6 +50,7 @@ if (isset($_SESSION['userID'])) {
                     <?php
                     }
                     ?>
+                    
                     <div class="info">
                         <div class="floatLeft">
                             <table>
@@ -160,7 +117,3 @@ if (isset($_SESSION['userID'])) {
     </body>
 
     </html>
-
-<?php
-} else header("Location: profile_buyer.php");
-?>

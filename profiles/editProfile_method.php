@@ -1,12 +1,33 @@
 <?php
-    if (isset($_POST['update'])) {
-        update_buyer();
-    } else if (!isset($_SESSION['userID'])) {
-        header("Location: profile_buyer.php");
-    }
+    session_start();
+    if (isset($_SESSION['userID'])) {
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "philcafe";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-    function update_buyer()
-    {
+        $userID =  $_SESSION['userID'];
+        $sql = "SELECT * FROM customers WHERE userID=$userID LIMIT 1";
+        $result = $conn->query($sql);
+
+        $error_message = $success_message = "";
+
+        function hide_mail($customerEmail)
+        {
+            $mail_part = explode("@", $customerEmail);
+            $mail_part[0] = substr($customerEmail, 0, 4) . str_repeat("*", strlen($mail_part[0]) - 4);
+            return implode("@", $mail_part);
+        }
+
+        function hide_mobile($contactNumber)
+        {
+            $mask_number =  str_repeat("*", strlen($contactNumber) - 4) . substr($contactNumber, -4);
+            return $mask_number;
+        }
+
+    if (isset($_POST['update'])) {
         global $conn;
     
         $userID = $_SESSION['userID'];
@@ -26,9 +47,8 @@
         $stmt->execute();
         $stmt->close();
 
-        echo "<script>window.alert(\"Profile Updated.\");</script>";
+        //echo "<script>window.alert(\"Profile Updated.\");</script>";
         unset($_POST['update']);
-        header("Refresh:0");
-        //header("Location: profile_buyer.php");
-    }
+        $success_message = "Profile updated.";
+    } } else header("Location: profile_buyer.php");
 ?>
