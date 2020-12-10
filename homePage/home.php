@@ -16,8 +16,8 @@
     
     <link rel="stylesheet" href="../navbar/nav.css">
     <link rel="stylesheet" href="../footer/footer.css">
-    <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="../assets/css/productCard.css">
+    <link rel="stylesheet" href="home.css">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -123,6 +123,9 @@
                     } 
                     else echo "Database is empty";
                 ?>
+    <!-- Footer -->
+    <?php include '../footer/shortfooter.php' ?>
+    <!-- Footer -->
     <script>
         function updateTotal(q) {
             var total = document.getElementById(`total${q}`);

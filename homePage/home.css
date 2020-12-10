@@ -103,12 +103,18 @@ h2 a {
 }
 
 .products {
-  padding: 5% 5% 1% 5%;
+  padding: 5% 10% 1% 10%;
   width: 100%;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
 }
   .card {
     padding: 2%;
-    margin: 0 2%;
+    margin: 0 1%;
+    width: 50%;
     transition: 0.3s;
   }
 
