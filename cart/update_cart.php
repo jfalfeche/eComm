@@ -3,11 +3,13 @@
 
     if(!isset($_SESSION)) {
         session_start();
-   }
+    }
 
     if(isset($_SESSION['userID'])){
-        if(isset($_POST['submit-button']) || isset($_GET['update']))
-            add_to_cart();		    
+        if(isset($_GET['check']))
+            checkStock(); 
+        else if(isset($_POST['submit-button']) || isset($_GET['update']))
+            add_to_cart();   
     } else {
         if(isset($_POST['submit-button'])) {
             echo "<script>window.alert(\"Login to add to cart.\");</script>";
@@ -25,13 +27,34 @@
         return $id;
     }
 
+    function checkStock(){
+        global $conn;
+
+        $productID = $_GET['action'];
+        $quantity = $_GET['quantity'];
+        $buyerID = $_SESSION['userID'];
+        $sellerID = getSellerID($productID);
+
+        // get old quantity value
+        $sql = "SELECT * from productdetail WHERE (productID = $productID AND buyerID = $buyerID) AND inOrder = 0";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+        $o_quantity = $row['quantity'];
+        
+        // compute new stock
+        $sql = "SELECT * from product WHERE product.productID = $productID";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+
+        $stock = $row['stock'];
+        echo $stock;
+    }
+
     function add_to_cart(){
         global $conn;
 
         $productID = $_GET['action'];
-        $quantity = $_POST['quantity'];
-        if(!isset($quantity)) // for update
-            $quantity = $_GET['quantity'];
+        $quantity = $_GET['quantity'];
         $buyerID = $_SESSION['userID'];
         $sellerID = getSellerID($productID);
 

@@ -67,7 +67,6 @@ a div.category:hover {
     position: absolute;
     left: 1em;
     top: 1em;
-    background: #246F75;
     z-index: 3;
     border-radius: 20px;
 }

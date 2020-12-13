@@ -44,12 +44,13 @@
 <body>
 	<!--NAV-->
     <nav class="nav guest">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="logo">
-                <h1>LOGO</h1>
+				<img class="imglogo" src="../assets/img/philcafe.png" alt="">
+                <h1 class="logotitle">PhilCafe</h1>
             </div>
         </div>
-        <div class="col-md-8"></div>
+        <div class="col-md-7"></div>
         <?php 
             include '../navbar/admin.php';
         ?>
@@ -261,11 +262,6 @@
 
 		</div>
 	</div>
-
-
-
-
-
 </body>
 </html>
 

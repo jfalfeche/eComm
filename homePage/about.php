@@ -31,7 +31,8 @@
     <nav class="nav guest fixed-top">
         <div class="col-md-3">
             <div class="logo">
-                <h1>LOGO</h1>
+                <img class="imglogo" src="../assets/img/philcafe.png" alt="">
+                <h1 class="logotitle">PhilCafe</h1>
             </div>
         </div>
         <?php 
@@ -76,41 +77,41 @@
     </div>
     <!-- Video Gallery -->
     <!--Carousel Wrapper-->
-    <div id="video-carousel-example" class="carousel slide carousel-fade" data-ride="carousel" data-aos="zoom-in-down">
+    <div id="gallery1" class="carousel slide carousel-fade" data-ride="carousel" data-aos="zoom-in-down">
         <!--Indicators-->
         <ol class="carousel-indicators">
-            <li data-target="#video-carousel-example" data-slide-to="0" class="active"></li>
-            <li data-target="#video-carousel-example" data-slide-to="1"></li>
-            <li data-target="#video-carousel-example" data-slide-to="2"></li>
+            <li data-target="#gallery1" data-slide-to="0" class="active"></li>
+            <li data-target="#gallery1" data-slide-to="1"></li>
+            <li data-target="#gallery1" data-slide-to="2"></li>
         </ol>
         <!--/.Indicators-->
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
                 <video class="video-fluid" controls data-aos="zoom-in-down">
-                    <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+                    <source class="g1_vid" src="../assets/img/about/vid1.mp4" type="video/mp4" />
                 </video>
             </div>
             <div class="carousel-item">
                 <video class="video-fluid" controls data-aos="zoom-in-down">
-                    <source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
+                    <source class="g1_vid" src="../assets/img/about/vid2.mp4" type="video/mp4" />
                 </video>
             </div>
             <div class="carousel-item">
                 <video class="video-fluid" controls data-aos="zoom-in-down">
-                    <source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
+                    <source class="g1_vid" src="../assets/img/about/vid3.mp4" type="video/mp4" />
                 </video>
             </div>
         </div>
         <!--/.Slides-->
         <!--Controls-->
         <div class="ccontrols">
-            <a class="carousel-control-prev" href="#video-carousel-example" role="button" data-slide="prev">
-                <img src="../assets/img/about/v1.png" alt="">
+            <a id="a_prev" class="carousel-control-prev" href="#gallery1" role="button" data-slide="prev">
+                <img class="thumbnail" id="t_prev" src="../assets/img/about/t3.png" alt="">
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#video-carousel-example" role="button" data-slide="next">
-                <img src="../assets/img/about/v2.png" alt="">
+            <a id="a_next" class="carousel-control-next" href="#gallery1" role="button" data-slide="next">
+                <img class="thumbnail" id="t_next" src="../assets/img/about/t2.png" alt="">
                 <span class="sr-only">Next</span>
             </a>
         </div>
@@ -150,34 +151,60 @@
         </div>
     </div>
     <!-- What we do -->
-    <!-- Video Gallery 2 -->
-    <div id="gallery2" class="carousel slide" data-ride="carousel" data-aos="zoom-in">
-        <ol id="g2ind" class="carousel-indicators gallery2">
-            <li data-target="#gallery2" data-slide-to="0" class="active"></li>
-            <li data-target="#gallery2" data-slide-to="1"></li>
-            <li data-target="#gallery2" data-slide-to="2"></li>
-        </ol>
-        <div id="g2car" class="carousel-inner gallery2">
+    <!-- Image Gallery -->
+    <div id="gallery2" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
             <div class="carousel-item active">
-                <video id="g2vid" class="video-fluid" controls>
-                    <source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
-                </video>
+                <img class="" src="../assets/img/about/t1.png" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Caption Title</h5>
+                    <p>Caption Paragraph</p>
+                </div>
             </div>
             <div class="carousel-item">
-                <video id="g2vid" class="video-fluid" controls>
-                    <source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
-                </video>
+                <img class="" src="../assets/img/about/t2.png" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                <h5>Caption Title</h5>
+                    <p>Caption Paragraph</p>
+                </div>
             </div>
             <div class="carousel-item">
-                <video id="g2vid" class="video-fluid" controls>
-                    <source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
-                </video>
+                <img class="" src="../assets/img/about/t3.png" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Caption Title</h5>
+                    <p>Caption Paragraph</p>
+                </div>
             </div>
         </div>
+        <a class="carousel-control-prev" href="#gallery2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#gallery2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+    <!-- Image Gallery -->
     <!-- Footer -->
     <div id="contact">
         <?php include './contact.php';?>
     </div>
+    <!-- JS script for control thumbnails -->
+    <script>
+        $('#gallery1').on('slid.bs.carousel', function () {
+            link = document.querySelector('.active .video-fluid .g1_vid').src;
+            if (link == "http://localhost/eComm/assets/img/about/vid1.mp4") {
+                document.getElementById('t_prev').src = "http://localhost/eComm/assets/img/about/t3.png";
+                document.getElementById('t_next').src = "http://localhost/eComm/assets/img/about/t2.png";
+            } else if (link == "http://localhost/eComm/assets/img/about/vid2.mp4") {
+                document.getElementById('t_prev').src = "http://localhost/eComm/assets/img/about/t1.png";
+                document.getElementById('t_next').src = "http://localhost/eComm/assets/img/about/t3.png";
+            } else if (link == "http://localhost/eComm/assets/img/about/vid3.mp4") {
+                document.getElementById('t_prev').src = "http://localhost/eComm/assets/img/about/t2.png";
+                document.getElementById('t_next').src = "http://localhost/eComm/assets/img/about/t1.png";
+            }
+        })
+    </script>
 </body>
 </html>

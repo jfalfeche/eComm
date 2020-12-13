@@ -25,34 +25,36 @@
 <body>
     <script>AOS.init();</script>
     <header>
-        <div class="overlay"></div>
+        <!--<div class="overlay"></div>-->
         <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
             <source src="./media/header.mp4" type="video/mp4">
         </video>
         <div class="container h-100">
+            <!--
             <div class="d-flex h-100 text-center align-items-center">
                 <div class="w-100 text-white">
                     <h1 class="display-3">PhilCafe</h1>
                     <p class="lead mb-0">Quality Products Picked Specially for You</p>
                 </div>
             </div>
+            -->
         </div>
     </header>
 
     <!-- NAV BAR STARTS HERE -->
     <nav class="nav guest">
         <div class="col-md-3">
-            <div class="logo"><h1>LOGO</h1></div>
+            <div class="logo"><img class="imglogo" src="../assets/img/philcafe.png" alt=""></div>
         </div>
         <?php 
             if (isset($_SESSION['userID'])) {
         ?>
-        <div class="col-md-2"></div>
+        <div class="col-md-2 title"><h1 class="">PhilCafe</h1></div>
         <?php 
                 include '../navbar/buyer.php';
             } else {
         ?>
-        <div class="col-md-4"></div>
+        <div class="col-md-4 title"><h1 class="">PhilCafe</h1></div>
         <?php
                 include '../navbar/guest.php';}
         ?>

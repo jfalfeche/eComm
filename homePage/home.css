@@ -52,21 +52,30 @@ header {
       display: none;
     }
   }
-
+/* Navbar */
   .logo {
     position: absolute;
     height: 150%;
     width: 100%;
     left: 3em;
     top: -4em;
-    background: #246F75;
     z-index: 3;
     border-radius: 20px;
   }
 
-  .logo h1{
+  .title {
+    text-align: left;
     font-size: 7em;
+    transform: translateY(20%);
+    color: #F6E05E;
   }
+
+  .imglogo {
+    position: absolute;
+    width: 85%;
+    transform: translateX(-50%) translateY(-30%);
+  }
+/* Navbar */
 
 body {
     background: #F7F6F4;

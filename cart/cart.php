@@ -22,34 +22,67 @@
     <title>My Cart</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../navbar/nav.css">
     <link rel="stylesheet" href="../footer/footer.css">
     <link rel="stylesheet" href="../assets/css/order-style.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
-    <link rel="stylesheet" href="../cart/cart.css">
+    <link rel="stylesheet" href="./cart.css">
 
     <script> // initialize array to store values
+        $.noConflict();
         window.stock = new Array();
         window.price = new Array();
         window.product = new Array();
         window.quantity = new Array();
+        window.total = new Array();
     </script>
+    <script src="./o_cart.js"></script>
 </head>
 <body>
+    <div id="checker" style="display: none; visibility: hidden;"></div>
     <!--NAV-->
     <nav class="nav buyer">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="logo">
-                <h1>LOGO</h1>
+                <img class="imglogo" src="../assets/img/philcafe.png" alt="">
+                <h1 class="logotitle">PhilCafe</h1>
             </div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
         <?php include '../navbar/buyer.php' ?>
     </nav>
-        <!--END NAV-->
+    <!--END NAV-->
+
+    <!--START: DELETE MODAL-->
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deleteModal">Confirm Delete</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">&times;</button>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to remove a product from your cart, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--END: DELETE MODAL-->
 
     <div id="container">
 		<div id="title">
@@ -107,14 +140,36 @@
 	                            </td>
 	                            <td> <!-- TOTAL -->
                                     <p id="total<?php echo $x ?>">
+                                        <script>
+                                            total[x] = <?php echo $row['price'] * $row['quantity']; ?>
+                                        </script>
                                         <?php echo $row['price'] * $row['quantity']; ?>
                                     </p>
-	                            </td>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn fas fa-times-circle fa-2x" data-href="cart_delete.php?productID=<?php echo $row['productID'] ?>" data-toggle="modal" data-target="#confirm-delete" id="delModal">	</button>
+                                </td>
 	                        </tr>
                             <?php $x++; ?>
                             <script> x++; // increment x</script>   
-                        <?php } // close while loop
-                    } else echo "Database is empty";
+                        <?php } ?><!-- close while loop -->
+                        <!-- Display overall total -->
+                        <tr id="gTotal">
+                            <td>
+                                <h1>TOTAL</h1>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h3 id="grandTotal"></h3>
+                                <script>
+                                    updateGrandTotal();
+                                </script>
+                            </td>
+                            <td></td>
+                        </tr>
+                <?php    } else echo "Cart is empty";
                 ?>
 				</tbody>
 			</table>
@@ -131,81 +186,16 @@
     <!-- Footer -->
     <?php include '../footer/shortfooter.php' ?>
     <!-- Footer -->
-    <script>
-        function updateTotal(q) {
-            var total = document.getElementById(`total${q}`);
-            total.innerHTML = document.getElementById(`quantity${q}`).value * price[parseInt(q)];
-        }
-
-        function updateDatabase(q) {
-            var x = product[parseInt(q)];
-            var y = document.getElementById(`quantity${q}`).value;
-            $.get('update_cart.php',
-            {
-                update:'true',
-                action:x, 
-                quantity:y
-            }, function(d){
-                $(`#quantity${q}`).html(d);
-            });
-        }
-
-        function updateStock(q) { // update stock array value
-            if(parseInt(document.getElementById(`quantity${q}`).value) > quantity[parseInt(q)])
-                stock[parseInt(q)] = stock[parseInt(q)] - (parseInt(document.getElementById(`quantity${q}`).value) - quantity[parseInt(q)]);
-            else
-                stock[parseInt(q)] = stock[parseInt(q)] + (quantity[parseInt(q)] - parseInt(document.getElementById(`quantity${q}`).value));
-        }
-
-        function updateAll(q) {
-            updateTotal(q);
-            updateDatabase(q);
-            updateStock(q);
-            quantity[parseInt(q)] = parseInt(document.getElementById(`quantity${q}`).value);
-        }
-
-        document.addEventListener("DOMContentLoaded", function () 
-        {
-            $('button').on('click', function(e){
-                e.preventDefault();
-                q = this.id.substring(1);
-                if (this.id.charAt(0) == '0') {
-                    if(parseInt(document.getElementById(`quantity${q}`).value) <= 1) {
-                        alert("Invalid quantity.");
-                        return;
-                    } else
-                        document.getElementById(`quantity${q}`).stepDown();
-                } else if (this.id.charAt(0) == '1') {
-                    if(parseInt(document.getElementById(`quantity${q}`).value) >= (quantity[parseInt(q)] + stock[parseInt(q)])) {
-                        alert("Invalid quantity.");
-                        return;
-                    } else
-                        document.getElementById(`quantity${q}`).stepUp();
-                }
-                updateAll(q);
-            })
-
-            $('input').on('keyup', function() {
-                q = this.id.substring(8); // id no
-                
-                if(parseInt(this.value) >= 1){
-
-                } else {
-                    alert("Invalid quantity.");
-                    this.value = 1;
-                }
-
-                if(parseInt(this.value) > (quantity[parseInt(q)] + stock[parseInt(q)])) {
-                    alert("Invalid quantity.");
-                    this.value = quantity[parseInt(q)] + stock[parseInt(q)];
-                }
-                updateAll(q);
-            }) 
-        })
-    </script>
     <?php 
         } else
         header("Location:../homePage/home.php");
     ?>
+    <script>
+        jQuery(document).ready(function($) {
+            $('#confirm-delete').on('show.bs.modal', function(e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        })
+    </script>
 </body>
 </html>

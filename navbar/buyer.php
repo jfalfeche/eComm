@@ -24,7 +24,7 @@ $url .= $_SERVER['REQUEST_URI'];
 <a class="col-md-1 <?php if(strpos($url,'http://localhost/eComm/homePage/about.php') == 'true') echo 'nav-active'?>" href="../homePage/about.php">About</a>
 <a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/products/product.php') == 'true') echo 'nav-active' ?>" href="../products/product.php">Products</a>
 <a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/phpmailer/contact.php') == 'true') echo 'nav-active' ?>" href="../phpmailer/contact.php">Contact</a>
-<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/buyerPages/cart.php') == 'true') echo 'nav-active' ?>" href="../cart/cart.php">My Cart</a>
+<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/cart/cart.php') == 'true') echo 'nav-active' ?>" href="../cart/cart.php">My Cart</a>
 <a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/profiles/profile_buyer.php') == 'true') echo 'nav-active' ?>" href="../profiles/profile_buyer.php">My Profile</a>
 <a class="col-md-1"
 <?php 

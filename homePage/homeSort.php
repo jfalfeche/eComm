@@ -59,7 +59,7 @@
                     if($i == 7) {
                         ?>
                     <a href="../product/product.php">
-                        <div class="col card last">
+                        <div class="col-md-3 card last" style="max-width:22.916667%;flex-basis:22.916667%;">
                             <div class=" my-auto">
                                 <a class="viewmore h-100" href="../products/product.php">
                                     <img src="../media/viewmore.png" alt="">

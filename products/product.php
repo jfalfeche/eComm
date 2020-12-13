@@ -26,20 +26,21 @@
 <body>
     <!--NAV-->
     <nav class="nav guest fixed-top">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="logo">
-                <h1>LOGO</h1>
+                <img class="imglogo" src="../assets/img/philcafe.png" alt="">
+                <h1 class="logotitle">PhilCafe</h1>
             </div>
         </div>
         <?php 
             if (isset($_SESSION['userID'])) {
         ?>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
         <?php 
                 include '../navbar/buyer.php';
             } else {
         ?>
-        <div class="col-md-5"></div>
+        <div class="col-md-4"></div>
         <?php
                 include '../navbar/guest.php';}
         ?>
