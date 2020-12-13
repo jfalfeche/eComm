@@ -78,7 +78,7 @@ CREATE TABLE `product`(
 	`description` text NOT NULL,
 	`image` longblob NOT NULL,
 	`stock` int(15) NOT NULL,
-	`price` int(15) NOT NULL,
+	`price` float NOT NULL,
 	`productUnitID` int(15) NOT NULL,
 	`productCategory` int(15),
 	`seller` int(15) NOT NULL,

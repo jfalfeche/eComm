@@ -46,7 +46,7 @@
         </div>
         <div class="card-body text-left">
             <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
-            <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
+            <p class="card-text"><b>₱<?php echo number_format($row["price"], 2, '.', ' '); ?></b></p>
             <p class="card-text"><?php echo "per ".strtolower($row["name"]); ?></p><br><br>
             <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="btn btn-primary">
                 <img src="../media/cart.png" alt="cart">

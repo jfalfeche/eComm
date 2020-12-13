@@ -27,10 +27,24 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" href="../assets/css/order-style.css">
 </head>
 <body>
 
+	<!--NAV-->
+    <nav class="nav buyer">
+        <div class="col-md-3">
+            <div class="logo">
+                <img class="imglogo" src="../assets/img/philcafe.png" alt="">
+                <h1 class="logotitle">PhilCafe</h1>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <?php include '../navbar/buyer.php' ?>
+    </nav>
+    <!--END NAV-->
+    
 	<div id="container">
 		<div id="title">
 			<form method="post" action="profile_buyer.php" id="form-id" class="inline" >
@@ -102,7 +116,7 @@
 	                            </td>
 	                            <td>
 	                                <div style="text-align: right;">
-	                                	<?php echo $row['totalAmount'] ?>	
+	                                	<?php echo number_format($row['totalAmount'], 2, '.', ' '); ?>	
 	                                	</div>
 	                            </td>
 	                            <td>

@@ -1,41 +1,43 @@
 <?php
-	if(isset($_GET['orderNo']) && is_numeric($_GET['orderNo']))
-	{
-		$servername = "localhost";
-	    $username = "root";
-	    $password = "";
-	    $dbname = "philcafe";
-	    // Create connection
-	    $conn = new mysqli($servername, $username, $password, $dbname);
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
-	    //get orderNo
-	    $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
+    if (isset($_SESSION['userID'])) 
+    {
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "philcafe";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-	    $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
+        $buyerID =  $_SESSION['userID'];
+
+	    $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
-			WHERE orderNo  = '$orderNo'";
+			WHERE productDetail.buyerID  = '$buyerID' AND productDetail.inOrder = '0'
+			ORDER BY productDetail.productDetailID ASC";
 
-	   $total = "SELECT shippingFee, totalAmount FROM `order` WHERE orderNo = '$orderNo'";
-	    include 'orderSummary_method.php'
-
+	    include 'orderSummary_method.php';
+		
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PhilCafe - Order Summary</title>
+	<title>PhilCafe - Cart Summary</title>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
-	
+
 	<link rel="stylesheet" href="../navbar/nav.css">
 	<link rel="stylesheet" href="../assets/css/order-style.css">
 </head>
 <body>
-
 	<!--NAV-->
     <nav class="nav buyer">
         <div class="col-md-3">
@@ -51,7 +53,7 @@
 
 	<div id="container">
 		<div id="title">
-			<form method="post" action="orderSummary.php?orderNo=<?php echo $orderNo;?>" id="form-id" class="inline" >
+			<form method="post" action="#" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>
@@ -80,10 +82,10 @@
 						$result = $conn->query($items);
 		                if ($result->num_rows > 0) 
 		                {
-		                	$prevOrderNo = null;
 		                    // output data of each row
 		                    while ($row = $result->fetch_assoc()) 
 		                    {
+		                		$subtotal += get_item_total($row['price'], $row['quantity']); 
 	                ?>
 	                        <tr>
 	                            <td>
@@ -104,7 +106,9 @@
 	                            </td>
 	                            <td>
 	                            	<div style="text-align: right;">
-	                                	<?php echo number_format(get_item_total($row['price'], $row['quantity']), 2, '.', ' '); ?>
+	                                	<?php 
+	                                		echo number_format(get_item_total($row['price'], $row['quantity']), 2, '.', ' ');
+	                                	?>
 	                                </div>
 	                            </td>
 	                            <td style="display: none;">
@@ -121,11 +125,7 @@
 		                ?>
 
 		            <?php
-		            	$result = $conn->query($total);
-
-		            	if ($result->num_rows > 0) 
-		                {
-		                	$row = $result->fetch_assoc();
+		            	
 		            ?>
 		            	<tr class="black-top-border">
 		            		<td></td>
@@ -134,7 +134,7 @@
 		            		<td>Subtotal</td>
 		            		<td >
 		            			<div style="text-align: right;">
-		            				<?php echo number_format(get_subtotal($row['totalAmount'], $row['shippingFee']), 2, '.', ' '); ?>
+		            				<?php echo number_format($subtotal, 2, '.', ' '); ?>
 		            			</div>
 		            		</td>
 		                </tr>
@@ -146,7 +146,7 @@
 		            		<td>Shipping Fee</td>
 		            		<td>
 		            			<div style="text-align: right;">
-		            				<?php echo number_format($row['shippingFee'], 2, '.', ' ') ?>
+		            				xxx.xx
 		            			</div>
 		            		</td>
 		                </tr>
@@ -158,13 +158,10 @@
 		            		<td style="font-size: 1.25em;"><b>TOTAL</b></td>
 		            		<td>
 		            			<div style="text-align: right; font-size: 1.25em;">
-		            				<b>PHP&emsp;<?php echo number_format($row['totalAmount'], 2, '.', ' ') ?></b>
+		            				<b>PHP&emsp;<?php echo number_format($subtotal, 2, '.', ' '); ?></b>
 		            			</div>
 		            		</td>
 		                </tr>
-		            <?php
-		                }
-		            ?>
 				</tbody>
 			</table>
 		</div>
@@ -174,7 +171,7 @@
 
 <?php
 	}
-	else
-		//header("Location: profile_buyer.php");
 
+	else 
+		header("Location: profile_buyer.php");
  ?>

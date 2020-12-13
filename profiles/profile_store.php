@@ -82,7 +82,7 @@
                     ?>
 				</div>
 
-				<div class="col-5">
+				<div class="col">
 					<span style="font-size: 3.5em;">
 						<?php echo $row['storeName'];?>
 					</span><br>	

@@ -10,9 +10,8 @@
 
         $userID =  $_SESSION['userID'];
 
-        $sql = "SELECT * FROM productdetail INNER JOIN sellers on productdetail.sellerID = sellers.sellerID INNER JOIN product on productdetail.productID = product.productID INNER JOIN productunit on product.productUnitID = productunit.productUnitID WHERE (buyerID = $userID AND inOrder = 0)";
+        $sql = "SELECT * FROM productdetail INNER JOIN sellers on productdetail.sellerID = sellers.sellerID INNER JOIN product on productdetail.productID = product.productID INNER JOIN productunit on product.productUnitID = productunit.productUnitID WHERE (buyerID = $userID AND inOrder = 0) ORDER BY productDetail.productDetailID ASC";
         $result = mysqli_query($conn,$sql);
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +128,7 @@
 	                            	<?php echo $row['productName']; ?>
 	                            </td>
 	                            <td> <!-- PRICE -->
-	                                <?php echo "PHP ".$row['price']." per ".$row['name'] ?>
+	                                <?php echo "PHP ". number_format($row['price'], 2, '.', ' ')." per ".$row['name'] ?>
 	                            </td>
 	                            <td> <!-- QUANTITY -->
                                     <div class="def-number-input number-input" id="quan">
@@ -139,11 +138,11 @@
                                     </div>
 	                            </td>
 	                            <td> <!-- TOTAL -->
-                                    <p id="total<?php echo $x ?>">
+                                    <p id="total<?php echo $x ?>" style="text-align: right;">
                                         <script>
                                             total[x] = <?php echo $row['price'] * $row['quantity']; ?>
                                         </script>
-                                        <?php echo $row['price'] * $row['quantity']; ?>
+                                        <?php echo  number_format($row['price'] * $row['quantity'], 2, '.', ' '); ?>
                                     </p>
                                 </td>
                                 <td>
@@ -162,9 +161,9 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <h3 id="grandTotal"></h3>
-                                <script>
-                                    updateGrandTotal();
+                                <h3 id="grandTotal" style="text-align: right;"></h3>
+                                <script> 
+                                    updateGrandTotal()
                                 </script>
                             </td>
                             <td></td>
@@ -177,7 +176,7 @@
         <!-- Buttons here -->
         <div class="row">
             <div class="col-md-12 buttons">
-                <form action="" method="post"><button type="submit" class="btn btn-success submit" id="summary">VIEW CART SUMMARY</button></form>
+               <button type="button" onclick="location.href='../profiles/cartSummary.php'" class="btn btn-success submit" id="summary">VIEW CART SUMMARY</button>
                 <form action="" method="post"><button type="submit" class="btn btn-success submit" id="checkout">PROCEED TO CHECKOUT</button></form>
             </div>
         </div>

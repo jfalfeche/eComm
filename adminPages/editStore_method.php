@@ -6,8 +6,8 @@ if (session_status() == PHP_SESSION_NONE) {
     {
 		if(isset($_POST['back-btn']))
 		{
-			back();
 			unset($_POST['back-btn']);
+			back();
 		}
 
 		if(isset($_POST['submit-button']))

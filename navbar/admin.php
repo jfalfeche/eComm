@@ -21,8 +21,8 @@ $url .= $_SERVER['REQUEST_URI'];
 ?>
 
 <a class="col-md-1 
-    <?php if (strpos($url, 'http://http://localhost/ecomm/adminPages/admin_main.php') == 'true') 
-        echo 'nav-active' ?>" href="../adminPages/admin_main.php">
+    <?php if (strpos($url, "admin_main.php")) 
+        echo 'nav-active'?>" href="../adminPages/admin_main.php">
     Admin
 </a>
 

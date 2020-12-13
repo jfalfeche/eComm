@@ -89,7 +89,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         </div>
                         <div class="card-body text-left">
                             <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
-                            <p class="card-text"><b>₱<?php echo $row["price"]; ?></b></p>
+                            <p class="card-text"><b>₱<?php echo number_format($row["price"], 2, '.', ' '); ?></b></p>
                             <p class="card-text"><?php echo "per ".strtolower($row["name"]); ?></p><br>
                             <p class="card-text">Available Stock: &emsp; <span style="font-weight: 500; text-align: right;"><?php echo ucwords($row["stock"]); ?></span></p>
                             <br><br>
