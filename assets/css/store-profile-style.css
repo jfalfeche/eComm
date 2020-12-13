@@ -242,3 +242,9 @@ hr
 .stores {
 	width: 125%;
 }
+
+.btn-active {
+    background: #F26709;
+    color: white;
+    border: none;
+}

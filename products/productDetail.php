@@ -82,7 +82,7 @@
                 Product Code: <b><?php echo $row["productID"] ?></b>
             </p>
             <p>
-                Sold By: <b><?php echo $row["storeName"] ?></b>
+                Sold By: <a href="../profiles/profile_store.php?sellerID=<?php echo $row["sellerID"] ?>"><b><?php echo $row["storeName"] ?></b></a>
             </p>
             <p>
                 Product Description:

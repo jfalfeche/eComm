@@ -29,7 +29,9 @@ $url .= $_SERVER['REQUEST_URI'];
 <a class="col-md-1"
 <?php 
     if (strpos($url, 'http://localhost/eComm/products/productDetail.php') == 'true') {
-        echo "href=\"../products/product.php";
+        echo "href=\"../homePage/home.php";
+    } else if (strpos($url, 'http://localhost/eComm/profiles/profile_store.php') == 'true') {
+        echo "href=\"../homePage/home.php";
     }
     else
         echo "href=\"".$url."";
