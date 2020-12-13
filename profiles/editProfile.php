@@ -18,12 +18,13 @@
     <body>
         <!--NAV-->
         <nav class="nav buyer">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="logo">
-                    <h1>LOGO</h1>
+                    <img class="imglogo" src="../assets/img/philcafe.png" alt="">
+                    <h1 class="logotitle">PhilCafe</h1>
                 </div>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
             <?php include '../navbar/buyer.php' ?>
         </nav>
         <!--END NAV-->
