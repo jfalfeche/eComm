@@ -30,12 +30,11 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                if ($i == 1 || $i % 5 == 0){
-                    echo '<div class="row products">';
-                }
-
                 if($row['stock'] > 0)
                 {
+                    if ($i == 1 || $i % 5 == 0){
+                        echo '<div class="row products">';
+                    }
 ?>  
 <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
     <div class="col-md-3 card" style="max-width:22.916667%;flex-basis:22.916667%;">

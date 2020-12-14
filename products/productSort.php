@@ -87,17 +87,23 @@
 <!-- PRODUCT DISPLAY START -->
 <?php
         if (mysqli_num_rows($result) > 0) {
-            $i = 1;
+            $i = 0;
             while($row = mysqli_fetch_array($res_data)){
-                if ($i == 1 || $i % 4 == 0){
-                    echo '<div class="row products">';
-                }
-
                 if($row['stock'] > 0)
                 {
+                    $i++;
+
+                    if ($i % 4 == 0 && $i != 0) {
+                        echo '</div>';
+                        $i = 1;
+                    }
+
+                    if ($i == 1){
+                        echo '<div class="row products">';
+                    }
                 ?>
                 <a href="../products/productDetail.php?action=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
-                    <div class="col-md-3 card">
+                    <div class="col-md-3 card" style="max-width:22.916667%;flex-basis:22.916667%;">
                         <div class="imgwrap">
                             <?php
                                 echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
@@ -115,18 +121,13 @@
                     </div>
                 </a>
                     <?php
-                                if ($i % 3 == 0 && $i != 0) {
-                                    echo '</div>';
-                                    $i = 0;
-                                }
-                                $i++;
-                            }
-                            else
+                            } else {
                                 continue;
                             }
-                        } else {
-                            echo "No products found.";
                         }
+                    } else {
+                        echo "No products found.";
+                    }
     ?>
 <!-- PRODUCT DISPLAY END -->
 <?php
