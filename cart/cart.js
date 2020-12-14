@@ -30,14 +30,15 @@ function updateGrandTotal() {
     for(i = 0; i < total.length; i++){
         grandTotal += total[i];
     }
-    grandTotal = grandTotal.toFixed(2)
+    grandTotal = grandTotal.toFixed(2);
     document.getElementById('grandTotal').innerHTML = grandTotal;
 }
 
 function updateTotal(q) {
     var tot = document.getElementById(`total${q}`);
     total[parseInt(q)] = document.getElementById(`quantity${q}`).value * price[parseInt(q)];
-    tot.innerHTML = total[parseInt(q)];
+    final = (Math.round(total[parseInt(q)] * 100) / 100).toFixed(2);
+    tot.innerHTML = final;
 }
 
 function updateDatabase(q) {
