@@ -1,5 +1,7 @@
 <?php
     session_start();
+    $page = $_SERVER["REQUEST_URI"];
+	$_SESSION['prevUrl'] = $page;
     if (isset($_SESSION['userID'])) {
         $servername = "localhost";
         $username = "root";
@@ -122,10 +124,14 @@
                         </script>
 	                        <tr>
 	                            <td> <!-- SOLD BY -->
-	                                <?php echo $row['storeName']; ?>
+                                    <a href="../profiles/profile_store.php?sellerID=<?php echo $row["sellerID"] ?>">
+                                        <?php echo $row['storeName']; ?>
+                                    </a>
 	                            </td>
 	                            <td> <!-- PRODUCT NAME -->
-	                            	<?php echo $row['productName']; ?>
+                                <a href="../products/productDetail.php?action=<?php echo $row['productID']?>">
+                                    <?php echo $row['productName']; ?>
+                                </a>
 	                            </td>
 	                            <td> <!-- PRICE -->
 	                                <?php echo "PHP ". number_format($row['price'], 2, '.', ' ')." per ".$row['name'] ?>
@@ -163,7 +169,7 @@
                             <td>
                                 <h3 id="grandTotal" style="text-align: right;"></h3>
                                 <script> 
-                                    updateGrandTotal()
+                                    updateGrandTotal();
                                 </script>
                             </td>
                             <td></td>

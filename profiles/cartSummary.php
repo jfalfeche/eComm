@@ -64,7 +64,7 @@
 		</div>
 
 		<div id="main">
-			<span style="font-size: 12px; font-weight: 500;"><i>click on any item to view details</i></span>
+			<span style="font-size: 12px; font-weight: 500;"><i></i></span>
 			<table id="order-summary-table" class="table table-hover">
 				<thead>
 					<tr>

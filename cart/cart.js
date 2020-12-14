@@ -30,6 +30,7 @@ function updateGrandTotal() {
     for(i = 0; i < total.length; i++){
         grandTotal += total[i];
     }
+    grandTotal = grandTotal.toFixed(2)
     document.getElementById('grandTotal').innerHTML = grandTotal;
 }
 
