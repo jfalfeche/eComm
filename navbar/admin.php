@@ -5,7 +5,7 @@ if(isset($_GET['logout']) && ($_GET['logout'] == true))
     $_SESSION = array();
     session_unset();
     session_destroy();
-    header("Refresh:0");
+    header("Location: ../homePage/home.php");
 }
 
 

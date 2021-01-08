@@ -20,19 +20,20 @@ $url .= $_SERVER['HTTP_HOST'];
 $url .= $_SERVER['REQUEST_URI'];
 ?>
 
-<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/homePage/home.php') == 'true') echo 'nav-active' ?>" href="../homePage/home.php">Home</a>
-<a class="col-md-1 <?php if(strpos($url,'http://localhost/eComm/homePage/about.php') == 'true') echo 'nav-active'?>" href="../homePage/about.php">About</a>
-<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/products/product.php') == 'true') echo 'nav-active' ?>" href="../products/product.php">Products</a>
-<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/phpmailer/contact.php') == 'true') echo 'nav-active' ?>" href="../phpmailer/contact.php">Contact</a>
-<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/cart/cart.php') == 'true') echo 'nav-active' ?>" href="../cart/cart.php">My Cart</a>
-<a class="col-md-1 <?php if (strpos($url, 'http://localhost/eComm/profiles/profile_buyer.php') == 'true') echo 'nav-active' ?>" href="../profiles/profile_buyer.php">My Profile</a>
+<a class="col-md-1 <?php if (strpos($url, 'home.php')) echo 'nav-active' ?>" href="../homePage/home.php">Home</a>
+<a class="col-md-1 <?php if(strpos($url,'about.php')) echo 'nav-active'?>" href="../homePage/about.php">About</a>
+<a class="col-md-1 <?php if (strpos($url, 'product.php')  || strpos($url,'productDetail.php') || strpos($url,'profile_store.php')) echo 'nav-active' ?>" href="../products/product.php">Products</a>
+<a class="col-md-1 <?php if (strpos($url, 'contact.php')) echo 'nav-active' ?>" href="../phpmailer/contact.php">Contact</a>
+<a class="col-md-1 <?php if (strpos($url, 'cart.php')) echo 'nav-active' ?>" href="../cart/cart.php">My Cart</a>
+<a class="col-md-1 <?php if (strpos($url, 'profile_buyer.php')) echo 'nav-active' ?>" href="../profiles/profile_buyer.php">My Profile</a>
 <a class="col-md-1"
 <?php 
-    if (strpos($url, 'http://localhost/eComm/products/productDetail.php') == 'true') {
-        echo "href=\"../homePage/home.php";
-    } else if (strpos($url, 'http://localhost/eComm/profiles/profile_store.php') == 'true') {
-        echo "href=\"../homePage/home.php";
+    if ((strpos($url, 'productDetail.php'))||count($_GET)) {
+        echo "href='$url&logout=true'";
     }
-    else
-        echo "href=\"".$url."";
-?>?logout=true" id="logout">Logout</a>
+    else{
+        echo "href='$url?logout=true'";
+    }
+        
+?>
+id="logout">Logout</a>

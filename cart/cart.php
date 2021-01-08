@@ -1,5 +1,8 @@
 <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
     $page = $_SERVER["REQUEST_URI"];
 	$_SESSION['prevUrl'] = $page;
     if (isset($_SESSION['userID'])) {
