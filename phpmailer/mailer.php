@@ -84,7 +84,6 @@
 
 		    $mail->send();
 		    
-
 		    header("Location: contact.php?sent");
 		} 
 		
