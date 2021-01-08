@@ -1,0 +1,10 @@
+Admin Account
+
+--------------------------------------------------------------
+To create an admin account:
+	1. Go to 'loginPage' folder and open 'admin_create.php' file
+	2. Fill out the first  field with email address of the new admin account.
+	3. Fill out the second field with preferred password.
+	4. Click the 'CREATE' button
+	5. New admin account is now created.
+--------------------------------------------------------------

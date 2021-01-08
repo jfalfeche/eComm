@@ -1,0 +1,74 @@
+Contact Page
+
+--------------------------------------------------------------
+MAILING FUNCTIONALITY
+
+Library used for sending emails functionality: PHPMailer
+
+SMTP: Google SMTP (smtp.gmail.com)
+Default Email:
+	email address: samplemail.ecomm@gmail.com
+	password: H&$3A3i&@4gStAc
+
+To customise default Email that receives the messages sent from the Contact Page:
+	- Open 'mailer.php' file in 'phpmailer' folder
+	
+	If you are going to use Google SMTP:
+		1. only change the values of '$mail->Username' and '$mail->Password'
+
+	If you are going to use other SMTP:
+		1. change the '$mail->Host'
+		2. change the '$mail->Username' and '$mail->Password'
+		3. (optional) You can also change the '$mail->Port' provided by your SMTP
+
+		Note: Typically your preferred SMTP provider will provide the values for these.
+
+Other customisable fields for the 'mailer.php' file:
+	1. '$mail->addAddress' - Recipient address and Receipient Name, this refers to the email address and name display that the message will be sent to. In a nutshell, the corresponding values for this will be displayed on the 'To' section of the email message.
+		Default Values
+			Recipient address: samplemail.ecomm+smtp@gmail.com
+			Recipient name: Sample Email 
+
+	2. '$mail->Subject' -> The default email subject that will be used when a guest sents a message using the Contact Page.
+
+	3. '$body' -> The format of the message to be sent.
+		Default:
+			Hello!
+			You have recevied an inquiry from: <inquirer's name>
+			Email: <inquirer's email>
+			Contact Number: <inquirer's number>
+			The message is: <inquirer's message>
+
+If mailer does not work:
+	- check 'mailer.php' file
+	- change '$mail->SMTPDebug' value to '2' to view debug output
+
+Common Errors encountered:
+	- 'Username and Password not accepted'
+		To resolve:
+			1. Check '$mail->Username' and '$mail->Password' values if they are correct.
+			2. Allow 'Less secure app access' on Google Account. This setting can be found on Google Account > Security > 'Less secure app access'.
+
+For more info, you can visit PHPMailer's Github (https://github.com/PHPMailer/PHPMailer)
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+CONTACT PAGE DETAILS
+ 
+ To edit Contact Us details:
+ 	- open the 'contact.php' file in 'phpmailer' folder
+ 	- look for a div with 'left-contact' id, you can start editing the details there
+
+ To change the displayed map:
+ 	- open the 'contact.php' file in 'phpmailer' folder
+ 	- look for a div with 'left-contact' id
+ 	- only change the 'src' value of the 'iframe' element
+ 		To acquire you 'src' value:
+ 			1. Go to Google Maps
+ 			2. Locate or search for the location you want to display
+ 			3. Ensure that the location you want to diplay is on the map
+ 			4. Open the sidebar of Google Maps (3 horizontal bars located on the upper-left of page)
+ 			5. Click 'Share or embed map'
+ 			6. On the pop-up display, go to the 'Ember a map' section
+ 			7. ONLY COPY the 'src' value given on the pop-up display 
+--------------------------------------------------------------

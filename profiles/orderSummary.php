@@ -1,5 +1,9 @@
 <?php
-	if(isset($_GET['orderNo']) && is_numeric($_GET['orderNo']))
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+	if(isset($_SESSION['userID']) && (isset($_GET['orderNo']) && is_numeric($_GET['orderNo'])))
 	{
 		$servername = "localhost";
 	    $username = "root";
@@ -8,13 +12,16 @@
 	    // Create connection
 	    $conn = new mysqli($servername, $username, $password, $dbname);
 
+	    //get buyerID
+	    $buyerID =  $_SESSION['userID'];
+
 	    //get orderNo
 	    $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
 
 	    $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
-			WHERE orderNo  = '$orderNo'";
+			WHERE orderNo  = '$orderNo' AND buyerID = '$buyerID'";
 
 	   $total = "SELECT shippingFee, totalAmount FROM `order` WHERE orderNo = '$orderNo'";
 	    include 'orderSummary_method.php'
@@ -175,6 +182,6 @@
 <?php
 	}
 	else
-		//header("Location: profile_buyer.php");
+		header("Location: profile_buyer.php");
 
  ?>

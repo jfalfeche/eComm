@@ -1,7 +1,10 @@
 <?php
-    session_start();
-    $page = $_SERVER["REQUEST_URI"];
-	$_SESSION['prevUrl'] = $page;
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+        $page = $_SERVER["REQUEST_URI"];
+    	$_SESSION['prevUrl'] = $page;
+    }
+    
     if (isset($_SESSION['userID'])) {
         $servername = "localhost";
         $username = "root";
@@ -85,12 +88,12 @@
                         <span>Go To My Cart</span></a>
                 </div>
 
-                <div class="col"><a href="pendingOrders.php?buyerID=<?php echo $userID; ?>">
+                <div class="col"><a href="pendingOrders.php">
                         <i class="material-icons md-60 green">check_circle_outline</i><br>
                         <span>Pending Orders</span></a>
                 </div>
 
-                <div class="col"><a href="orderHistory.php?buyerID=<?php echo $userID; ?>">
+                <div class="col"><a href="orderHistory.php">
                         <i class="material-icons md-60 blue">history</i><br>
                         <span>Go To Order History</span></a>
                 </div>

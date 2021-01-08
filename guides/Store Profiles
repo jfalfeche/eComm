@@ -1,0 +1,31 @@
+Store Profiles
+
+--------------------------------------------------------------
+To change the image background on the 'Store Profile' page:
+	- Go to assets > css > store-profile-style.css
+	- Edit the #banner 'background-image' value 
+
+Note: the image background is uniform across all the store profiles(admin or non-admin)	
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+To Edit store profile:
+	- Visit the 'Store Profile' page of the store you want to edit
+	- Click the 'Edit Profile' button on the top right of the page
+	- You will then be directed to the 'Edit Store Profile' page
+	- Edit store details from the text fields
+	- To replace profile picture, click the 'Upload image' button located under the current profile picture diplay
+	- To save all changes click 'SAVE CHANGES' button on the lower-left of the page
+	- To go back to the 'Store Profile' page, click the the left arrow/back button.
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+To Delete store profile:
+	- Visit the 'Store Profile' page of the store you want to delete
+	- Click the 'Delete Profile' button on the right side of the page just after the banner image
+	- A popup display will appear to confirm you delete action
+	- Confrim, delete action by clicking 'Delete' button on the popup display
+
+*The deleted store profile cannot be retrieved once the delete action is confirmed 
+--------------------------------------------------------------
+

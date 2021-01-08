@@ -1,0 +1,32 @@
+Store Applications
+
+--------------------------------------------------------------
+Store Applications:
+	- Apply the store on the Seller Registration Page.
+		It can be accessed through: Login > Create New Account > Register as SELLER.
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+Approve Store Applications:
+	- Login to an admin account
+	- On the Admin Page, scroll down to 'Store Applications' section
+	- To add/approve the store application, click the green plus sign button placed on the leftmost side of the same row of the application.
+	- You will then be directed to an 'Edit Store Profile' page
+	- Fill out or edit some details
+	- Add a Profile Picture
+	- Click 'SAVE CHANGES' to add the store
+
+	*If the green plus sign button was clicked but you don't want to add the store, just click the left arrow/back button to go back to the Admin page.
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+Approve or Delete Store Applications:
+	- Login to an admin account
+	- On the Admin Page, scroll down to 'Store Applications' section
+	- To delete the store application, click the red trash bin button on the placed on the rightmost side of the same row of the application.
+	- A popup display will appear
+	- Confirm the delete action by clicking the 'Delete button' on the popup
+
+	*The deleted application cannot be retrieved once the delete action is confirmed 
+--------------------------------------------------------------
+

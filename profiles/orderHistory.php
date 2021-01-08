@@ -1,5 +1,9 @@
 <?php
-	if(isset($_GET['buyerID']) && is_numeric($_GET['buyerID']))
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+	if(isset($_SESSION['userID']))
 		{
 			$servername = "localhost";
 		    $username = "root";
@@ -9,7 +13,7 @@
 		    $conn = new mysqli($servername, $username, $password, $dbname);
 
 		    //get buyerID
-		     $buyerID =  filter_var($_GET['buyerID'], FILTER_SANITIZE_NUMBER_INT);
+		    $buyerID =  $_SESSION['userID'];
 
 		    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.buyerID = '$buyerID' ORDER BY order.dateOrdered DESC";
 		   
@@ -161,6 +165,7 @@
 	}
 
 	else
-		header("Location: admin_main.php");
+		print("here");
+		//header("Location: ../homePage/home.php");
 
  ?>

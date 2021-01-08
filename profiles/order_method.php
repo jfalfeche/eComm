@@ -6,12 +6,6 @@
 		unset($_POST['back-btn']);
 	}
 
-	else if(!isset($_GET['buyerID']))
-	{
-		header("Location: admin_main.php");
-	}
-
-
 	function get_order()
 	{
 
