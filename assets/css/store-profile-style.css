@@ -17,6 +17,7 @@ body
     overflow-x: hidden !important;
 }
 
+/*to edit the image background on storeProfile, change here*/
 #banner 
 {
 	padding: 3em 0 10em 0;
@@ -163,8 +164,10 @@ hr
 
 #orders a:hover
 {
-	color: #006a9c;
+	color:  #000000;
 	opacity: 100;
+	text-decoration: underline;
+	text-decoration-color: #006a9c;
 }
 
 #manage-products
