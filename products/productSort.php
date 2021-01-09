@@ -16,7 +16,9 @@
             else {
                 $cat = 0;
             }
-        } 
+        }
+
+        $cat =  strval($cat);
 // on search
         if(isset($_GET['search']))
             $search = $_GET['search'];
@@ -30,27 +32,29 @@
 
         if($cat == 0) {
             if(isset($search)) {
-                $total_pages_sql = "SELECT COUNT(*) FROM product 
-                                WHERE product.stock > -1 
-                                AND product.productName LIKE '%{$search}%' 
-                                OR product.description LIKE '%{$search}%'";
+                $total_pages_sql = "SELECT COUNT(*) FROM product, productunit 
+                                    WHERE (productunit.productUnitID = product.productUnitID) 
+                                    AND product.stock > -1 
+                                    AND product.productName LIKE '%{$search}%' 
+                                    OR product.description LIKE '%{$search}%'";
             } else
                 $total_pages_sql = "SELECT COUNT(*) FROM product, productunit 
-                                    WHERE product.stock > -1 
-                                    AND productunit.productUnitID = product.productUnitID";
+                                    WHERE (productunit.productUnitID = product.productUnitID)
+                                    AND product.stock > -1";
         }
         if($cat > 0) {
             if(isset($search)) {
-                $total_pages_sql = "SELECT COUNT(*) FROM product 
-                                    WHERE product.stock > -1 
+                $total_pages_sql = "SELECT COUNT(*) FROM product, , productunit 
+                                    WHERE (productunit.productUnitID = product.productUnitID) 
+                                    AND product.stock > -1 
                                     AND (product.productName LIKE '%{$search}%' 
                                         OR product.description LIKE '%{$search}%') 
-                                    AND productCategory = ".strval($cat)."";
+                                    AND product.productCategory = $cat";
             } else
                 $total_pages_sql = "SELECT COUNT(*) FROM product, productunit 
-                                    WHERE product.stock > -1 
-                                    AND productunit.productUnitID = product.productUnitID 
-                                    AND productCategory = ".strval($cat)."";
+                                    WHERE (productunit.productUnitID = product.productUnitID)
+                                    AND product.stock > -1 
+                                    AND product.productCategory = $cat";
         }
         $result = mysqli_query($conn,$total_pages_sql);
         $total_rows = mysqli_fetch_array($result)[0];
@@ -58,15 +62,37 @@
 
         if($cat == 0) {
             if(isset($search)) {
-                $sql = "SELECT * FROM product, productunit WHERE (productunit.productUnitID = product.productUnitID) AND (product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%') ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+                    $sql = "SELECT * FROM product, productunit 
+                            WHERE (productunit.productUnitID = product.productUnitID)
+                            AND product.stock > -1 
+                            AND (product.productName LIKE '%{$search}%' 
+                            OR product.description LIKE '%{$search}%') 
+                            ORDER BY product.productID 
+                            DESC LIMIT $offset, $no_of_records_per_page";
             } else
-                $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+                $sql = "SELECT * FROM product, productunit 
+                        WHERE productunit.productUnitID = product.productUnitID
+                        AND product.stock > -1 
+                        ORDER BY product.productID 
+                        DESC LIMIT $offset, $no_of_records_per_page";
         }
         if($cat > 0) {
             if(isset($search)) {
-                $sql = "SELECT * FROM product, productunit WHERE (productunit.productUnitID = product.productUnitID) AND (productCategory = ".strval($cat).") AND (product.productName LIKE '%{$search}%' OR product.description LIKE '%{$search}%') ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+                $sql = "SELECT * FROM product, productunit 
+                        WHERE (productunit.productUnitID = product.productUnitID) 
+                        AND product.stock > -1 
+                        AND (product.productCategory = $cat) 
+                        AND (product.productName LIKE '%{$search}%' 
+                        OR product.description LIKE '%{$search}%') 
+                        ORDER BY product.productID 
+                        DESC LIMIT $offset, $no_of_records_per_page";
             } else
-                $sql = "SELECT * FROM product, productunit WHERE productunit.productUnitID = product.productUnitID AND (productCategory = ".strval($cat).") ORDER BY product.productID DESC LIMIT $offset, $no_of_records_per_page";
+                $sql = "SELECT * FROM product, productunit 
+                        WHERE (productunit.productUnitID = product.productUnitID) 
+                        AND product.stock > -1 
+                        AND (product.productCategory = $cat) 
+                        ORDER BY product.productID 
+                        DESC LIMIT $offset, $no_of_records_per_page";
         }
         $res_data = mysqli_query($conn,$sql);
 ?>
