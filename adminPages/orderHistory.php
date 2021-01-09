@@ -16,7 +16,7 @@
 			    //get sellerID
 			     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
-			    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered DESC";
+			    $order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered DESC";
 			   
 			    include 'order_method.php';
 		

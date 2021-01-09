@@ -15,7 +15,7 @@
 		    //get customerID
 		     $buyerID =  $_SESSION['userID'];
 
-		    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE order.buyerID = '$buyerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC";
+		    $order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE order.buyerID = '$buyerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC, order.orderNo";
 		   
 		    include 'order_method.php';
 		
