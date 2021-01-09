@@ -4,6 +4,8 @@
     }
     
     $page = $_SERVER["REQUEST_URI"];
+    $_SESSION['cartUrl'] = $page;
+    $_SESSION['urlBeforeCart'] = $_SESSION['prevUrl'];
 	$_SESSION['prevUrl'] = $page;
     if (isset($_SESSION['userID'])) {
         $servername = "localhost";
@@ -91,7 +93,7 @@
     <div id="container">
 		<div id="title">
             <div class="back">
-                <a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+                <a href="<?php echo $_SESSION['urlBeforeCart'];?>" class="text-decoration-none" >
                     <i class="fa fa-arrow-circle-left fa-3x"></i>&nbsp;
                 </a>
                 <span style="font-size: 2em; font-weight: 500;" class="inline">YOUR CART</span>

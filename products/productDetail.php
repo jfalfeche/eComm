@@ -5,6 +5,14 @@
     if(isset($_GET['action'])) {
         $id =  $_GET['action'];
     }
+    //
+    if(isset($_SESSION['cartUrl'])) {
+        if($_SESSION['prevUrl'] != $_SESSION['cartUrl']) {
+            $_SESSION['back'] = $_SESSION['prevUrl'];
+        }
+    } else $_SESSION['back'] = $_SESSION['prevUrl'];
+    $_SESSION['prevUrl'] = $_SERVER["REQUEST_URI"];
+    //
 
     $sql = "SELECT * FROM product, productunit, sellers WHERE product.productID = ".$id." AND productunit.productUnitID = product.productUnitID AND product.seller = sellers.sellerID";
     $result = mysqli_query($conn,$sql);
@@ -55,7 +63,7 @@
     <!--END NAV-->
 
     <div class="back">
-        <a href="<?php echo $_SESSION['prevUrl'];?>" class="text-decoration-none" >
+        <a href="<?php echo $_SESSION['back'];?>" class="text-decoration-none" >
             <i class="fa fa-arrow-circle-left fa-3x"></i>&nbsp;
         </a>
         <div class="title">
