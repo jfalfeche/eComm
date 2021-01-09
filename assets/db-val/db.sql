@@ -120,11 +120,9 @@ CREATE TABLE `order`(
 	`message` text NOT NULL,
 	PRIMARY KEY (`orderNo`),
 	KEY `buyerID` (`buyerID`),
-	KEY `shippingAddress` (`shippingAddress`),
 	KEY `status` (`status`),
 	CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
-	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shippingAddress`) REFERENCES `customers` (`permanentAddress`),
-	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`)
+	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
