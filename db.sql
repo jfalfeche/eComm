@@ -105,11 +105,6 @@ CREATE TABLE `orderStatus`(
 
 
 
-
-
-
-
-
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order`(
@@ -132,6 +127,8 @@ CREATE TABLE `order`(
 	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+
 
 
 DROP TABLE IF EXISTS `productDetail`;
