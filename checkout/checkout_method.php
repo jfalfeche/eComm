@@ -15,10 +15,14 @@
         $buyerID = $userID = $_SESSION['userID'];
 
         $customer = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
-        
+
         $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price FROM `productDetail` 
                     INNER JOIN `product` ON productdetail.productID = product.productID WHERE productDetail.buyerID  = '$buyerID' AND productDetail.inOrder = '0'
                     ORDER BY productDetail.productDetailID ASC";
+
+        function get_item_total($price, $quantity) {
+            return $price * $quantity;
+        }
 
         function get_customer_name($userID){
             global $conn;
@@ -46,10 +50,6 @@
                                 AND  productdetail.buyerID = $buyerID";
 
             $result = $conn->query($unique_sellerID);
-
-            function get_item_total($price, $quantity) {
-                return $price * $quantity;
-            }
 
             if ($result->num_rows > 0) 
             {
