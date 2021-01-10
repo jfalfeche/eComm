@@ -112,7 +112,7 @@ CREATE TABLE `order`(
 	`buyerID` int(15) NOT NULL,
 	`shippingAddress` varchar(200) NOT NULL,
 	`status` int(15) NOT NULL,
-	`paymentMethod` varchar(10) NOT NULL,
+	`paymentMethod` varchar(30) NOT NULL,
 	`dateOrdered` date NOT NULL,
 	`dateCompleted` date ,
 	`totalAmount` decimal(10,2) NOT NULL,
