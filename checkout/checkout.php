@@ -157,7 +157,7 @@
         <div class="center">
             <div class="buttons">
 
-                <button type="submit" onclick="location.href='../profiles/cartSummary.php?checkout'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
+                <button type="button" onclick="location.href='../profiles/cartSummary.php?checkout'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
                 <button type="submit" name="submit" class="btn btn-success btn-lg">PLACE ORDER</button>
 
             </div>
