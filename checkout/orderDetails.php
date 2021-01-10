@@ -1,4 +1,4 @@
-<?php include 'checkoutSummary_method.php' ?>
+<?php include 'orderDetails_method.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,7 +190,7 @@
         <!--BUTTONS-->
         <div class="center">
             <div class="buttons">
-                <button type="button" onclick="location.href='../profiles/cartSummary.php'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
+                <button type="button" onclick="location.href='../profiles/orderSummary.php?orderNo=<?php echo $orderNo?>'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
                 <button type="submit" name="submit" class="btn btn-two btn-success btn-lg">Cancel Order</button>
             </div>
         </div>
