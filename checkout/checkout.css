@@ -87,3 +87,15 @@ body{
 .summary {
     width: 50%;
 }
+
+.btn-two {
+    color: black;
+    background-color: #F7F6F4;
+    border-style: solid !important;
+    border-color: black !important;
+    width: 200px !important;
+}
+
+.btn-two:hover {
+    background-color: #f74747;
+}
