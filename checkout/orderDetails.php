@@ -69,7 +69,8 @@
 
     <div class="column left">
         <div class="header">
-            <a href="../profiles/pendingOrders.php"><i class="fa fa-arrow-circle-left fa-3x" style="color: #200E32;"></i></a>
+            <a href="<?php echo $_SESSION['prevUrl'];?>">
+                <i class="fa fa-arrow-circle-left fa-3x" style="color: #200E32;"></i></a>
             <h1 class="underline">SHIPPING INFORMATION</h1>
         </div>
 
@@ -118,7 +119,7 @@
         <table class="table table-borderless summary">
         <tbody>
             <tr>
-                <th style="line-height: 3px;">ORDER NUMBER</th>
+                <th style="line-height: 3px;">ORDER #</th>
                 <td></td><td></td>
                 <th style="line-height: 3px;"><?php echo sprintf('%08d', $row['orderNo']) ?></th>
             </tr>

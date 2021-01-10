@@ -76,7 +76,7 @@
 	        <table class="table table-borderless summary">
 	        <tbody>
 	            <tr>
-	                <th style="line-height: 3px;">ORDER NUMBER</th>
+	                <th style="line-height: 3px;">ORDER #</th>
 	                <td></td><td></td>
 	                <th style="line-height: 3px;"><?php echo sprintf('%08d', $row['orderNo']) ?></th>
 	            </tr>
