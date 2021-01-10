@@ -64,11 +64,9 @@
                 </tr>
                 <tr><td colspan="2">
                     <input type="radio" name="shippingAddress" class="radiogroup" checked />Custom Address<br> 
-<<<<<<< HEAD
-                    <input type="text" style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" required /></td>
-=======
-                    <input type="text" placeholder="Custom Address" required style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" /></td>
->>>>>>> ccc09b16ed121e87b26579a905b7a490bc9732c1
+
+                    <input type="text" placeholder="Custom Address" required style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" required/></td>
+
                 </tr>
                 
                 <tr><th scope="col" colspan="2">Payment Method<br>
@@ -158,13 +156,10 @@
           <!--BUTTONS-->
         <div class="center">
             <div class="buttons">
-<<<<<<< HEAD
-                    <button type="submit" onclick="location.href='../profiles/cartSummary.php?checkout'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
+
+                <button type="submit" onclick="location.href='../profiles/cartSummary.php?checkout'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
                 <button type="submit" name="submit" class="btn btn-success btn-lg">PLACE ORDER</button>
-=======
-                    <button type="submit" onclick="location.href='../profiles/cartSummary.php'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
-                    <button type="submit" name="submit" class="btn btn-success btn-lg">PLACE ORDER</button>
->>>>>>> ccc09b16ed121e87b26579a905b7a490bc9732c1
+
             </div>
         </div>
         <!--END BUTTONS-->

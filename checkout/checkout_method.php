@@ -18,7 +18,7 @@
 
         $customer = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
 
-<<<<<<< HEAD
+
         $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price 
                       FROM `productDetail` 
                       INNER JOIN `product` 
@@ -26,30 +26,9 @@
                       WHERE productDetail.buyerID  = '$buyerID' 
                       AND productDetail.inOrder = '0'
                       ORDER BY productDetail.productDetailID ASC";
-=======
-        $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price FROM `productDetail` 
-                    INNER JOIN `product` ON productdetail.productID = product.productID WHERE productDetail.buyerID  = '$buyerID' AND productDetail.inOrder = '0'
-                    ORDER BY productDetail.productDetailID ASC";
 
-        function get_item_total($price, $quantity) {
-            return $price * $quantity;
-        }
-
-        function get_customer_name($userID){
-            global $conn;
-
-            $sql = "SELECT firstName, middleName, lastName FROM `customers` WHERE userID=$userID LIMIT 1";
-            $result = $conn->query($sql);
-
-            if (mysqli_num_rows($result) == 1) {
-                $row = $result->fetch_assoc();
-                $name = $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName'];
-                echo ($name);
-            }
-        }
->>>>>>> ccc09b16ed121e87b26579a905b7a490bc9732c1
-
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) 
+        {
             //get appropriate values
             $shippingAddress = $_POST['shippingAddress'];
             $paymentMethod = $_POST['paymentMethod'];
@@ -63,17 +42,11 @@
                                 AND  productdetail.buyerID = $buyerID";
 
             $result = $conn->query($unique_sellerID);
-
-<<<<<<< HEAD
             $row = $result->fetch_assoc(); 
             $index_stop = $row['COUNT(DISTINCT sellerID)'];
-            echo $index_stop;
-            if ($index_stop > 0) 
-=======
-            if ($result->num_rows > 0) 
->>>>>>> ccc09b16ed121e87b26579a905b7a490bc9732c1
-            {
-                
+            
+            if ($index_stop > 0)
+            {      
                 //get the unique sellerIDs
                 $sellerIDs = "SELECT DISTINCT sellerID FROM `productdetail` 
                             WHERE productdetail.inOrder = false
@@ -127,14 +100,11 @@
                 //echo "error: no product in cart";
                 header("Location: ../cart/cart.php");
             }
-<<<<<<< HEAD
+
             //echo '<script>alert("Order placed!")</script>';
-        }  
-=======
-        } //echo '<script>alert("Order placed!")</script>'; 
-          //echo '<script>window.location="../checkout/checkoutSummary.php"</script>';
->>>>>>> ccc09b16ed121e87b26579a905b7a490bc9732c1
+        }
     }
+        
     else
         header("Location: ../loginPage/login.php");
 
