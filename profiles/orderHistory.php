@@ -126,7 +126,7 @@
 	                                	</div>
 	                            </td>
 	                            <td>
-	                            	<a href="orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary" style="display: none;"></a>
+	                            	<a href="../checkout/orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary" style="display: none;"></a>
 	                            </td>
 	                        </tr>
 	                       

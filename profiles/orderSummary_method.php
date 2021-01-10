@@ -17,7 +17,7 @@
 
 		if(strpos($current_url, 'checkout')) 
 			back_checkout();
-		
+		 
 		else if(!isset($_GET['orderNo']))
 			back_cart();
 		
@@ -41,7 +41,7 @@
 	function back_orderDetails()
 	{
 		global $orderNo;
-		header("Location: orderDetails.php?orderNo=".$orderNo);
+		header("Location: ../checkout/orderDetails.php?orderNo=".$orderNo);
 	}
 
 	function get_item_total($price, $quantity)
