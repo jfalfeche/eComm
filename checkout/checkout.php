@@ -45,7 +45,7 @@
 
     <div class="column left">
         <div class="header">
-            <a href="../cart/cart.php"><i class="fa fa-arrow-circle-left fa-2x" style="color: #200E32;"></i></a>
+            <a href="../cart/cart.php"><i class="fa fa-arrow-circle-left fa-3x" style="color: #200E32;"></i></a>
             <h1 class="underline">SHIPPING INFORMATION</h1>
         </div>
 
@@ -64,7 +64,7 @@
                 </tr>
                 <tr><td colspan="2">
                     <input type="radio" name="shippingAddress" class="radiogroup" checked />Custom Address<br> 
-                    <input type="text" style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" /></td>
+                    <input type="text" style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" required /></td>
                 </tr>
                 
                 <tr><th scope="col" colspan="2">Payment Method<br>
@@ -154,7 +154,7 @@
           <!--BUTTONS-->
         <div class="center">
             <div class="buttons">
-                    <button type="submit" onclick="location.href='../profiles/cartSummary.php'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
+                    <button type="submit" onclick="location.href='../profiles/cartSummary.php?checkout'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
                 <button type="submit" name="submit" class="btn btn-success btn-lg">PLACE ORDER</button>
             </div>
         </div>

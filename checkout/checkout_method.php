@@ -3,6 +3,8 @@
         session_start();
     }
 
+   
+
     if (isset($_SESSION['userID'])) {
         $servername = "localhost";
         $username = "root";
@@ -16,45 +18,34 @@
 
         $customer = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
 
-        function get_customer_name($userID){
-            global $conn;
-
-            $sql = "SELECT firstName, middleName, lastName FROM `customers` WHERE userID=$userID LIMIT 1";
-            $result = $conn->query($sql);
-
-            if (mysqli_num_rows($result) == 1) {
-                $row = $result->fetch_assoc();
-                $name = $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName'];
-                echo ($name);
-            }
-        }
+        $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price 
+                      FROM `productDetail` 
+                      INNER JOIN `product` 
+                      ON productdetail.productID = product.productID 
+                      WHERE productDetail.buyerID  = '$buyerID' 
+                      AND productDetail.inOrder = '0'
+                      ORDER BY productDetail.productDetailID ASC";
 
         if (isset($_POST['submit'])) {
-
             //get appropriate values
             $shippingAddress = $_POST['shippingAddress'];
             $paymentMethod = $_POST['paymentMethod'];
             $message = $_POST['message'];
 
+            unset($_POST['submit']);
+
             //check how many unique sellers from checked out items
             $unique_sellerID = "SELECT COUNT(DISTINCT sellerID) FROM `productdetail`
                                 WHERE productdetail.inOrder = 0
                                 AND  productdetail.buyerID = $buyerID";
-                                
-            $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price FROM `productDetail` 
-                    INNER JOIN `product` ON productdetail.productID = product.productID WHERE productDetail.buyerID  = '$buyerID' AND productDetail.inOrder = '0'
-                    ORDER BY productDetail.productDetailID ASC";
 
             $result = $conn->query($unique_sellerID);
 
-            function get_item_total($price, $quantity) {
-                return $price * $quantity;
-            }
-
-            if ($result->num_rows > 0) 
+            $row = $result->fetch_assoc(); 
+            $index_stop = $row['COUNT(DISTINCT sellerID)'];
+            echo $index_stop;
+            if ($index_stop > 0) 
             {
-                $row = $result->fetch_assoc(); 
-                $index_stop = $row['COUNT(DISTINCT sellerID)'];
                 
                 //get the unique sellerIDs
                 $sellerIDs = "SELECT DISTINCT sellerID FROM `productdetail` 
@@ -101,14 +92,16 @@
                     }
                     
                 }
-                //header("Location: pendingOrders.php");
+                header("Location: ../profiles/orderHistory.php");
             }
 
             else{
                 /*change here, redirect somewhere*/
-                echo "error: no product in cart";
+                //echo "error: no product in cart";
+                header("Location: ../cart/cart.php");
             }
-        } echo '<script>alert("Order placed!")</script>'; 
+            //echo '<script>alert("Order placed!")</script>';
+        }  
     }
     else
         header("Location: ../loginPage/login.php");
@@ -116,6 +109,24 @@
 ?>
 
 <?php
+    function get_customer_name($userID){
+        global $conn;
+
+        $sql = "SELECT firstName, middleName, lastName FROM `customers` WHERE userID=$userID LIMIT 1";
+        $result = $conn->query($sql);
+
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            $name = $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName'];
+            echo ($name);
+        }
+    }
+
+    function get_item_total($price, $quantity)
+    {
+        return $price * $quantity;
+    }
+
 	function totalAmount_perSeller($buyerID, $sellerID, $shippingFee)
 	{
 		global $conn;
