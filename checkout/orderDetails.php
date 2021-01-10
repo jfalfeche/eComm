@@ -82,14 +82,14 @@
         <table class="table table-borderless summary">
         <tbody>
             <tr>
-                <th>ORDER NUMBER</th>
+                <th style="line-height: 3px;">ORDER NUMBER</th>
                 <td></td><td></td>
-                <th><?php echo sprintf('%08d', $row['orderNo']) ?></th>
+                <th style="line-height: 3px;"><?php echo sprintf('%08d', $row['orderNo']) ?></th>
             </tr>
             <tr>
-                <th>ORDER STATUS</th>
+                <th style="line-height: 3px;">ORDER STATUS</th>
                 <td></td><td></td>
-                <td><span style="color: <?php echo get_status_color($row['status']) ?>;">
+                <td style="line-height: 3px;"><span style="color: <?php echo get_status_color($row['status']) ?>;">
 	                    <strong><?php get_status_name($row['status']); ?></strong>
 	                </span>
                 </td>
@@ -100,9 +100,9 @@
             ?>
 
             <tr>
-                <th>SELLER</th>
+                <th style="line-height: 3px;">SELLER</th>
                 <td></td><td></td>
-                <td><?php echo $row["storeName"] ?>
+                <td style="line-height: 3px;"><?php echo $row["storeName"] ?>
                 </td>
             </tr>
 
