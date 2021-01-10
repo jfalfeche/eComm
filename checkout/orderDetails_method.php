@@ -17,7 +17,7 @@
             $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
 
             $info = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
-            $info2 = "SELECT shippingAddress, paymentMethod, message FROM `order` WHERE orderNo = '$orderNo'";
+            $info2 = "SELECT shippingAddress, paymentMethod, message FROM `order` WHERE orderNo = '$orderNo' AND buyerID= '$buyerID'";
             $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
