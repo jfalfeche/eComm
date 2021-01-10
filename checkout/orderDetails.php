@@ -33,7 +33,7 @@
 
     <div class="column left">
         <div class="header">
-            <a href="../profiles/pendingOrders.php"><i class="fa fa-arrow-circle-left fa-2x" style="color: #200E32;"></i></a>
+            <a href="../profiles/pendingOrders.php"><i class="fa fa-arrow-circle-left fa-3x" style="color: #200E32;"></i></a>
             <h1 class="underline">SHIPPING INFORMATION</h1>
         </div>
 
