@@ -18,7 +18,10 @@
 		    $order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE order.buyerID = '$buyerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 		   
 		    include 'order_method.php';
-		
+
+			//save current page url
+		   	$page = $_SERVER["REQUEST_URI"];
+			$_SESSION['prevUrl'] = $page;
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +54,7 @@
     
 	<div id="container">
 		<div id="title">
-			<form method="post" action="profile_buyer.php" id="form-id" class="inline" >
+			<form method="post" action="./profile_buyer.php" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>
