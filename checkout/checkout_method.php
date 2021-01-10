@@ -15,6 +15,10 @@
         $buyerID = $userID = $_SESSION['userID'];
 
         $customer = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
+        
+        $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price FROM `productDetail` 
+                    INNER JOIN `product` ON productdetail.productID = product.productID WHERE productDetail.buyerID  = '$buyerID' AND productDetail.inOrder = '0'
+                    ORDER BY productDetail.productDetailID ASC";
 
         function get_customer_name($userID){
             global $conn;
@@ -40,10 +44,6 @@
             $unique_sellerID = "SELECT COUNT(DISTINCT sellerID) FROM `productdetail`
                                 WHERE productdetail.inOrder = 0
                                 AND  productdetail.buyerID = $buyerID";
-                                
-            $items = "SELECT productDetail.productDetailID, productdetail.quantity, product.productName, product.price FROM `productDetail` 
-                    INNER JOIN `product` ON productdetail.productID = product.productID WHERE productDetail.buyerID  = '$buyerID' AND productDetail.inOrder = '0'
-                    ORDER BY productDetail.productDetailID ASC";
 
             $result = $conn->query($unique_sellerID);
 
@@ -108,7 +108,8 @@
                 /*change here, redirect somewhere*/
                 echo "error: no product in cart";
             }
-        } echo '<script>alert("Order placed!")</script>'; 
+        } //echo '<script>alert("Order placed!")</script>'; 
+          //echo '<script>window.location="../checkout/checkoutSummary.php"</script>';
     }
     else
         header("Location: ../loginPage/login.php");

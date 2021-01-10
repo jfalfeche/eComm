@@ -64,7 +64,7 @@
                 </tr>
                 <tr><td colspan="2">
                     <input type="radio" name="shippingAddress" class="radiogroup" checked />Custom Address<br> 
-                    <input type="text" style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" /></td>
+                    <input type="text" placeholder="Custom Address" required style="width: 60%; margin-top: 5px; height: 30px;" name="shippingAddress" id="amount" /></td>
                 </tr>
                 
                 <tr><th scope="col" colspan="2">Payment Method<br>
@@ -125,7 +125,7 @@
                 <td>Subtotal</td>
 		        <td>
 		            <div style="text-align: right;">
-		            	<?php echo number_format($subtotal, 2, '.', ' '); ?>
+		            	    PHP <?php echo number_format($subtotal, 2, '.', ' '); ?>
 		            </div>
                 </td>
             </tr>
@@ -155,14 +155,14 @@
         <div class="center">
             <div class="buttons">
                     <button type="submit" onclick="location.href='../profiles/cartSummary.php'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
-                <button type="submit" name="submit" class="btn btn-success btn-lg">PLACE ORDER</button>
+                    <button type="submit" name="submit" class="btn btn-success btn-lg">PLACE ORDER</button>
             </div>
         </div>
         <!--END BUTTONS-->
     </div>
   
 </div>
-  </form>
+</form>
 <!-- Footer -->
     <?php include '../footer/shortfooter.php' ?>
 <!-- Footer -->
