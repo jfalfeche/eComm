@@ -10,9 +10,22 @@
     <script src="https://kit.fontawesome.com/58872a6613.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../navbar/nav.css">
     <link rel="stylesheet" href="../footer/footer.css">
     <link rel="stylesheet" href="./checkout.css">
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -28,6 +41,29 @@
         <?php include '../navbar/buyer.php' ?>
     </nav>
 <!--END NAV-->
+
+<!--START MODAL-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Order Cancellation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to cancel your order, this procedure is irreversible.</p>
+        <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <form method='POST' action=''><a><button type="submit" name="cancel" class="btn btn-danger btn-ok">Cancel Order</button></a></form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END MODAL-->
 
 <div id="container">
 
@@ -124,10 +160,10 @@
             
             <tr>
                 <td>
-                    <div style="text-align: center;"><?php echo $row['productName'] ?></div>
+                    <div style="text-align: right;"><?php echo $row['productName'] ?></div>
                 </td>
                 <td>
-                    <div style="text-align: center;"><?php echo $row['quantity'] ?></div>
+                    <div style="text-align: right;"><?php echo $row['quantity'] ?></div>
                 </td>
                 <td>
 	                <div style="text-align: right;">PHP <?php echo number_format(get_item_total($row['price'], $row['quantity']), 2, '.', ' ');?></div>
@@ -189,10 +225,10 @@
 
         <!--BUTTONS-->
         <div class="center">
-            <div class="buttons"><form method='POST' action=''>
+            <div class="buttons">
                 <button type="button" onclick="location.href='../profiles/orderSummary.php?orderNo=<?php echo $orderNo?>'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
-                <button type="submit" name="cancel" class="btn btn-two btn-success btn-lg">Cancel Order</button>
-            </div></form>
+                <button type="button" class="btn btn-two" data-toggle="modal" data-target="#exampleModal">Cancel Order</button>
+            </div>
         </div>
         <!--END BUTTONS-->
     </div>
