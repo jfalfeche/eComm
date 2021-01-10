@@ -83,19 +83,34 @@
         <tbody>
             <tr>
                 <th>ORDER NUMBER</th>
-                <td></td>
-                <th><?php echo sprintf('%08d', $orderNo) ?></th>
+                <td></td><td></td>
+                <th><?php echo sprintf('%08d', $row['orderNo']) ?></th>
             </tr>
             <tr>
                 <th>ORDER STATUS</th>
-                <td></td>
+                <td></td><td></td>
                 <td><span style="color: <?php echo get_status_color($row['status']) ?>;">
 	                    <strong><?php get_status_name($row['status']); ?></strong>
 	                </span>
                 </td>
-                <td></td>
             </tr>
 
+            <?php 
+                } $result = $conn->query($items); if ($result->num_rows > 0) {$row = $result->fetch_assoc();
+            ?>
+
+            <tr>
+                <th>SELLER</th>
+                <td></td><td></td>
+                <td><?php echo $row["storeName"] ?>
+                </td>
+            </tr>
+
+        </tbody>
+        </table>
+
+        <table class="table table-borderless summary">
+        <tbody>
             <?php }
                 $subtotal = 0;
                 $shippingFee = 0;
@@ -106,7 +121,7 @@
 
                 $subtotal += get_item_total($row['price'], $row['quantity']); 
             ?>
-
+            
             <tr>
                 <td>
                     <div style="text-align: center;"><?php echo $row['productName'] ?></div>

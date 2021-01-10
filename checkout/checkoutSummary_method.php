@@ -21,12 +21,11 @@
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
             WHERE orderNo  = '$orderNo' AND buyerID = '$buyerID'";
-            
-            $total = "SELECT shippingFee, totalAmount, status FROM `order` WHERE orderNo = '$orderNo'";
+            $total = "SELECT orderNo, shippingFee, totalAmount, status FROM `order` WHERE orderNo = '$orderNo'";
     
     
         if (isset($_POST['submit'])) {
-            
+
         }
 
     } else
