@@ -20,6 +20,11 @@
 ?>
 
 <?php
+	function back()
+	{
+		session_start();
+		header("Location: ".$_SESSION['prevUrl']);
+	}
 
 	function get_order()
 	{

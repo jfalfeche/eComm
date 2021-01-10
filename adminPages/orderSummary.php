@@ -22,8 +22,8 @@
 					WHERE orderNo  = '$orderNo'";
 
 			   $total = "SELECT shippingFee, totalAmount FROM `order` WHERE orderNo = '$orderNo'";
-			    include 'orderSummary_method.php';
-		
+			   
+			   include 'orderSummary_method.php';		
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
 
 	<div id="container">
 		<div id="title">
-			<form method="post" action="#" id="form-id" class="inline" >
+			<form method="post" action="orderSummary.php?orderNo=<?php echo $orderNo?>" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>

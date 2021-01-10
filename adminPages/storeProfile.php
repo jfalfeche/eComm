@@ -25,6 +25,15 @@
 		    $result = $conn->query($sql);
 
 		    include 'storeProfile_method.php';
+
+		    $page = $_SERVER["REQUEST_URI"];
+		
+			//save previous currentUrl as previousUrl
+		   	if($page != $_SESSION['currentUrl'])
+		   		$_SESSION['prevUrl'] = $_SESSION['currentUrl'];
+
+			// save current url as currentUrl
+			$_SESSION['currentUrl'] = $page;
 ?>
 
 <!DOCTYPE html>
