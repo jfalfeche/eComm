@@ -189,10 +189,10 @@
 
         <!--BUTTONS-->
         <div class="center">
-            <div class="buttons">
-                <button type="button" onclick="location.href='../profiles/orderSummary.php?orderNo=<?php echo $orderNo?>'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
-                <button type="submit" name="submit" class="btn btn-two btn-success btn-lg">Cancel Order</button>
-            </div>
+            <div class="buttons"><form method='POST' action=''>
+                <button type="button" onclick="location.href='../profiles/cartSummary.php?orderNo=<?php echo $orderNo?>'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
+                <button type="submit" name="cancel" class="btn btn-two btn-success btn-lg">Cancel Order</button>
+            </div></form>
         </div>
         <!--END BUTTONS-->
     </div>

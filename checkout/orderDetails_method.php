@@ -2,6 +2,7 @@
 	if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+
     if(isset($_SESSION['userID']) && (isset($_GET['orderNo']) && is_numeric($_GET['orderNo']))) {
 
             $servername = "localhost";
@@ -16,20 +17,34 @@
             $orderNo =  filter_var($_GET['orderNo'], FILTER_SANITIZE_NUMBER_INT);
 
             $info = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
-            $info2 = "SELECT shippingAddress, paymentMethod, message FROM `order` WHERE orderNo = '$orderNo' AND buyerID= '$buyerID'";
+            $info2 = "SELECT shippingAddress, paymentMethod, message FROM `order` WHERE orderNo = '$orderNo'";
             $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
             WHERE orderNo  = '$orderNo' AND buyerID = '$buyerID'";
             $total = "SELECT orderNo, shippingFee, totalAmount, status FROM `order` WHERE orderNo = '$orderNo'";
-    
-    
-        if (isset($_POST['submit'])) {
 
+        if (isset($_POST['cancel'])) {
+                global $conn;
+
+                $sql = "SELECT status FROM `order` WHERE orderNo = '$orderNo'";
+                $result = $conn->query($sql);
+
+                if (mysqli_num_rows($result) == 1) {
+                    $row = $result->fetch_assoc();
+
+                    $status = 6;
+                    $updateSQL = "UPDATE `order` SET status=? WHERE order.orderNo=$orderNo";
+                    $stmt = $conn->prepare($updateSQL);
+                    $stmt->bind_param('i', $status);
+                    $stmt->execute();
+                    $stmt->close();
+
+                    unset($_POST['cancel']);
+            }
         }
-
     } else
-        header("Location: ../loginPage/login.php");
+        header("Location: ../loginPage/login.php"); 
 ?>
 
 <?php
@@ -76,5 +91,5 @@
 		else if($value == "6")
 			return "#967E69";
 
-	}
+    }
 ?>
