@@ -139,7 +139,7 @@
             <tr>
                 <th style="line-height: 3px;">SELLER</th>
                 <td></td><td></td>
-                <td style="line-height: 3px;"><?php echo $row["storeName"] ?>
+                <td style="line-height: 3px;"><a href="../profiles/profile_store.php?sellerID=<?php echo $row['sellerID'] ?>"><?php echo $row["storeName"] ?></a>
                 </td>
             </tr>
 
@@ -161,7 +161,7 @@
             
             <tr>
                 <td>
-                    <div style="text-align: right;"><?php echo $row['productName'] ?></div>
+                    <div style="text-align: right;"><a href="../products/productDetail.php?action=<?php echo $row['productID'] ?>"><?php echo $row['productName'] ?></a></div>
                 </td>
                 <td>
                     <div style="text-align: right;"><?php echo $row['quantity'] ?></div>

@@ -18,7 +18,7 @@
 
             $info = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
             $info2 = "SELECT shippingAddress, paymentMethod, message FROM `order` WHERE orderNo = '$orderNo' AND buyerID= '$buyerID'";
-            $items = "SELECT productdetail.quantity, product.productName, product.price, product.productID, product.stock, sellers.storeName FROM `productDetail` 
+            $items = "SELECT productdetail.quantity, product.productName, product.price, product.productID, product.stock, sellers.sellerID, sellers.storeName FROM `productDetail` 
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
             WHERE orderNo  = '$orderNo' AND buyerID = '$buyerID'";
