@@ -131,7 +131,7 @@
 	            <?php
 	            		$row_items = $result_items->fetch_assoc();
 	                }
-	              }    
+	              }    $grandTotal = $row['totalAmount'] + $row['shippingFee'];
 	            ?>
 
 	        </tbody>
@@ -164,7 +164,7 @@
 	                <th>TOTAL</th>
 			        <td>
 	                    <div style="text-align: right;">
-			                <b>PHP <?php echo number_format($row['totalAmount'], 2, '.', ' ') ?></b>
+			                <b>PHP <?php echo number_format($grandTotal, 2, '.', ' ') ?></b>
 			            </div>
 			        </td>
 	            </tr>

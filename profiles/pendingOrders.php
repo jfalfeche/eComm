@@ -104,7 +104,9 @@
 		                    {
 	               				
 	                			if($prevOrderNo == $row['orderNo'])
-	                				continue;
+									continue;
+									
+									$grandTotal = $row['totalAmount'] + $row['shippingFee'];	
 	                ?>
 	                        <tr>
 	                            <td>
@@ -123,7 +125,7 @@
 	                            </td>
 	                            <td>
 	                                <div style="text-align: right;">
-	                                	<?php echo number_format($row['totalAmount'], 2, '.', ' '); ?>	
+	                                	<?php echo number_format($grandTotal, 2, '.', ' '); ?>	
 	                                	</div>
 	                            </td>
 	                            <td>

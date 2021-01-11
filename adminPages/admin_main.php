@@ -121,8 +121,8 @@
 		                if ($result->num_rows > 0) 
 		                {
 		                    // output data of each row
-		                    while ($row = $result->fetch_assoc()) 
-		                    {
+		                    while ($row = $result->fetch_assoc()) {
+								$grandTotal = $row['totalAmount'] + $row['shippingFee'];
 	                ?>		
 	                        <tr>
 	                            <td>
@@ -144,7 +144,7 @@
 	                            </td>
 	                            <td>
 	                                <div style="text-align: right;">
-	                                	PHP&emsp;<?php echo number_format($row['totalAmount'], 2, '.', ' ') ?>
+	                                	PHP&emsp;<?php echo number_format($grandTotal, 2, '.', ' ') ?>
 	                                </div>
 	                            </td>
 	                            <td style="display: none;">
