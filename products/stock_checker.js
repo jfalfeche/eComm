@@ -26,7 +26,7 @@ function checkStock(q,mode) {
 
 document.addEventListener("DOMContentLoaded", function () 
 {
-    $('button#0').on('click', function(e)){
+    $('button#0').on('click', function(e){
         e.preventDefault();
         if(parseInt(document.getElementById(`quantity`).value) <= 1) {
             alert("Invalid quantity.");
@@ -34,12 +34,12 @@ document.addEventListener("DOMContentLoaded", function ()
         } else {
             document.getElementById(`quantity`).stepDown();
         }
-    }
+    })
 
-    $('button#1').on('click', function(e)){
+    $('button#1').on('click', function(e){
         e.preventDefault();
         checkStock(1,'button');
-    }
+    })
 
     $('input').on('keyup', function() {
         q = this.id.substring(8); // id no
