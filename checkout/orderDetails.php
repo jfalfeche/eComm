@@ -231,7 +231,7 @@
                 <button type="button" onclick="location.href='../profiles/orderSummary.php?orderNo=<?php echo $orderNo?>'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
                 <br>
                 <?php 
-                    if($row['status'] != 6) {?>
+                    if($row['status'] == 1) {?>
                 <button type="button" class="btn btn-two" data-toggle="modal" data-target="#exampleModal">Cancel Order</button>
                 <?php }?>
             </div>
