@@ -8,17 +8,16 @@ function checkStock(q,mode) {
         quantity:y
     }, function(d){
         $(`#checker`).html(d); // displays validity of quantity inputted on checker
-        let c = document.getElementById('checker'); // gets quantity of checker
         if(mode == 'button') { // if button is pressed
-            if(parseInt(document.getElementById(`quantity${q}`).value) >= (quantity[parseInt(q)] + parseInt(c.innerHTML))) { // if quantity is greater than stock
+            if(parseInt(document.getElementById(`quantity${q}`).value) >= (quantity[parseInt(q)] + parseInt(checker))) { // if quantity is greater than stock
                 alert("Invalid quantity.");
             } else {
                 document.getElementById(`quantity${q}`).stepUp();
             }
         } else if(mode == 'type') { // if quantity was typed
-            if(parseInt(document.getElementById(`quantity${q}`).value) > (quantity[parseInt(q)] + parseInt(c.innerHTML))) {
+            if(parseInt(document.getElementById(`quantity${q}`).value) > (quantity[parseInt(q)] + parseInt(checker))) {
                 alert("Invalid quantity.");
-                document.getElementById(`quantity${q}`).value = (quantity[parseInt(q)] + parseInt(c.innerHTML));
+                document.getElementById(`quantity${q}`).value = (quantity[parseInt(q)] + parseInt(checker));
             }
         }
         updateAll(q);

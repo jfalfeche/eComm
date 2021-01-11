@@ -47,7 +47,7 @@
         $row = mysqli_fetch_array($result);
 
         $stock = $row['stock'];
-        echo $stock;
+        echo "<script>checker = ".$stock.";</script>";
     }
 
     function add_to_cart(){
