@@ -12,12 +12,15 @@ body {
     background: url(../assets/img/cart-bg.png);
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 120vh;
     overflow-x: hidden;
 }
 
+#container {
+    min-height: 80vh;
+}
+
 footer {
-    position: relative;
     width: 100%;
     bottom: 0;
 }

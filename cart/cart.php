@@ -4,8 +4,8 @@
     }
     
     $page = $_SERVER["REQUEST_URI"];
-    $_SESSION['cartUrl'] = $page;
-    $_SESSION['urlBeforeCart'] = $_SESSION['prevUrl'];
+    if($_SESSION['prevUrl'] != $page)
+        $_SESSION['urlBeforeCart'] = $_SESSION['prevUrl'];
 	$_SESSION['prevUrl'] = $page;
     if (isset($_SESSION['userID'])) {
         $servername = "localhost";
@@ -111,7 +111,7 @@
 					    <th scope="col">QUANTITY</th>
 					    <th scope="col">TOTAL</th>
 				    </tr>
-				</thead>
+                </thead>
 				<tbody>
                     <script> var x = 0; // initialize x</script> 
 					<?php
@@ -181,20 +181,26 @@
                         </tr>
                 <?php    } else echo "Cart is empty";
                 ?>
-				</tbody>
+                </tbody>
 			</table>
 		</div>
         <!-- Buttons here -->
+        <?php 
+            if($result->num_rows > 0) { // hide button if there are no items in cart
+        ?>
         <div class="row">
             <div class="col-md-12 buttons">
                <button type="button" onclick="location.href='../profiles/cartSummary.php'" class="btn btn-success submit" id="summary">VIEW CART SUMMARY</button>
                 <form action="" method="post"><button type="submit" class="btn btn-success submit" id="checkout">PROCEED TO CHECKOUT</button></form>
             </div>
         </div>
-    </div>
-                
+        <?php } ?>
+    </div>  
+      
     <!-- Footer -->
-    <?php include '../footer/shortfooter.php' ?>
+    <footer>
+        <?php include '../footer/shortfooter.php' ?>
+    </footer>
     <!-- Footer -->
     <?php 
         } else

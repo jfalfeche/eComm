@@ -7,16 +7,18 @@
     }
     //
     if(isset($_SESSION['cartUrl'])) {
-        if($_SESSION['prevUrl'] != $_SESSION['cartUrl']) {
+        if($_SESSION['prevUrl'] != $_SESSION['cartUrl'] && $_SESSION['prevUrl'] != $_SERVER["REQUEST_URI"]) {
             $_SESSION['back'] = $_SESSION['prevUrl'];
         }
     } else $_SESSION['back'] = $_SESSION['prevUrl'];
-    $_SESSION['prevUrl'] = $_SERVER["REQUEST_URI"];
+    
     //
 
     $sql = "SELECT * FROM product, productunit, sellers WHERE product.productID = ".$id." AND productunit.productUnitID = product.productUnitID AND product.seller = sellers.sellerID";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
+
+    $_SESSION['prevUrl'] = $_SERVER["REQUEST_URI"];
 
     if (mysqli_num_rows($result) > 0) {
         
