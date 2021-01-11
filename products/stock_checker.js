@@ -26,20 +26,20 @@ function checkStock(q,mode) {
 
 document.addEventListener("DOMContentLoaded", function () 
 {
-    $('button').on('click', function(e){
+    $('button#0').on('click', function(e)){
         e.preventDefault();
-        q = this.id.substring(1);
-        if (this.id.charAt(0) == '0') {
-            if(parseInt(document.getElementById(`quantity`).value) <= 1) {
-                alert("Invalid quantity.");
-                return;
-            } else {
-                document.getElementById(`quantity`).stepDown();
-            }
-        } else if (this.id.charAt(0) == '1') {
-            checkStock(q,'button');
+        if(parseInt(document.getElementById(`quantity`).value) <= 1) {
+            alert("Invalid quantity.");
+            return;
+        } else {
+            document.getElementById(`quantity`).stepDown();
         }
-    })
+    }
+
+    $('button#1').on('click', function(e)){
+        e.preventDefault();
+        checkStock(1,'button');
+    }
 
     $('input').on('keyup', function() {
         q = this.id.substring(8); // id no
