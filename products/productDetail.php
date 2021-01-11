@@ -10,7 +10,7 @@
         if($_SESSION['prevUrl'] != $_SESSION['cartUrl'] && $_SESSION['prevUrl'] != $_SERVER["REQUEST_URI"]) {
             $_SESSION['back'] = $_SESSION['prevUrl'];
         }
-    } else $_SESSION['back'] = $_SESSION['prevUrl'];
+    } else if ($_SESSION['prevUrl'] != $_SERVER["REQUEST_URI"]) $_SESSION['back'] = $_SESSION['prevUrl'];
     
     //
 

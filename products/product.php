@@ -80,6 +80,7 @@
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
+                        <! -- CHANGE BUTTON CATEGORY NAMES BASED ON DB HERE -->
                         <a class="text-decoration-none" href="#" id="0"><div class="category">ALL CATEGORIES</div></a>
                         <a class="text-decoration-none" href="#" id="1"><div class="category">FRUITS</div></a>
                         <a class="text-decoration-none" href="#" id="2"><div class="category">VEGETABLES</div></a>
