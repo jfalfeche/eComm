@@ -144,7 +144,7 @@
 		                   	 }
 
 		                	} 
-		                	else echo "Database is empty";
+		                	else echo "<tr><td>Order History is empty<td><tr>";
 		                	
 		                ?>
 				</tbody>

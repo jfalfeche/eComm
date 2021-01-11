@@ -138,7 +138,7 @@
 		                   	 }
 
 		                	} 
-		                	else echo "Database is empty";
+		                	else echo "<tr><td>There are no Pending Orders.<td><tr>";
 		                	
 		                ?>
 				</tbody>
