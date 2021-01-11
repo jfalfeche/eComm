@@ -48,8 +48,9 @@
         window.product = new Array();
         window.quantity = new Array();
         window.total = new Array();
+        var checker = 0;
     </script>
-    <script src="./o_cart.js"></script>
+    <script src="./cart.js"></script>
 </head>
 <body>
     <div id="checker" style="display: none; visibility: hidden;"></div>
