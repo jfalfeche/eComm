@@ -18,7 +18,7 @@
 
             $info = "SELECT * FROM `customers` WHERE userID=$userID LIMIT 1";
             $info2 = "SELECT shippingAddress, paymentMethod, message FROM `order` WHERE orderNo = '$orderNo' AND buyerID= '$buyerID'";
-            $items = "SELECT productdetail.quantity, product.productName, product.price, sellers.storeName FROM `productDetail` 
+            $items = "SELECT productdetail.quantity, product.productName, product.price, product.productID, product.stock, sellers.storeName FROM `productDetail` 
 			INNER JOIN `product` ON productdetail.productID = product.productID 
 			INNER JOIN `sellers` ON product.seller = sellers.sellerID
             WHERE orderNo  = '$orderNo' AND buyerID = '$buyerID'";
@@ -41,7 +41,26 @@
                     $stmt->close();
 
                     unset($_POST['cancel']);
-            }
+                }
+                
+                $result = $conn->query($items);
+                
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = $result->fetch_assoc()) {
+
+                        $stock = $row['stock'] + $row['quantity'];
+                        $productID =  $row['productID'];
+
+                        $updateSQL = "UPDATE `product` SET stock=? WHERE product.productID=$productID";
+                        $stmt = $conn->prepare($updateSQL);
+                        $stmt->bind_param('i', $stock);
+                        $stmt->execute();
+                        $stmt->close();
+
+                        unset($_POST['cancel']);
+                    }   $stock = 0;
+                }
         }
     } else
         header("Location: ../loginPage/login.php"); 
@@ -90,6 +109,5 @@
 			return "#0A5900";
 		else if($value == "6")
 			return "#967E69";
-
     }
 ?>
