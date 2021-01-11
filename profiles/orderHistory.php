@@ -170,7 +170,6 @@
 	}
 
 	else
-		print("here");
-		//header("Location: ../homePage/home.php");
+		header("Location: ../homePage/home.php");
 
  ?>
