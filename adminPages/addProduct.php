@@ -172,8 +172,8 @@
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var file = input.files[0];
-			if(parseInt(file.size) > 1048576) {
-				alert("File image too large. Please upload less than 1 MB image.");
+			if(parseInt(file.size) > 770000) {
+				alert("File image too large. Please upload less than 770 KB image.");
 			} else {
 				var reader = new FileReader();
 			
