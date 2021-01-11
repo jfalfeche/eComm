@@ -130,7 +130,8 @@
 
 		            	if ($result->num_rows > 0) 
 		                {
-		                	$row = $result->fetch_assoc();
+							$row = $result->fetch_assoc();
+							$grandTotal = $row['totalAmount'] + $row['shippingFee'];
 		            ?>
 		            	<tr class="black-top-border">
 		            		<td></td>
@@ -139,7 +140,7 @@
 		            		<td>Subtotal</td>
 		            		<td >
 		            			<div style="text-align: right;">
-		            				<?php echo get_subtotal($row['totalAmount'], $row['shippingFee']); ?>
+									<?php echo number_format($row['totalAmount'], 2, '.', ' '); ?>
 		            			</div>
 		            		</td>
 		                </tr>
@@ -163,7 +164,7 @@
 		            		<td style="font-size: 1.25em;"><b>TOTAL</b></td>
 		            		<td>
 		            			<div style="text-align: right; font-size: 1.25em;">
-		            				<b>PHP&emsp;<?php echo number_format($row['totalAmount'], 2, '.', ' ') ?></b>
+		            				<b>PHP&emsp;<?php echo number_format($grandTotal, 2, '.', ' ') ?></b>
 		            			</div>
 		            		</td>
 		                </tr>
