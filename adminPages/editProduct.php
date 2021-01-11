@@ -183,13 +183,17 @@
 
 	function readURL(input) {
 		if (input.files && input.files[0]) {
-			var reader = new FileReader();
+			var file = input.files[0];
+			if(parseInt(file.size) > 1500000) {
+				alert("File image too large. Please upload less than 1.5MB image.");
+			} else {
+				var reader = new FileReader();
 			
-			reader.onload = function(e) {
-			$('#pimg').attr('src', e.target.result);
+				reader.onload = function(e) {
+					$('#pimg').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]); // convert to base64 string
 			}
-			
-			reader.readAsDataURL(input.files[0]); // convert to base64 string
 		}
 	}
 
