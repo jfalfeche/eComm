@@ -11,6 +11,7 @@ function checkStock(q,mode) {
         if(mode == 'button') { // if button is pressed
             if(parseInt(document.getElementById(`quantity${q}`).value) >= (quantity[parseInt(q)] + parseInt(checker))) { // if quantity is greater than stock
                 alert("Invalid quantity.");
+                document.getElementById(`quantity${q}`).value = (quantity[parseInt(q)] + parseInt(checker));
             } else {
                 document.getElementById(`quantity${q}`).stepUp();
             }

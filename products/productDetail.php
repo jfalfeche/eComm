@@ -39,8 +39,14 @@
     <link rel="stylesheet" href="../footer/footer.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/editProduct.css">
     <link rel="stylesheet" href="./productDetail.css">
+    <script src="./stock_checker.js"></script>
 </head>
 <body>
+    <script>
+        var checker = 0;
+        var x = <?php echo $row["productID"]; ?>;
+    </script>
+    <div id="checker" style="display: none; visibility: hidden;"></div>
     <!--NAV-->
     <nav class="nav guest">
         <div class="col-md-3">
@@ -109,8 +115,9 @@
                         <button id="1" class="plus"></button>
                     </div>
                     <div id="avail">
+                        <div id="stock_count" style="display: inline-block;"><?php echo $row["stock"] ?> </div>
                         <?php 
-                            echo $row["stock"]." ".strtolower($row["name"]); if($row["stock"] > 1) echo "s";
+                            echo strtolower($row["name"]); if($row["stock"] > 1) echo "s";
                         ?> available
                     </div>
                 </p>
@@ -128,28 +135,6 @@
         var form = document.getElementById("addtocartform");
         $('button#addtocart').on('click', function(e){
             form.submit();
-        })
-
-        $('button#0').on('click', function(e){
-            e.preventDefault();
-            var count = document.getElementById("quantity").value;
-            if(count > 1) {
-                document.getElementById("quantity").stepDown();
-            }
-        })
-        $('button#1').on('click', function(e){
-            e.preventDefault();
-            var count = document.getElementById("quantity").value;
-            if(count >= 1 && count < <?php echo $row["stock"] ?>) {
-                document.getElementById("quantity").stepUp();
-            }
-        })
-        var quant = document.getElementById("quantity");
-        quant.addEventListener('keyup', function() {
-            if(quant.value > <?php echo $row["stock"] ?>)
-                quant.value = <?php echo $row["stock"] ?>;
-            else if (quant.value < 1)
-                quant.value = 1;
         })
     </script>
 
