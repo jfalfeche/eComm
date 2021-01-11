@@ -1,7 +1,8 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+
     if(isset($_SESSION['LGUID']))
     {
     	$servername = "localhost";
@@ -36,9 +37,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
     	$products = "SELECT * from `product`, `productUnit` WHERE (productUnit.productUnitID = product.productUnitID) AND (product.seller=$sellerID) LIMIT $offset, $no_of_records_per_page";
 
-    	if(isset($_POST['srchProduct'])){
+    	if(isset($_POST['searchProductsVal'])){
             search_products($_POST['searchProductsVal']);
-            unset($_POST['srchProduct']);
+            unset($_POST['searchProductsVal']);
         }
 
     	$result_products = mysqli_query($conn, $products);
@@ -51,6 +52,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <div class ="products-display">
 <br>
+
+<!-- PAGE NUMBERS START -->
 <div class="pageNumbers">
     <button id="1" type="button" class="btn btn-outline-dark">First</button>
     <button id="<?php if($pageno <= 1){ echo '#'; } else { echo ($pageno - 1); } ?>" type="button" class="btn btn-outline-dark"><</button>
@@ -82,22 +85,28 @@ if (session_status() == PHP_SESSION_NONE) {
 
                 <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="text-reset text-decoration-none">
                     <div class="col-md-2 card">
+                        <!--product picture-->
                         <div class="imgwrap">
                             <?php
                                 echo '<img class="card-img-top img-responsive full-width" src="data:image/jpeg;base64,'.$row['image'].'" alt="Card image cap">';
                             ?>
                         </div>
                         <div class="card-body text-left">
+                            <!--product name-->
                             <h4 class="card-title"><?php echo $row["productName"]; ?></h4>
+                            <!--product price-->
                             <p class="card-text"><b>₱<?php echo number_format($row["price"], 2, '.', ' '); ?></b></p>
                             <p class="card-text"><?php echo "per ".strtolower($row["name"]); ?></p><br>
+                            <!--product # of available stock-->
                             <p class="card-text">Available Stock: &emsp; <span style="font-weight: 500; text-align: right;"><?php echo ucwords($row["stock"]); ?></span></p>
                             <br><br>
 
                             <div id="product-buttons"class="row">
+                                <!--update product button-->
                                 <a href="editProduct.php?productID=<?php echo $row['productID']?>" class="btn btn-info col-6">
                                     <h5 class="card-text">Update</h5>
                                 </a>
+                                <!--delete product button-->
                                 <a class=" btn btn-danger col-4" data-product="<?php echo $row['productName'] ?>" data-href="deleteProduct.php?sellerID=<?php echo $sellerID ?>&productID=<?php echo $row['productID'] ?>"  data-toggle="modal" data-target="#confirm-delete-product" id="delModal"
                                 >
                                     <i class="fas fa-trash-alt fa-2x"></i>
@@ -117,7 +126,11 @@ if (session_status() == PHP_SESSION_NONE) {
                 else
                     continue;
             } 
-        }else {
+        }
+
+        else 
+        {
+            echo "what";
             echo "<span style=\"color: red;\">No products found.</span>";
         }
     ?>

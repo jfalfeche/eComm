@@ -16,9 +16,18 @@
 			    //get sellerID
 			     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
-			    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered DESC";
+			    $order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			   
 			    include 'order_method.php';
+
+			   	$page = $_SERVER["REQUEST_URI"];
+		
+				//save previous currentUrl as previousUrl
+			   	if($page != $_SESSION['currentUrl'])
+			   		$_SESSION['prevUrl'] = $_SESSION['currentUrl'];
+
+				// save current url as currentUrl
+				$_SESSION['currentUrl'] = $page;
 		
 ?>
 
@@ -73,8 +82,8 @@
 						<option value="approved">Status: Approved</option>
 						<option value="packed">Status: Packed</option>
 						<option value="shipped">Status: Shipped</option>
-						<option value="shipped">Status: Completed</option>
-						<option value="shipped">Status: Cancelled</option>
+						<option value="completed">Status: Completed</option>
+						<option value="cancelled">Status: Cancelled</option>
 
 					</select>
 				</form>

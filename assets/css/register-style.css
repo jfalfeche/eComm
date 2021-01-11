@@ -25,7 +25,7 @@ body {
 }
 
 .right-login {
-	width: 100%;
+	max-width: 100%;
 	grid-column: col 2/ span 1;
     grid-row: row ;
     padding: 5%;
@@ -96,7 +96,7 @@ body {
 	background:#379863;
     position: absolute;
     font-weight: 400;
-    margin-top: 13px;
+    margin-top: 15px;
 }
 
 .signup-form .btn3:hover { 
@@ -126,5 +126,4 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
 }

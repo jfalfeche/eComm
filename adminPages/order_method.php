@@ -20,6 +20,11 @@
 ?>
 
 <?php
+	function back()
+	{
+		session_start();
+		header("Location: ".$_SESSION['prevUrl']);
+	}
 
 	function get_order()
 	{
@@ -30,19 +35,19 @@
 			global $order, $sellerID;
 			$sort = $_POST['sortOrder']; 
 			if ($sort == "all")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			else if($sort == "oldest-newest")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			else if($sort == "newest-oldest")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5  ORDER BY order.dateOrdered DESC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5  ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "pending")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=1 ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=1 ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			else if($sort == "approved")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=2  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=2  ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			else if($sort == "packed")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=3  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=3  ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			else if($sort == "shipped")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=4  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=4  ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 
 		}
 	}
@@ -96,7 +101,7 @@
 	{
 		global $conn, $sellerID;
 
-		$sql = "SELECT productDetail.productID, productDetail.quantity, product.productName FROM `productDetail` INNER JOIN `product` ON productDetail.productID=product.productID WHERE productDetail.buyerID='$id' AND productDetail.orderNo='$orderNo' AND productDetail.sellerID = '$sellerID'";
+		$sql = "SELECT productDetail.productID, productDetail.quantity, product.productName FROM `productDetail` LEFT JOIN `product` ON productDetail.productID=product.productID WHERE productDetail.buyerID='$id' AND productDetail.orderNo='$orderNo' AND productDetail.sellerID = '$sellerID'";
 		$result = $conn->query($sql);
 
 		$product_list = "";
@@ -121,23 +126,23 @@
 			global $order, $sellerID;
 			$sort = $_POST['sortOrder']; 
 			if ($sort == "all")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered DESC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "oldest-newest")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			else if($sort == "newest-oldest")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID'   ORDER BY order.dateOrdered DESC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID'   ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "pending")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=1 ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=1 ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "approved")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=2  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status=2  ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "packed")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=3  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=3  ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "shipped")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=4  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=4  ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "completed")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=5  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=5  ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 			else if($sort == "cancelled")
-				$order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=6  ORDER BY order.dateOrdered ASC";
+				$order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND  order.status=6  ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 		}
 	}
 ?>

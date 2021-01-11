@@ -15,11 +15,12 @@
 		
 		unset($_POST['back-btn']);
 
-		if(!isset($_GET['orderNo']))
+		if(strpos($current_url, 'checkout')) 
+			back_checkout();
+		 
+		else if(!isset($_GET['orderNo']))
 			back_cart();
 		
-		else if(strpos($current_url, 'checkout.php') == 'true') 
-			back_checkout();
 		else 
 			back_orderDetails();
 	}
@@ -34,13 +35,13 @@
 
 	function back_checkout()
 	{
-		header("Location: ../profiles/checkout.php");
+		header("Location: ../checkout/checkout.php");
 	}
 
 	function back_orderDetails()
 	{
 		global $orderNo;
-		header("Location: orderDetails.php?orderNo=".$orderNo);
+		header("Location: ../checkout/orderDetails.php?orderNo=".$orderNo);
 	}
 
 	function get_item_total($price, $quantity)

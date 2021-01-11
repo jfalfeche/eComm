@@ -17,7 +17,7 @@
 
 	   	//save current page url
 	   	$page = $_SERVER["REQUEST_URI"];
-		$_SESSION['prevUrl'] = $page;
+		$_SESSION['currentUrl'] = $page;
 
 	   	include 'admin_method.php';
  ?>

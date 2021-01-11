@@ -2,6 +2,7 @@
 	if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+
     if(isset($_SESSION['LGUID']))
     {
 		if(isset($_GET['sellerID']) && is_numeric($_GET['sellerID']))
@@ -14,11 +15,20 @@
 			    $conn = new mysqli($servername, $username, $password, $dbname);
 
 			    //get sellerID
-			     $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
+			    $sellerID =  filter_var($_GET['sellerID'], FILTER_SANITIZE_NUMBER_INT);
 
-			    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC";
+			    $order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.sellerID = '$sellerID' AND order.status>0 AND order.status<5 ORDER BY order.dateOrdered ASC, order.orderNo ASC";
 			   
 			    include 'order_method.php';
+
+			   	$page = $_SERVER["REQUEST_URI"];
+		
+				//save previous currentUrl as previousUrl
+			   	if($page != $_SESSION['currentUrl'])
+			   		$_SESSION['prevUrl'] = $_SESSION['currentUrl'];
+
+				// save current url as currentUrl
+				$_SESSION['currentUrl'] = $page;
 		
 ?>
 
@@ -53,15 +63,18 @@
     
 	<div id="container">
 		<div id="title">
+			<!--back button-->
 			<form method="post" action="storeProfile.php?sellerID=<?php echo $sellerID;?>" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>
 			</form>
 
+			<!--page title-->
 			<span style="font-size: 2em; font-weight: 500;" class="inline">PENDING ORDERS</span>
 			<hr class="mt-1 mb-2">
 			
+			<!--sort menu-->
 			<div class="sort">
 				<form name="sortFormOrder" action="pendingOrders.php?sellerID=<?php echo $sellerID;?>" method="post">
 					<select name="sortOrder" class="form-control" onChange="sortFormOrder.submit()">
@@ -80,6 +93,7 @@
 
 		<div id="main">
 			<span style="font-size: 12px; font-weight: 500;"><i>click on any item to view details</i></span>
+			<!--pending orders table-->
 			<table id="pending-orders-table" class="table table-hover">
 				<thead>
 					<tr>
@@ -144,7 +158,8 @@
 </html>
 
 <script>
-	//when a row is clicked, a search is done for the href belonging to an anchor. If one is found, the window’s location is set to that href
+	//when a row is clicked, a search is done for the href belonging to an anchor. 
+	//If one is found, the window’s location is set to that href
 	$(document).ready(function() 
 	{
 

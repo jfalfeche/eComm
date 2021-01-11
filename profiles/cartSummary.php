@@ -53,7 +53,7 @@
 
 	<div id="container">
 		<div id="title">
-			<form method="post" action="#" id="form-id" class="inline" >
+			<form method="post" action="" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>

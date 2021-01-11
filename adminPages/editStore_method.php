@@ -29,7 +29,7 @@ if (session_status() == PHP_SESSION_NONE) {
 	function back()
 	{
 		session_start();
-		header("Location: ".$_SESSION['prevUrl']);
+		header("Location: ".$_SESSION['currentUrl']);
 	}
 
 	function update_seller()

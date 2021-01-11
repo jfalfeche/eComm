@@ -41,7 +41,9 @@ body{
 }
 
 .header {
-    margin: 50px 80px;
+    margin-left: 5%;
+    margin-top: 3%;
+    margin-bottom: 1em;
     display: flex;
     align-items: center;
 }

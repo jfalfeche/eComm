@@ -30,7 +30,7 @@
         <!--END NAV-->
 
         <div class="header">
-            <a href="profile_buyer.php"><i class="fa fa-arrow-circle-left fa-2x" style="color: #200E32;"></i></a>
+            <a href="profile_buyer.php"><i class="fa fa-arrow-circle-left fa-3x" style="color: #200E32;"></i></a>
             <h1 class="underline">EDIT PROFILE</h1><i class="material-icons md-35 icon">edit</i>
         </div>
 

@@ -15,10 +15,13 @@
 		    //get buyerID
 		    $buyerID =  $_SESSION['userID'];
 
-		    $order = "SELECT * FROM `order` INNER JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.buyerID = '$buyerID' ORDER BY order.dateOrdered DESC";
+		    $order = "SELECT * FROM `order` LEFT JOIN  `productDetail` ON order.orderNo = productDetail.orderNo WHERE productDetail.buyerID = '$buyerID' ORDER BY order.dateOrdered DESC, order.orderNo DESC";
 		   
 		    include 'order_method.php';
 		
+			//save current page url
+		   	$page = $_SERVER["REQUEST_URI"];
+			$_SESSION['prevUrl'] = $page;
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +54,7 @@
 
 	<div id="container">
 		<div id="title">
-			<form method="post" action="profile_buyer.php" id="form-id" class="inline" >
+			<form method="post" action="./profile_buyer.php" id="form-id" class="inline" >
 				<button type="submit" name="back-btn" id="submit-id" class="inline">
 					<i class="fas fa-arrow-circle-left fa-3x inline"></i>
 				</button>
@@ -126,7 +129,7 @@
 	                                	</div>
 	                            </td>
 	                            <td>
-	                            	<a href="orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary" style="display: none;"></a>
+	                            	<a href="../checkout/orderDetails.php?orderNo=<?php echo $row['orderNo']?>" class="btn btn-primary" style="display: none;"></a>
 	                            </td>
 	                        </tr>
 	                       

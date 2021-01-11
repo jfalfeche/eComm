@@ -105,11 +105,6 @@ CREATE TABLE `orderStatus`(
 
 
 
-
-
-
-
-
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order`(
@@ -117,7 +112,7 @@ CREATE TABLE `order`(
 	`buyerID` int(15) NOT NULL,
 	`shippingAddress` varchar(200) NOT NULL,
 	`status` int(15) NOT NULL,
-	`paymentMethod` varchar(10) NOT NULL,
+	`paymentMethod` varchar(30) NOT NULL,
 	`dateOrdered` date NOT NULL,
 	`dateCompleted` date ,
 	`totalAmount` decimal(10,2) NOT NULL,
@@ -125,13 +120,13 @@ CREATE TABLE `order`(
 	`message` text NOT NULL,
 	PRIMARY KEY (`orderNo`),
 	KEY `buyerID` (`buyerID`),
-	KEY `shippingAddress` (`shippingAddress`),
 	KEY `status` (`status`),
 	CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `customers` (`userID`),
-	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shippingAddress`) REFERENCES `customers` (`permanentAddress`),
-	CONSTRAINT `order_ibfk_3` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`)
+	CONSTRAINT `order_ibfk_2` FOREIGN KEY (`status`) REFERENCES `orderStatus` (`orderStatusID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+
 
 
 DROP TABLE IF EXISTS `productDetail`;

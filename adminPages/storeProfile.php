@@ -25,6 +25,15 @@
 		    $result = $conn->query($sql);
 
 		    include 'storeProfile_method.php';
+
+		    $page = $_SERVER["REQUEST_URI"];
+		
+			//save previous currentUrl as previousUrl
+		   	if($page != $_SESSION['currentUrl'])
+		   		$_SESSION['prevUrl'] = $_SESSION['currentUrl'];
+
+			// save current url as currentUrl
+			$_SESSION['currentUrl'] = $page;
 ?>
 
 <!DOCTYPE html>
@@ -117,8 +126,11 @@
     		{
 				$row = $result->fetch_assoc();
 		?>
+		
+		<!--Store details-->
 		<div id="banner">
 			<div class="details row">
+				<!--profile picture-->
 				<div class="col image">
 					<br>	
 					<?php
@@ -127,19 +139,23 @@
 				</div>
 
 				<div class="col-5">
+					<!--store name-->
 					<span style="font-size: 3.5em;">
 						<?php echo $row['storeName'];?>
 					</span><br>	
 
+					<!--store email-->
 					<span style="font-size: 1.5em; font-style: italic;">
 						<?php echo $row['storeEmail'];?>
 					</span><br><br>	
 
+					<!--store description-->
 					<span style="font-size: 1.25em;">
 						<?php echo $row['storeDescription'];?>
 					</span>
 				</div>
 
+				<!--Edit store profile button-->
 				<div class="col edit-btn">
 					<a href="editStore.php?sellerID=<?php echo $sellerID;?>" class="btn bg-transparent btn-primary-outline text-center" role="button">
 						<i class="fas fa-pen"></i>&emsp;EDIT PROFILE
@@ -148,6 +164,7 @@
 			</div>
 		</div>
 
+		<!--Delete profile button-->
 		<div id="delete-profile">
 			<button type="button" class="btn  btn-outline-danger" data-seller="<?php echo $row['storeName'] ?>"data-href="deleteStore.php?sellerID=<?php echo $row['sellerID'] ?>"  data-toggle="modal" data-target="#confirm-delete" id="delModal">DELETE PROFILE</button>
 		</div>
@@ -155,8 +172,9 @@
 		<div id="orders">
 			<span style="font-size: 32px; font-weight: 500;">ORDERS</span>
 			<hr class="mt-1 mb-2">
-
 			 <div class="row">
+
+				<!--order history button-->
 			    <div class="col">
 			    	<a href="orderHistory.php?sellerID=<?php echo $row['sellerID'] ?>">
 						<i class="fas fa-history fa-3x"></i>
@@ -165,6 +183,7 @@
 			      	</a>
 			    </div>
 
+			    <!--pending orders button-->
 			    <div class="col">
 			    	<a href="pendingOrders.php?sellerID=<?php echo $row['sellerID'] ?>">
 						<i class="far fa-check-circle fa-3x"></i>
@@ -181,6 +200,7 @@
 			<span style="font-size: 32px; font-weight: 500;">MANAGE PRODUCTS</span>
 			<hr class="mt-1 mb-2">
 			<div class="row">
+				<!--add product button-->
 				<div class="add-product col">
 					<a href="addProduct.php?sellerID=<?php echo $row['sellerID'] ?>">
 						<i class="fas fa-plus-square fa-2x"></i>
@@ -188,6 +208,7 @@
 					</a>
 				</div>
 
+				<!--search functionality-->
 				<div class="search col">
 					<form name="searchProducts" action="storeProfile.php?sellerID=<?php echo $sellerID; ?>" method="post">
 						<input type="text" name="searchProductsVal" class="form-control inputfld" placeholder="Search Products here...">
@@ -195,13 +216,17 @@
 					</form>
 				</div>
 			</div>
+			
+			<!--store products display-->
 			<?php
 				include 'storeProfile_pagination.php';
 			?>
+
 		</div>
 
 		<?php
 			}
+			//redirect admin page if the store profile requested does not existed
 			else
 				header("Location: admin_main.php");
 		?>	
@@ -210,6 +235,7 @@
 </body>
 </html>
 
+<!--delete store modal script-->
 <script>
 	$('#confirm-delete').on('show.bs.modal', function(e) 
 	{
@@ -223,7 +249,7 @@
 
 </script>
 
-
+<!--delete store product modal script-->
 <script>
     $('#confirm-delete-product').on('show.bs.modal', function(e) 
     {
