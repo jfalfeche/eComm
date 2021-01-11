@@ -59,6 +59,7 @@
                         $stmt->close();
 
                         unset($_POST['cancel']);
+                        header("Refresh:0");
                     }   $stock = 0;
                 }
         }
