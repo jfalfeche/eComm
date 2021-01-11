@@ -194,7 +194,9 @@
             <?php
 		        $result = $conn->query($total);
 		            if ($result->num_rows > 0) {
-		                $row = $result->fetch_assoc();
+                        $row = $result->fetch_assoc();
+                        
+                $grandTotal = $row['totalAmount'] + $row['shippingFee'];
 		    ?>
 
             <tr>
@@ -202,7 +204,7 @@
                 <td>Shipping Fee</td>
 		        <td>
 		            <div style="text-align: right;">
-                        PHP <?php echo number_format($shippingFee, 2, '.', ' '); ?>
+                        PHP <?php echo number_format($row['shippingFee'], 2, '.', ' '); ?>
                     </div>
 		        </td>
             </tr>
@@ -212,7 +214,7 @@
                 <th>TOTAL</th>
 		        <td>
                     <div style="text-align: right;">
-		                <b>PHP <?php echo number_format($row['totalAmount'], 2, '.', ' ') ?></b>
+		                <b>PHP <?php echo number_format($grandTotal, 2, '.', ' ') ?></b>
 		            </div>
 		        </td>
             </tr>
@@ -228,7 +230,11 @@
         <div class="center">
             <div class="buttons">
                 <button type="button" onclick="location.href='../profiles/orderSummary.php?orderNo=<?php echo $orderNo?>'" style="background-color:#2D9CDB;" class="btn btn-one btn-success">DETAILED ORDER SUMMARY</button>
+                
+                <?php 
+                    if($row['status'] != 6) {?>
                 <button type="button" class="btn btn-two" data-toggle="modal" data-target="#exampleModal">Cancel Order</button>
+                <?php }?>
             </div>
         </div>
         <!--END BUTTONS-->
