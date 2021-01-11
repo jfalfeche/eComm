@@ -173,8 +173,8 @@
 	        </tbody>
 	        </table>
 
-	        <!--BUTTONS-->
-	        <div class="center">
+			<!--BUTTONS-->
+			<div class="center" style="margin-left:-10%;">
 	            <div class="buttons">
 	            	<form method='POST' action='orderDetails.php?orderNo=<?php echo $orderNo?>'>
 	                
@@ -185,7 +185,7 @@
 		                <input class ="price" type="number" min="0" step="any" name="shippingFee" value="<?php echo $row['shippingFee']; ?>" style="width: 100%; line-height: 2em;"><br><br>
 
 		                <b>UPDATE ORDER STATUS</b><br>
-		                <select name="status" class="form-control" style="width: 75%;">
+		                <select name="status" class="form-control" style="width: 100%;">
 							<option value="pending" <?php if((int)$row['status'] == 1) echo "selected='selected'"?> >Pending</option>
 							<option value="approved" <?php if((int)$row['status'] == 2) echo "selected='selected'"?> >Approved</option>
 							<option value="packed" <?php if((int)$row['status'] == 3) echo "selected='selected'"?> >Packed</option>
@@ -195,8 +195,8 @@
 						</select>
 						<br>
 		                <button type="submit" name="updateBtn" class="btn btn-success submit">Update Order</button>
-	            </div></form>
-	        </div>
+	            	</form></div>
+				</div>
 	        <!--END BUTTONS-->
 	            <?php
 	                }

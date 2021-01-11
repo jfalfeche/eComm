@@ -51,7 +51,7 @@
 
                         $stock = $row['stock'] + $row['quantity'];
                         $productID =  $row['productID'];
-
+                        
                         $updateSQL = "UPDATE `product` SET stock=? WHERE product.productID=$productID";
                         $stmt = $conn->prepare($updateSQL);
                         $stmt->bind_param('i', $stock);
@@ -60,7 +60,7 @@
 
                         unset($_POST['cancel']);
                         header("Refresh:0");
-                    }   $stock = 0;
+                    }   
                 }
         }
     } else
@@ -90,8 +90,7 @@
 		$sql = "SELECT name from `orderStatus` WHERE orderStatusID=$status_id LIMIT 1";
     	$result = $conn->query($sql);
 
-    	if(mysqli_num_rows($result) == 1)
-    	{
+    	if(mysqli_num_rows($result) == 1){
     		$row = $result->fetch_assoc();
     		echo strtoupper($row['name']);
     	}
