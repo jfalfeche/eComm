@@ -129,7 +129,7 @@
 					?>
 					<div class="def-number-input number-input">
 						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-						<input id="q" class="quantity" min="1" name="quantity" value="<?php echo $row['stock']; ?>" type="number">
+						<input id="q" class="quantity" min="0" name="quantity" value="<?php echo $row['stock']; ?>" type="number">
 						<button onclick="this.parentNode.querySelector('#q').stepUp()" class="plus"></button>
 					</div>
 
@@ -203,8 +203,8 @@
 
 	var quant = document.getElementById("q");
 	quant.addEventListener('keyup', function() {
-		if (quant.value < 1)
-			quant.value = 1;
+		if (quant.value < 0)
+			quant.value = 0;
 	})
 </script>
 
