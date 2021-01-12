@@ -118,10 +118,10 @@
 	            
 	            <tr>
 	                <td>
-	                    <div style="text-align: right;"><?php echo $row_items['productName'] ?></div>
+	                    <?php echo $row_items['productName'] ?>
 	                </td>
 	                <td>
-	                    <div style="text-align: right;"><?php echo $row_items['quantity'] ?></div>
+	                    <div style="text-align: center;"><?php echo $row_items['quantity'] ?></div>
 	                </td>
 	                <td>
 		                <div style="text-align: right;">PHP <?php echo number_format(get_item_total($row_items['price'], $row_items['quantity']), 2, '.', ' ');?></div>

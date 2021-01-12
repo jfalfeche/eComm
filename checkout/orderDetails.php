@@ -161,13 +161,13 @@
             
             <tr>
                 <td>
-                    <div style="text-align: right;"><a href="../products/productDetail.php?action=<?php echo $row['productID'] ?>"><?php echo $row['productName'] ?></a></div>
+                    <a href="../products/productDetail.php?action=<?php echo $row['productID'] ?>"><?php echo $row['productName'] ?></a>
                 </td>
                 <td>
-                    <div style="text-align: right;"><?php echo $row['quantity'] ?></div>
+                    <div style="text-align: center;"><?php echo $row['quantity'] ?></div>
                 </td>
                 <td>
-	                <div style="text-align: right;">PHP <?php echo number_format(get_item_total($row['price'], $row['quantity']), 2, '.', ' ');?></div>
+	                <div style="text-align: right">PHP <?php echo number_format(get_item_total($row['price'], $row['quantity']), 2, '.', ' ');?></div>
 	            </td>
             </tr>
 
