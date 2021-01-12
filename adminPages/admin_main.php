@@ -12,7 +12,7 @@
 	    // Create connection
 	    $conn = new mysqli($servername, $username, $password, $dbname);
 
-	    $order = "SELECT * from `order` WHERE status=1 ORDER BY dateOrdered ASC";
+	    $order = "SELECT * from `order` WHERE status>0 AND status<5  ORDER BY dateOrdered ASC";
 	   	$store = "SELECT * from `sellers` WHERE storeStatus=false";
 
 	   	//save current page url
