@@ -90,8 +90,8 @@
 					    <th scope="col">ORDER #</th>
 					    <th scope="col">STATUS</th>
 					    <th scope="col">DATE ORDERED</th>
-					    <th scope="col">BUYER</th>
 					    <th scope="col">ORDER DETAILS</th>
+					    <th scope="col">ORDER TOTAL</th>
 				    </tr>
 				</thead>
 				<tbody>
